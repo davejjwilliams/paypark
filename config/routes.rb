@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'map/map'
   get 'home/home'
   get 'home/contact'
