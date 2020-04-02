@@ -1,2 +1,10 @@
 <h1>THE MAP</h1>
 <p>Levon will map</p>
+<% if user_signed_in? %>
+  <p>USER INFO:</p>
+  <%= current_user.name %>
+  <%= current_user.email %>
+  <%= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
+<% else %>
+  <p>NO ONE IS SIGNED IN</p>
+<% end %>
