@@ -1,0 +1,7 @@
+<p>To be edited by the front-end team when all pages are complete!</p>
+<p>This is a header! You shouldn't see anything more than this if you aren't signed in!</p>
+<% if user_signed_in? %>
+  <%= link_to "The Map", map_map_path %>
+  <p>This is your name: <%= current_user.name %></p>
+  <%= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
+<%end %>
