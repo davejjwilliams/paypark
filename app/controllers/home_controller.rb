@@ -10,8 +10,9 @@ class HomeController < ApplicationController
     @user.save
     session[:user_id] = @user.id
     sign_in(User.find(@user.id), scope: :user)
-    redirect_to map_map_path
+    redirect_to map_path
   end
+
   private
   def auth
     request.env['omniauth.auth']
