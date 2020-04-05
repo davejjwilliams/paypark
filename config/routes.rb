@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'map/map'
-  get 'home/home'
-  get 'home/contact'
+  get 'map', to:'map#map'
+  get 'contact', to:'home#contact'
 
   # App Root
   root 'home#home'
