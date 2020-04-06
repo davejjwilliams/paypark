@@ -21,12 +21,12 @@
 </p>
 
 <p>
-  <strong>Driveway description:</strong>
+  <strong>Description:</strong>
   <%= @homeowner.driveway_description %>
 </p>
 
 <p>
-  <strong>Driveway price:</strong>
+  <strong>Price:</strong>
   <%= @homeowner.driveway_price %>
 </p>
 
@@ -41,12 +41,12 @@
 </p>
 
 <p>
-  <strong>Activation code:</strong>
+  <strong>Code:</strong>
   <%= @homeowner.activation_code %>
 </p>
 
 <p>
-  <strong>Driveway verified:</strong>
+  <strong>Verified:</strong>
   <%= @homeowner.driveway_verified %>
 </p>
 
@@ -58,6 +58,15 @@
 <p>
   <strong>Number ratings:</strong>
   <%= @homeowner.number_ratings %>
+</p>
+
+<p>
+  <strong>Average Rating:</strong>
+  <% if @homeowner.number_ratings == 0%>
+    0
+  <% else %>
+    <%= (@homeowner.total_ratings.to_f/@homeowner.number_ratings) %>
+  <% end %>
 </p>
 
 <% unless @homeowner.driveway_verified %>
