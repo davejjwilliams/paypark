@@ -60,5 +60,8 @@
   <%= @homeowner.number_ratings %>
 </p>
 
+<% unless @homeowner.driveway_verified %>
+  <%= link_to 'Verify Driveway', verification_path %> |
+<% end %>
 <%= link_to 'Edit', edit_homeowner_path(@homeowner) %> |
 <%= link_to 'Back', homeowners_path %>
