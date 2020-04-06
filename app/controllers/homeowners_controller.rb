@@ -1,5 +1,6 @@
 class HomeownersController < ApplicationController
   before_action :set_homeowner, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /homeowners
   # GET /homeowners.json
@@ -25,6 +26,9 @@ class HomeownersController < ApplicationController
   # POST /homeowners.json
   def create
     @homeowner = Homeowner.new(homeowner_params)
+    @homeowner.user_id = current_user.id
+    @homeowner.activation_code = (0...8).map { (65 + rand(26)).chr }.join
+    @homeowner.last_modified = Date.today
 
     respond_to do |format|
       if @homeowner.save

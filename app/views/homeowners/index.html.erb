@@ -24,7 +24,7 @@
   <tbody>
     <% @homeowners.each do |homeowner| %>
       <tr>
-        <td><%= homeowner.user %></td>
+        <td><%= homeowner.user.name %></td>
         <td><%= homeowner.address %></td>
         <td><%= homeowner.latitude %></td>
         <td><%= homeowner.longitude %></td>
