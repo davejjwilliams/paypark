@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_06_160831) do
+ActiveRecord::Schema.define(version: 2020_04_06_221134) do
+
+  create_table "drivers", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "registration_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_drivers_on_user_id"
+  end
 
   create_table "homeowners", force: :cascade do |t|
     t.integer "user_id"
