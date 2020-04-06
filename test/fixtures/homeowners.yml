@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  address: MyText
+  latitude: 9.99
+  longitude: 9.99
+  driveway_description: MyText
+  driveway_price: 9.99
+  driveway_active: false
+  last_modified: 2020-04-06
+  activation_code: MyText
+  driveway_verified: false
+  total_ratings: 1
+  number_ratings: 1
+
+two:
+  user: two
+  address: MyText
+  latitude: 9.99
+  longitude: 9.99
+  driveway_description: MyText
+  driveway_price: 9.99
+  driveway_active: false
+  last_modified: 2020-04-06
+  activation_code: MyText
+  driveway_verified: false
+  total_ratings: 1
+  number_ratings: 1

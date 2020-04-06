@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @homeowner.user %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @homeowner.address %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @homeowner.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @homeowner.longitude %>
+</p>
+
+<p>
+  <strong>Driveway description:</strong>
+  <%= @homeowner.driveway_description %>
+</p>
+
+<p>
+  <strong>Driveway price:</strong>
+  <%= @homeowner.driveway_price %>
+</p>
+
+<p>
+  <strong>Driveway active:</strong>
+  <%= @homeowner.driveway_active %>
+</p>
+
+<p>
+  <strong>Last modified:</strong>
+  <%= @homeowner.last_modified %>
+</p>
+
+<p>
+  <strong>Activation code:</strong>
+  <%= @homeowner.activation_code %>
+</p>
+
+<p>
+  <strong>Driveway verified:</strong>
+  <%= @homeowner.driveway_verified %>
+</p>
+
+<p>
+  <strong>Total ratings:</strong>
+  <%= @homeowner.total_ratings %>
+</p>
+
+<p>
+  <strong>Number ratings:</strong>
+  <%= @homeowner.number_ratings %>
+</p>
+
+<%= link_to 'Edit', edit_homeowner_path(@homeowner) %> |
+<%= link_to 'Back', homeowners_path %>

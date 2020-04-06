@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_02_171426) do
+ActiveRecord::Schema.define(version: 2020_04_06_160831) do
+
+  create_table "homeowners", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "address"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.text "driveway_description"
+    t.decimal "driveway_price"
+    t.boolean "driveway_active", default: false
+    t.date "last_modified"
+    t.text "activation_code"
+    t.boolean "driveway_verified", default: false
+    t.integer "total_ratings", default: 0
+    t.integer "number_ratings", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_homeowners_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

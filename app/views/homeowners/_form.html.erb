@@ -1,0 +1,77 @@
+<%= form_with(model: homeowner, local: true) do |form| %>
+  <% if homeowner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>
+
+      <ul>
+      <% homeowner.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_area :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driveway_description %>
+    <%= form.text_area :driveway_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driveway_price %>
+    <%= form.text_field :driveway_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driveway_active %>
+    <%= form.check_box :driveway_active %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_modified %>
+    <%= form.date_select :last_modified %>
+  </div>
+
+  <div class="field">
+    <%= form.label :activation_code %>
+    <%= form.text_area :activation_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driveway_verified %>
+    <%= form.check_box :driveway_verified %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total_ratings %>
+    <%= form.number_field :total_ratings %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number_ratings %>
+    <%= form.number_field :number_ratings %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
