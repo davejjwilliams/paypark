@@ -20,9 +20,9 @@ function initMap2() {
     var lng = document.getElementById('homeowner_longitude').value;
 
     // if not defined create default position
-    if (!lat || !lng){
-        lat=51.5;
-        lng=-0.125;
+    if (!lat || !lng) {
+        lat = 51.5;
+        lng = -0.125;
         document.getElementById('homeowner_latitude').value = lat;
         document.getElementById('homeowner_longitude').value = lng;
     }
@@ -38,27 +38,29 @@ function initMap2() {
         map: map,
         draggable: true
     });
+
     // refresh marker position and recenter map on marker
-    function refreshMarker(){
+    function refreshMarker() {
         var lat = document.getElementById('homeowner_latitude').value;
         var lng = document.getElementById('homeowner_longitude').value;
         var myCoords = new google.maps.LatLng(lat, lng);
         marker.setPosition(myCoords);
         map.setCenter(marker.getPosition());
     }
+
     // when input values change call refreshMarker
     document.getElementById('homeowner_latitude').onchange = refreshMarker;
     document.getElementById('homeowner_longitude').onchange = refreshMarker;
     // when marker is dragged update input values
-    marker.addListener('drag', function() {
+    marker.addListener('drag', function () {
         latlng = marker.getPosition();
-        newlat=(Math.round(latlng.lat()*1000000))/1000000;
-        newlng=(Math.round(latlng.lng()*1000000))/1000000;
+        newlat = (Math.round(latlng.lat() * 1000000)) / 1000000;
+        newlng = (Math.round(latlng.lng() * 1000000)) / 1000000;
         document.getElementById('homeowner_latitude').value = newlat;
         document.getElementById('homeowner_longitude').value = newlng;
     });
     // When drag ends, center (pan) the map on the marker position
-    marker.addListener('dragend', function() {
+    marker.addListener('dragend', function () {
         map.panTo(marker.getPosition());
     });
 }

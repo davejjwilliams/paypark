@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Paypark</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+  <head>
+    <title>Paypark</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key='+Rails.application.credentials.google[:google_maps_api_key] %>
+    <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=' + Rails.application.credentials.google[:google_maps_api_key] %>
 
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <%= yield(:head_tags) %>
-</head>
+    <%= yield(:head_tags) %>
+  </head>
 
-<body>
+  <body>
 
-<%= render "shared/header" %>
+  <%= render "shared/header" %>
 
-<%= yield %>
+  <%= yield %>
 
-<%= render "shared/footer" %>
+  <%= render "shared/footer" %>
 
-</body>
+  </body>
 </html>
