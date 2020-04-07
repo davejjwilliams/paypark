@@ -1,3 +1,11 @@
+<% provide :head_tags do %>
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          initMap(<%=@homeowner.latitude%>, <%=@homeowner.longitude%>)
+      });
+  </script>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -62,11 +70,15 @@
 
 <p>
   <strong>Average Rating:</strong>
-  <% if @homeowner.number_ratings == 0%>
+  <% if @homeowner.number_ratings == 0 %>
     0
   <% else %>
-    <%= (@homeowner.total_ratings.to_f/@homeowner.number_ratings) %>
+    <%= (@homeowner.total_ratings.to_f / @homeowner.number_ratings) %>
   <% end %>
+</p>
+
+<p>
+<div id="map"></div>
 </p>
 
 <% unless @homeowner.driveway_verified %>
