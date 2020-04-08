@@ -1,3 +1,12 @@
+<% provide :head_tags do %>
+  <meta name='turbolinks-visit-control' content='reload'>
+  <script>
+      document.addEventListener("DOMContentLoaded", function(){
+          initMap()
+      });
+  </script>
+<% end %>
+
 <h1>THE MAP</h1>
 <p>Levon will map</p>
 <% if user_signed_in? %>
@@ -8,3 +17,7 @@
 <% else %>
   <p>NO ONE IS SIGNED IN</p>
 <% end %>
+
+<p>
+<div id="map"></div>
+</p>

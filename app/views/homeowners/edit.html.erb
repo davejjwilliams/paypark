@@ -1,6 +1,42 @@
 <h1>Editing Homeowner</h1>
 
-<%= render 'form', homeowner: @homeowner %>
+<%# render 'form', homeowner: @homeowner %>
 
-<%= link_to 'Show', @homeowner %> |
+<%= form_with(model: @homeowner, local: true) do |form| %>
+  <% if @homeowner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>
+
+      <ul>
+        <% @homeowner.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_area :address, :readonly => true %>
+  </div>
+
+  <p>
+    <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %>
+  </p>
+
+  <div class="field">
+    <%= form.label :driveway_description %>
+    <%= form.text_area :driveway_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driveway_price %>
+    <%= form.text_field :driveway_price %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
 <%= link_to 'Back', homeowners_path %>
