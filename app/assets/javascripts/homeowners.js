@@ -54,12 +54,13 @@ function initMap2() {
     });
 }
 
-function setCords(){
+function setCords(marker){
     latlng = marker.getPosition();
     newlat = (Math.round(latlng.lat() * 1000000)) / 1000000;
     newlng = (Math.round(latlng.lng() * 1000000)) / 1000000;
     document.getElementById('homeowner_latitude').value = newlat;
     document.getElementById('homeowner_longitude').value = newlng;
+    document.getElementById('homeowner_address').value = marker.title;
 }
 
 function initMap3() {
@@ -84,18 +85,13 @@ function initMap3() {
     //var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
+    var  marker = new google.maps.Marker({});
     searchBox.addListener('places_changed', function() {
         var places = searchBox.getPlaces();
 
         if (places.length == 0) {
             return;
         }
-
-        // Clear out the old markers.
-  /*      markers.forEach(function(marker) {
-            marker.setMap(null);
-        });
-        markers = [];*/
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
@@ -112,28 +108,20 @@ function initMap3() {
                 scaledSize: new google.maps.Size(25, 25)
             };
 
-      /*      // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location,
-         /!*     var latitude = place.geometry.location.lat();
-                var longitude = place.geometry.location.lng();*!/
-                draggable: true
-            }));*/
-
-            var marker = new google.maps.Marker({
+            //clear last marker
+            marker.setMap(null);
+            marker = new google.maps.Marker({
                 position: place.geometry.location,
                 animation: google.maps.Animation.DROP,
                 map: map,
                 icon: icon,
+                title: place.name,
                 draggable: true
-            }); setCords();
+            }); setCords(marker);
 
             // when marker is dragged update input values
             marker.addListener('drag', function () {
-               setCords();
+               setCords(marker);
             });
             // When drag ends, center (pan) the map on the marker position
             marker.addListener('dragend', function () {
