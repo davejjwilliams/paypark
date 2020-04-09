@@ -75,17 +75,15 @@ function initMap3() {
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+   // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());
     });
 
-    //var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    var  marker = new google.maps.Marker({});
+    // Everytime there is a new search
+    var marker = new google.maps.Marker({});
     searchBox.addListener('places_changed', function() {
         var places = searchBox.getPlaces();
 
@@ -100,34 +98,47 @@ function initMap3() {
                 console.log("Returned place contains no geometry");
                 return;
             }
-            var icon = {
+       /*     var icon = {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(17, 34),
                 scaledSize: new google.maps.Size(25, 25)
             };
-
-            //clear last marker
+*/
+            // Clear last marker
             marker.setMap(null);
+
+            // Drop marker
             marker = new google.maps.Marker({
                 position: place.geometry.location,
                 animation: google.maps.Animation.DROP,
                 map: map,
-                icon: icon,
+                //icon: icon,
+                //label: 'P',
                 title: place.name,
                 draggable: true
             }); setCords(marker);
 
             // when marker is dragged update input values
             marker.addListener('drag', function () {
-               setCords(marker);
-            });
-            // When drag ends, center (pan) the map on the marker position
-            marker.addListener('dragend', function () {
-                map.panTo(marker.getPosition());
+                setCords(marker);
             });
 
+            // When drag ends, center (pan) the map on the marker position
+            marker.addListener('dragend', function () {
+                if((Math.abs(marker.position.lat() - place.geometry.location.lat()) > 0.00005) || (Math.abs(marker.position.lng() - place.geometry.location.lng()) > 0.0001)){
+                    // Put marker back to beginning position
+                    marker.setPosition(place.geometry.location);
+                    map.panTo(marker.getPosition());
+                    setCords(marker);
+                }
+                else{
+                    map.panTo(marker.getPosition());
+                }
+            });
+
+            // Not too sure, something to do with the zoom level fitting to the bounds
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
                 bounds.union(place.geometry.viewport);
