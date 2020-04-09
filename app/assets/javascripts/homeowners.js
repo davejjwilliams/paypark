@@ -133,7 +133,7 @@ function initMap3() {
                     map.panTo(marker.getPosition());
                     setCords(marker);
                 }
-                else{
+                else{ // When drag within limit
                     map.panTo(marker.getPosition());
                 }
             });
