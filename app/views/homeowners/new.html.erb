@@ -1,5 +1,61 @@
+<% provide :head_tags do %>
+  <meta name='turbolinks-visit-control' content='reload'>
+  <script>
+      document.addEventListener("DOMContentLoaded", initMap3);
+  </script>
+<% end %>
+
 <h1>New Homeowner</h1>
 
-<%= render 'form', homeowner: @homeowner %>
+<%= form_with(model: @homeowner, local: true) do |form| %>
+  <% if @homeowner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>
+
+      <ul>
+        <% @homeowner.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class ="field"> <input id="pac-input" class="controls" type="text" placeholder="Search address and drag to driveway"> </div>
+  <div id="map2"></div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_area :address %>
+  </div>
+
+  <div class="field" style="display: none">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude, :readonly => true %>
+  </div>
+
+  <div class="field" style="display: none">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude, :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driveway_description %>
+    <%= form.text_area :driveway_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driveway_price %>
+    <%= form.text_field :driveway_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driveway_active %>
+    <%= form.check_box :driveway_active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Back', homeowners_path %>
