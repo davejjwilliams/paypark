@@ -1,7 +1,5 @@
 <h1>Editing Homeowner</h1>
 
-<%# render 'form', homeowner: @homeowner %>
-
 <%= form_with(model: @homeowner, local: true) do |form| %>
   <% if @homeowner.errors.any? %>
     <div id="error_explanation">

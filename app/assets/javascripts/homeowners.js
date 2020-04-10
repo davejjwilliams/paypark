@@ -84,6 +84,7 @@ function initMap3() {
 
     // Everytime there is a new search
     var marker = new google.maps.Marker({});
+    var rectangle = new google.maps.Rectangle({});
     searchBox.addListener('places_changed', function() {
         var places = searchBox.getPlaces();
 
@@ -101,15 +102,31 @@ function initMap3() {
 
             // Clear last marker
             marker.setMap(null);
+            rectangle.setMap(null);
 
             // Drop marker
             marker = new google.maps.Marker({
                 position: place.geometry.location,
                 animation: google.maps.Animation.DROP,
                 map: map,
-                title: place.name,
+                title: place.formatted_address,
                 draggable: true
             }); setCords(marker);
+
+            rectangle = new google.maps.Rectangle({
+                strokeColor: '#ff0000',
+                strokeOpacity: 0.9,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35,
+                map: map,
+                bounds: {
+                    north: place.geometry.location.lat() + 0.0000625,
+                    south: place.geometry.location.lat() - 0.0000625,
+                    east: place.geometry.location.lng() + 0.0001,
+                    west: place.geometry.location.lng() - 0.0001
+                }
+            });
 
             // when marker is dragged update input values
             marker.addListener('drag', function () {
@@ -118,7 +135,7 @@ function initMap3() {
 
             // When drag ends, center (pan) the map on the marker position
             marker.addListener('dragend', function () {
-                if((Math.abs(marker.position.lat() - place.geometry.location.lat()) > 0.00005) || (Math.abs(marker.position.lng() - place.geometry.location.lng()) > 0.0001)){
+                if((Math.abs(marker.position.lat() - place.geometry.location.lat()) > 0.0000625) || (Math.abs(marker.position.lng() - place.geometry.location.lng()) > 0.0001)){
                     // Put marker back to beginning position
                     marker.setPosition(place.geometry.location);
                     map.panTo(marker.getPosition());
