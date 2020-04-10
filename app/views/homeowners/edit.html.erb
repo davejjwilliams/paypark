@@ -19,7 +19,7 @@
   </div>
 
   <p>
-    <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %>
+    <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=400x300&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %>
   </p>
 
   <div class="field">
@@ -30,6 +30,11 @@
   <div class="field">
     <%= form.label :driveway_price %>
     <%= form.text_field :driveway_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driveway_active %>
+    <%= form.check_box :driveway_active %>
   </div>
 
   <div class="actions">
