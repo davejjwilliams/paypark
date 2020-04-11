@@ -6,7 +6,7 @@
   <%= link_to "Homeowners Index", homeowners_path %>
   <br>
   Real Links:
-  <%= link_to "The Map", map_path %>
+  <%= link_to "The Map", root_path %>
 
   <% if Driver.exists?(:user_id => current_user.id) %>
     <% driver = Driver.find_by_user_id(current_user.id) %>

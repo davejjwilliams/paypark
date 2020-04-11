@@ -1,7 +1,4 @@
 class HomeController < ApplicationController
-  def home
-  end
-
   def contact
   end
 
@@ -10,10 +7,15 @@ class HomeController < ApplicationController
     @user.save
     session[:user_id] = @user.id
     sign_in(User.find(@user.id), scope: :user)
-    redirect_to map_path
+    if !Homeowner.exists?(user_id: current_user.id) && !Driver.exists?(user_id: current_user.id)
+      redirect_to signup_path
+    else
+      redirect_to root_path
+    end
   end
 
   private
+
   def auth
     request.env['omniauth.auth']
   end
