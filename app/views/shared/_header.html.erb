@@ -6,17 +6,17 @@
   <%= link_to "Homeowners Index", homeowners_path %>
   <br>
   Real Links:
-  <%= link_to "The Map", map_path %>
+  <%= link_to "The Map", root_path %>
 
-  <% if Driver.exists?(:user_id => current_user.id) %>
-    <% driver = Driver.find_by_user_id(current_user.id) %>
+  <% if Driver.exists?(session[:driver_id]) %>
+    <% driver = Driver.find(session[:driver_id]) %>
     <%= link_to "Driver Page", driver %>
   <% else %>
     <%= link_to "Register Your Car!", new_driver_path %>
   <% end %>
 
-  <% if Homeowner.exists?(:user_id => current_user.id) %>
-    <% homeowner = Homeowner.find_by_user_id(current_user.id) %>
+  <% if Homeowner.exists?(session[:homeowner_id]) %>
+    <% homeowner = Homeowner.find(session[:homeowner_id]) %>
     <%= link_to "Homeowner Page", homeowner %>
   <% else %>
     <%= link_to "Register Your Driveway!", new_homeowner_path %>

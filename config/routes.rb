@@ -2,11 +2,13 @@ Rails.application.routes.draw do
   resources :drivers
   resources :homeowners
   devise_for :users
-  get 'map', to:'map#map'
   get 'contact', to:'home#contact'
 
+  # Sign Up View
+  get 'signup', to:'home#signup'
+
   # App Root
-  root 'home#home'
+  root 'map#map'
 
   # Verification Form
   get 'verification', to:'verification#new'

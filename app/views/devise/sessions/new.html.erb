@@ -1,6 +1,11 @@
-<h2>Log in</h2>
-<br>
-<%= link_to "Click here to log in!", '/auth/google_oauth2' %>
+<h1>Welcome to PayPark!</h1>
+<p>This will be the login page.</p>
+<% if user_signed_in? %>
+  <p>Welcome, <%= current_user.name %>! </p>
+  <%= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
+<% else %>
+  <%= link_to "Click here to log in!", '/auth/google_oauth2' %>
+<% end %>
 
 <%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 <!--  <div class="field">-->
