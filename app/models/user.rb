@@ -11,4 +11,8 @@ class User < ApplicationRecord
       user.password = SecureRandom.hex
     end
   end
+
+  # Chat associations
+  has_many :conversations, foreign_key: :sender_id
+  has_many :messages
 end
