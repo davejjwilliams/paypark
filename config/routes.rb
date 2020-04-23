@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :drivers
   resources :homeowners
   devise_for :users
@@ -16,5 +17,16 @@ Rails.application.routes.draw do
 
   # Omniauth Redirect
   get '/auth/:provider/callback' => 'home#omniauth'
+
+  # Temporary live chat route
+  get 'chat', to:'chat#chat'
+
+  # Resources for chat
+  resources :conversations, only: [:create] do
+    member do
+      post :close
+    end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
