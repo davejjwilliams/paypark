@@ -15,6 +15,10 @@ class HomeownersController < ApplicationController
 
   # GET /homeowners/new
   def new
+    if Homeowner.exists?(user_id: current_user.id)
+      @homeowner = Homeowner.find_by_user_id(current_user.id)
+      redirect_to "/homeowners/#{@homeowner.id}"
+    end
     @homeowner = Homeowner.new
   end
 
