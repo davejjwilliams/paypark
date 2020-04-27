@@ -2,58 +2,6 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
-function initMap2() {
-
-    var lat = document.getElementById('homeowner_latitude').value;
-    var lng = document.getElementById('homeowner_longitude').value;
-
-    // if not defined create default position
-    if (!lat || !lng) {
-        lat = 51.5;
-        lng = -0.125;
-        document.getElementById('homeowner_latitude').value = lat;
-        document.getElementById('homeowner_longitude').value = lng;
-    }
-    var myCoords = new google.maps.LatLng(lat, lng);
-    var mapOptions = {
-        center: myCoords,
-        zoom: 14
-    };
-    var map = new google.maps.Map(document.getElementById('map2'), mapOptions);
-    var marker = new google.maps.Marker({
-        position: myCoords,
-        animation: google.maps.Animation.DROP,
-        map: map,
-        draggable: true
-    });
-
-    // refresh marker position and recenter map on marker
-    function refreshMarker() {
-        var lat = document.getElementById('homeowner_latitude').value;
-        var lng = document.getElementById('homeowner_longitude').value;
-        var myCoords = new google.maps.LatLng(lat, lng);
-        marker.setPosition(myCoords);
-        map.setCenter(marker.getPosition());
-    }
-
-    // when input values change call refreshMarker
-    document.getElementById('homeowner_latitude').onchange = refreshMarker;
-    document.getElementById('homeowner_longitude').onchange = refreshMarker;
-
-    // when marker is dragged update input values
-    marker.addListener('drag', function () {
-        latlng = marker.getPosition();
-        newlat = (Math.round(latlng.lat() * 1000000)) / 1000000;
-        newlng = (Math.round(latlng.lng() * 1000000)) / 1000000;
-        document.getElementById('homeowner_latitude').value = newlat;
-        document.getElementById('homeowner_longitude').value = newlng;
-    });
-    // When drag ends, center (pan) the map on the marker position
-    marker.addListener('dragend', function () {
-        map.panTo(marker.getPosition());
-    });
-}
-
 function setCords(marker){
     latlng = marker.getPosition();
     newlat = (Math.round(latlng.lat() * 1000000)) / 1000000;
@@ -63,7 +11,7 @@ function setCords(marker){
     document.getElementById('homeowner_address').value = marker.title;
 }
 
-function initMap3() {
+function initMapHO() {
 
     // Spawn map
     var map = new google.maps.Map(document.getElementById('map2'), {
