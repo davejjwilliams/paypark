@@ -19,11 +19,12 @@ function initMap() {
         var link = "/homeowners/".concat(gon.driveways[index].id);
         google.maps.event.addListener(marker, 'click', (function (marker) {
             return function () {
+                var str = "Book";
+                var result = str.link(link);
                 infowindow.setContent(
-                    gon.driveways[index].address + '<br>'+ link +'<br>' +
+                    gon.driveways[index].address + '<br>' + '<br>' +
                     '£' + parseFloat(gon.driveways[index].driveway_price) + ' per hour' + '<br><br>' +
-                    gon.driveways[index].driveway_description + '<br>' +
-                    '</p><a href="/homeowners">Book</a>');
+                    gon.driveways[index].driveway_description + '<br>' + result);
                 infowindow.open(map, marker);
             }
                 ;
