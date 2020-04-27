@@ -16,7 +16,8 @@ function initMap() {
             position: {lat: parseFloat(gon.driveways[index].latitude), lng: parseFloat(gon.driveways[index].longitude)},
             map: map,
         });
-        var link = "/homeowners/".concat(gon.driveways[index].id);
+        //var link = "/homeowners/".concat(gon.driveways[index].id);
+        var link = "/bookings/new"//.concat(gon.driveways[index].id);
         google.maps.event.addListener(marker, 'click', (function (marker) {
             return function () {
                 var str = "Book";

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Driver:</strong>
+  <%= @booking.driver_id %>
+</p>
+
+<p>
+  <strong>Homeowner:</strong>
+  <%= @booking.homeowner_id %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @booking.price %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @booking.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @booking.end_time %>
+</p>
+
+<p>
+  <strong>Complete:</strong>
+  <%= @booking.complete %>
+</p>
+
+<p>
+  <strong>Withdrawn:</strong>
+  <%= @booking.withdrawn %>
+</p>
+
+<%= link_to 'Edit', edit_booking_path(@booking) %> |
+<%= link_to 'Back', bookings_path %>

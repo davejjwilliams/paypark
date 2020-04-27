@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :bookings
   resources :drivers
   resources :homeowners
   devise_for :users
