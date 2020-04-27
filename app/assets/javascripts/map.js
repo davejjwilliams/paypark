@@ -10,18 +10,23 @@ function initMap() {
         //content: contentString
     });
 
-    for (count = 0; count < gon.driveways.length; count++) {
+    gon.driveways.forEach(myFunction);
+    function myFunction(item, index){
         marker = new google.maps.Marker({
-            position: {lat: parseFloat(gon.driveways[count].latitude), lng: parseFloat(gon.driveways[count].longitude)},
+            position: {lat: parseFloat(gon.driveways[index].latitude), lng: parseFloat(gon.driveways[index].longitude)},
             map: map,
         });
-        var link = "/homeowners/".concat(gon.driveways[count].id);
-        google.maps.event.addListener(marker, 'click', (function (marker, count) {
+        var link = "/homeowners/".concat(gon.driveways[index].id);
+        google.maps.event.addListener(marker, 'click', (function (marker) {
             return function () {
-                infowindow.setContent(gon.driveways[count].driveway_description + '</p><a href="/homeowners">Book</a>');
+                infowindow.setContent(
+                    gon.driveways[index].address + '<br>'+ link +'<br>' +
+                    '£' + parseFloat(gon.driveways[index].driveway_price) + ' per hour' + '<br><br>' +
+                    gon.driveways[index].driveway_description + '<br>' +
+                    '</p><a href="/homeowners">Book</a>');
                 infowindow.open(map, marker);
             }
-            ;
+                ;
         })(marker, count));
     }
 
