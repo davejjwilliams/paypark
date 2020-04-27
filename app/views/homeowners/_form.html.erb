@@ -1,88 +1,139 @@
-<% provide :head_tags do %>
-  <meta name='turbolinks-visit-control' content='reload'>
-  <script>
-      document.addEventListener("DOMContentLoaded", initMap2);
-  </script>
-<% end %>
+<%#= form_with(model: homeowner, local: true) do |form| %>
+  <%# if homeowner.errors.any? %>
+<!--    <div id="error_explanation">-->
+<!--      <h2><%#= pluralize(homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>-->
 
-<%= form_with(model: homeowner, local: true) do |form| %>
+<!--      <ul>-->
+        <%# homeowner.errors.full_messages.each do |message| %>
+<!--          <li><%#= message %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
+<!--  </div>-->
+
+
+
+  <%# provide :head_tags do %>
+<!--    <meta name='turbolinks-visit-control' content='reload'>-->
+<!--    <script>-->
+<!--        document.addEventListener("DOMContentLoaded", initMap2);-->
+<!--    </script>-->
+  <%# end %>
+
+
+<!--  <div id="map-holder">-->
+<!--    <div id="map2"></div>-->
+
+    <%#= form.hidden_field :latitude %>
+
+    <%#= form.hidden_field :longitude %>
+
+
+
+
+
+
+
+<!--    <div id="right-div">-->
+      <%#= form.label :address %>
+      <%#= form.text_area :address %>
+
+
+        <%#= form.label :driveway_description %>
+        <%#= form.text_area :driveway_description %>
+
+
+
+        <%#= form.label :driveway_price %>
+        <%#= form.text_field :driveway_price %>
+<!--      </div>-->
+
+        <%#= form.label :driveway_active %>
+        <%#= form.check_box :driveway_active %>
+
+
+        <%#= form.submit %>
+
+
+
+<!--    </div>-->
+
+
+<%# end %>
+
+<div id="left-div">
+
+
+  <%= form_with(model: homeowner, local: true) do |form| %>
   <% if homeowner.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>
+      <div id="error_explanation">
+        <h2><%= pluralize(homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>
 
-      <ul>
-        <% homeowner.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+        <ul>
+  <% homeowner.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+  <% end %>
+        </ul>
+      </div>
+  <% end %>
     </div>
+
+
+
+  <% provide :head_tags do %>
+      <meta name='turbolinks-visit-control' content='reload'>
+      <script>
+          document.addEventListener("DOMContentLoaded", initMap2);
+      </script>
   <% end %>
 
-  <!--  <div class="field">-->
-  <%#= form.label :user_id %>
-  <%#= form.text_field :user_id %>
-  <!--  </div>-->
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_area :address %>
-  </div>
+    <div id="map-holder">
+      <div id="map2"></div>
 
-  <div class="field">
-    <%= form.label :latitude %>
-    <%= form.text_field :latitude %>
-  </div>
 
-  <div class="field">
-    <%= form.label :longitude %>
-    <%= form.text_field :longitude %>
-  </div>
+  <%= form.hidden_field :latitude %>
 
-  <p>
-  <div id="map2"></div>
-  </p>
+  <%= form.hidden_field :longitude %>
 
-  <div class="field">
-    <%= form.label :driveway_description %>
-    <%= form.text_area :driveway_description %>
-  </div>
 
-  <div class="field">
-    <%= form.label :driveway_price %>
-    <%= form.text_field :driveway_price %>
-  </div>
 
-  <div class="field">
-    <%= form.label :driveway_active %>
-    <%= form.check_box :driveway_active %>
-  </div>
 
-  <!--  <div class="field">-->
-  <%#= form.label :last_modified %>
-  <%#= form.date_select :last_modified %>
-  <!--  </div>-->
 
-  <!--  <div class="field">-->
-  <%#= form.label :activation_code %>
-  <%#= form.text_area :activation_code %>
-  <!--  </div>-->
 
-  <!--  <div class="field">-->
-  <%#= form.label :driveway_verified %>
-  <%#= form.check_box :driveway_verified %>
-  <!--  </div>-->
 
-  <!--  <div class="field">-->
-  <%#= form.label :total_ratings %>
-  <%#= form.number_field :total_ratings %>
-  <!--  </div>-->
 
-  <!--  <div class="field">-->
-  <%#= form.label :number_ratings %>
-  <%#= form.number_field :number_ratings %>
-  <!--  </div>-->
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+
+
+
+</div>
+<div id="right-div">
+
+
+
+  <div class="label" style="font-size: 22px;"><%= form.label :address %></div>
+
+  <div id="input-div"><%= form.text_area :address, class: "textarea" %></div>
+
+
+  <div class="label" style="font-size: 22px;"><%= form.label :driveway_description %></div>
+  <div id="input-div"><%= form.text_area :driveway_description, class: "textarea"%></div>
+
+
+
+  <div class="label" style="font-size: 22px;"><%= form.label :driveway_price %></div>
+  <div id="input-div"><%= form.text_field :driveway_price, class: "input is-large" %></div>
+
+
+    <div class="label"><%= form.label :driveway_active, class: "checkbox-label"%><%= form.check_box :driveway_active, class: "checkbox" %></div>
+  <p id="useful-tip">THIS SPACE CAN BE USED TO HAVE A USEFUL TIP</p>
+
+
+  <div style="margin-top: 5%;"><%= form.submit :submit_button, class: "button is-primary is-large"%></div>
+
+
+
 <% end %>
+</div>

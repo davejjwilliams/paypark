@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Paypark</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Paypark</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=' + Rails.application.credentials.google[:google_maps_api_key] %>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=' + Rails.application.credentials.google[:google_maps_api_key] %>
 
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= yield(:head_tags) %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <body>
+  <%= yield(:head_tags) %>
+</head>
+<header>
+  <!-- summon the header -->
+  <%= render partial: "shared/header" %>
 
-  <%= render "shared/header" %>
+</header>
 
+<body>
+
+
+
+
+
+<div id="body1">
   <%= yield %>
+</div>
 
-  <%= render "shared/footer" %>
+<!-- summon footer -->
+<%= render partial: "shared/footer" %>
 
-  </body>
+</body>
 </html>

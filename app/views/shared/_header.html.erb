@@ -1,27 +1,105 @@
-<p>To be edited by the front-end team when all pages are complete!</p>
-<p>This is a header! You shouldn't see anything more than this if you aren't signed in!</p>
-<% if user_signed_in? %>
-  Testing Links:
-  <%= link_to "Drivers Index", drivers_path %>
-  <%= link_to "Homeowners Index", homeowners_path %>
-  <br>
-  Real Links:
-  <%= link_to "The Map", map_path %>
+<!--<div id="header">-->
+<!--<span class="icon is-large">-->
+<!--  <i class="fas fa-home"></i>-->
+<!--</span>-->
+<!--  <span style="font-size: 48px; color: Dodgerblue;">-->
+<!--  <i class="fas fa-igloo"></i>-->
+<!--</span>-->
+<!--  <i class="fab fa-houzz"></i>-->
 
-  <% if Driver.exists?(:user_id => current_user.id) %>
-    <% driver = Driver.find_by_user_id(current_user.id) %>
-    <%= link_to "Driver Page", driver %>
-  <% end %>
 
-  <% if Homeowner.exists?(:user_id => current_user.id) %>
-    <% homeowner = Homeowner.find_by_user_id(current_user.id) %>
-    <%= link_to "Homeowner Page", homeowner %>
-  <% end %>
+<%# if user_signed_in? %>
+<!--  Testing Links:-->
+<%#= link_to "Drivers Index", drivers_path %>
+<%#= link_to "Homeowners Index", homeowners_path %>
+<!--  <br>-->
+<!--  Real Links:-->
+<%#= link_to "The Map", map_path %>
 
-  <p>This is your name: <%= current_user.name %></p>
-  <%= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
-<% end %>
+<%# if Driver.exists?(:user_id => current_user.id) %>
+<%# driver = Driver.find_by_user_id(current_user.id) %>
+<%#= link_to "Driver Page", driver %>
+<%# end %>
 
-<% 5.times do %>
-  <br>
-<% end %>
+<%# if Homeowner.exists?(:user_id => current_user.id) %>
+<%# homeowner = Homeowner.find_by_user_id(current_user.id) %>
+<%#= link_to "Homeowner Page", homeowner %>
+<%# end %>
+
+<!--  <p>This is your name: <%#= current_user.name %></p>-->
+<%#= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
+<%# end %>
+<!--</div>-->
+
+
+
+<div class="header">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+    </a>
+
+    <a class="active" href="javascript:void(0)" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</div>
+
+
+
+
+<div id="navbar">
+  <nav role="navigation" aria-label="main navigation">
+
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <button id="navbutton" class="button" >
+          <%= link_to "Drivers Index", drivers_path %>
+        </button>
+
+
+        <button id="navbutton" class="button is-light is-primary" class="active" href="javascript:void(0)"> <%= link_to "Homeowners Index2", homeowners_path %></button>
+
+
+        <a class="active" href="javascript:void(0)"><button id="navbutton" class="button is-light is-primary"> <%= link_to "Homeowners Index", homeowners_path %></button> </a>
+
+
+        <a class="active" href="javascript:void(0)"><button id="navbutton" class="button is-light is-primary"> <%= link_to "Homeowners Index", homeowners_path %></button></a>
+
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary" class="active" href="javascript:void(0)">
+              <strong>Sign up</strong>
+            </a>
+            <a id="login-button" class="button" class="active" href="javascript:void(0)" >
+              Log in
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+
+<script>
+    window.onscroll = function() {myFunction()};
+
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>
