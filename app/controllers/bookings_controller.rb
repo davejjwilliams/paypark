@@ -26,15 +26,36 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
 
+    # Ensure bookings are hourly
     @booking.start_time = @booking.start_time.change(min: 0)
+    @booking.end_time = @booking.end_time.change(min: 0)
 
-    respond_to do |format|
-      if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-        format.json { render :show, status: :created, location: @booking }
-      else
-        format.html { render :new }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
+    # Get all other bookings under this homeowner
+    @other_bookings = Booking.where(:homeowner_id => @booking.homeowner_id)
+
+    # Check for booking encompassing, booking being encompassed, start time overlap, and end time overlap
+    @other_bookings.each do |ob|
+      if (@booking.start_time >= ob.start_time && @booking.end_time <= ob.end_time) ||
+        (@booking.start_time <= ob.start_time && @booking.end_time >= ob.end_time) ||
+        (@booking.start_time >= ob.start_time && @booking.start_time <= ob.end_time) ||
+        (@booking.end_time >= ob.start_time && @booking.end_time <= ob.end_time)
+          redirect_to "/booking_error"
+          return
+      end
+    end
+
+    # Check that the booking time is at least an hour later than the end time, and that the booking starts before it ends
+    if Time.current + 1.hour > @booking.start_time || @booking.start_time >= @booking.end_time
+      redirect_to "/booking_error"
+    else
+      respond_to do |format|
+        if @booking.save
+          format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
+          format.json { render :show, status: :created, location: @booking }
+        else
+          format.html { render :new }
+          format.json { render json: @booking.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
