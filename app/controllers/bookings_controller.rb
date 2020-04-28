@@ -12,8 +12,16 @@ class BookingsController < ApplicationController
   def show
   end
 
+  def driver_check
+    if (!Driver.exists?(user_id: current_user.id))
+      flash[:alert] = "You are not registered as a driver!"
+      redirect_to new_driver_path
+    end
+  end
+
   # GET /bookings/new
   def new
+    driver_check
     @booking = Booking.new
     @homeowner = Homeowner.find(params[:dvwid])
   end
