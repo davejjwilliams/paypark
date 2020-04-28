@@ -17,7 +17,7 @@ function initMap() {
             map: map,
         });
         //var link = "/homeowners/".concat(gon.driveways[index].id);
-        var link = "/bookings/new?dvwid=".concat(gon.driveways[index].id).concat(";dvwprc=").concat(gon.driveways[index].driveway_price);
+        var link = "/bookings/new?dvwid=".concat(gon.driveways[index].id);
         google.maps.event.addListener(marker, 'click', (function (marker) {
             return function () {
                 var str = "Book";

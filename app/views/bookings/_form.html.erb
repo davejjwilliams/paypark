@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.hidden_field :driver_id, :value => current_user.id %>
+    <%= form.hidden_field :driver_id, :value => Driver.find_by_user_id(current_user.id).id %>
   </div>
 
   <div class="field">
-    <%= form.hidden_field :homeowner_id, :id => "homeowner_field" %>
+    <%= form.hidden_field :homeowner_id, :value => params[:dvwid] %>
   </div>
 
   <div class="field">
-    <%= form.hidden_field :price, :id => "price_field" %>
+    <%= form.hidden_field :price, :value => @homeowner.driveway_price %>
   </div>
 
   <div class="field">

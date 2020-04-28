@@ -2,6 +2,9 @@ class HomeController < ApplicationController
   def contact
   end
 
+  def booking_error
+  end
+
   def omniauth
     @user = User.from_omniauth(auth)
     @user.save
