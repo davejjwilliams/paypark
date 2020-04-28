@@ -12,18 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :driver_id %>
-    <%= form.number_field :driver_id %>
+    <%= form.hidden_field :driver_id, :value => current_user.id %>
   </div>
 
   <div class="field">
-    <%= form.label :homeowner_id %>
-    <%= form.number_field :homeowner_id %>
+    <%= form.hidden_field :homeowner_id, :id => "homeowner_field" %>
   </div>
 
   <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
+    <%= form.hidden_field :price, :id => "price_field" %>
   </div>
 
   <div class="field">
@@ -34,16 +31,6 @@
   <div class="field">
     <%= form.label :end_time %>
     <%= form.datetime_select :end_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :complete %>
-    <%= form.check_box :complete %>
-  </div>
-
-  <div class="field">
-    <%= form.label :withdrawn %>
-    <%= form.check_box :withdrawn %>
   </div>
 
   <div class="actions">

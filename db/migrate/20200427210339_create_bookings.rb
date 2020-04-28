@@ -6,8 +6,8 @@ class CreateBookings < ActiveRecord::Migration[5.2]
       t.decimal :price
       t.datetime :start_time
       t.datetime :end_time
-      t.boolean :complete
-      t.boolean :withdrawn
+      t.boolean :complete, default: false
+      t.boolean :withdrawn, default: false
 
       t.timestamps
     end

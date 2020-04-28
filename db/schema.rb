@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2020_04_27_210339) do
     t.decimal "price"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.boolean "complete"
-    t.boolean "withdrawn"
+    t.boolean "complete", default: false
+    t.boolean "withdrawn", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

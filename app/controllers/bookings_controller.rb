@@ -26,6 +26,8 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
 
+    @booking.start_time = @booking.start_time.change(min: 0)
+
     respond_to do |format|
       if @booking.save
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
@@ -42,6 +44,7 @@ class BookingsController < ApplicationController
   def update
     respond_to do |format|
       if @booking.update(booking_params)
+        # Redirect to payment
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
