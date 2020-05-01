@@ -5,6 +5,35 @@ function initMap() {
         center: cen
     });
 
+    infoWindow = new google.maps.InfoWindow;
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found ~ 1 mile');
+            infoWindow.open(map);
+            map.setCenter(pos);
+        }, function() {
+            //Device may have location services turned off in OS settings
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+    }
+
     var marker, count, contentString;
     var infowindow = new google.maps.InfoWindow({
         //content: contentString
