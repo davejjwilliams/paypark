@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   devise_for :users
   get 'contact', to:'home#contact'
 
+
+  get "data", :to=>"bookings#get", :as=>"data"
+  post "data(/:id)", :to => "bookings#add"
+  put "data/:id", :to => "bookings#updateCal"
+  delete "data/:id", :to => "bookings#delete"
+
+
   # Sign Up View
   get 'signup', to:'home#signup'
 

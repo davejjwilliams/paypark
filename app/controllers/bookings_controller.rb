@@ -94,6 +94,61 @@ class BookingsController < ApplicationController
     end
   end
 
+
+
+
+  protect_from_forgery
+
+  def get
+    id = params[:dvwid]
+    homeowner = Homeowner.find_by(id)
+    driveway_bookings = Booking.all.where(homeowner_id: homeowner.id)
+
+    render :json => driveway_bookings.map {|event| {
+        :id => event.id,
+        :start_date => event.start_time.to_formatted_s(:db),
+        :end_date => event.end_time.to_formatted_s(:db),
+
+    }}
+  end
+
+
+
+
+
+
+
+  def add
+    event = Booking.create(
+
+    :start_time => params["start_time"],
+    :end_time => params["end_time"])
+
+    render :json => {:action => "inserted", :tid => event.id}
+  end
+
+  def updateCal
+    booking = Booking.find(params["id"])
+    booking.text = params["text"]
+    booking.start_time = params["start_time"]
+    booking.end_time = params["end_time"]
+    booking.save
+
+    render :json => {:action => "updated"}
+  end
+
+  def delete
+    Booking.find(params["id"]).destroy
+
+    render :json => {:action => "deleted"}
+  end
+
+
+
+
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
