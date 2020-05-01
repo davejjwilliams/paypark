@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_010146) do
+ActiveRecord::Schema.define(version: 2020_04_27_210339) do
+
+  create_table "bookings", force: :cascade do |t|
+    t.integer "driver_id"
+    t.integer "homeowner_id"
+    t.decimal "price"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean "complete", default: false
+    t.boolean "withdrawn", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "conversations", force: :cascade do |t|
     t.integer "recipient_id"

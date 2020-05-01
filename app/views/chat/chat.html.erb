@@ -4,10 +4,14 @@
   <% end %>
 </ul>
 
-<h2 class="panel-title">Users</h2>
+<h2 class="panel-title">Homeowners you have booked with:</h2>
 
 <ul>
-  <% @users.each do |user| %>
-    <li><%= link_to user.email, conversations_path(user_id: user), remote: true, method: :post %></li>
+  <% @driver_conversations_with.each do |user| %>
+    <li><%= link_to User.find(user.user_id).name, conversations_path(user_id: user), remote: true, method: :post %></li>
   <% end %>
 </ul>
+
+<% if !Homeowner.find_by_user_id(current_user.id).nil? %>
+  <%= render 'homeowner_conversations' %>
+<% end %>
