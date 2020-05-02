@@ -1,31 +1,46 @@
-<p>To be edited by the front-end team when all pages are complete!</p>
-<p>This is a header! You shouldn't see anything more than this if you aren't signed in!</p>
-<% if user_signed_in? %>
-  Testing Links:
-  <%= link_to "Drivers Index", drivers_path %>
-  <%= link_to "Homeowners Index", homeowners_path %>
-  <br>
-  Real Links:
-  <%= link_to "The Map", root_path %>
+<div class="header">
+  <div class="navbar-brand">
 
-  <% if Driver.exists?(session[:driver_id]) %>
-    <% driver = Driver.find(session[:driver_id]) %>
-    <%= link_to "Driver Page", driver %>
-  <% else %>
-    <%= link_to "Register Your Car!", new_driver_path %>
-  <% end %>
 
-  <% if Homeowner.exists?(session[:homeowner_id]) %>
-    <% homeowner = Homeowner.find(session[:homeowner_id]) %>
-    <%= link_to "Homeowner Page", homeowner %>
-  <% else %>
-    <%= link_to "Register Your Driveway!", new_homeowner_path %>
-  <% end %>
+    <a class="active" href="javascript:void(0)" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
 
-  <p>This is your name: <%= current_user.name %></p>
-  <%= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
-<% end %>
 
-<% 5.times do %>
-  <br>
-<% end %>
+
+
+
+    <% if user_signed_in? %>
+      <%= current_user.name %>
+      <%= current_user.email %>
+
+    <% else %>
+      <p>NO ONE IS SIGNED IN</p>
+    <% end %>
+
+    <a class="navbar-item" href="https://bulma.io">
+      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+    </a>
+
+    <%= link_to "Homeowners Index2", homeowners_path %>
+
+    <% if user_signed_in? %>
+      <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :id=>'login-button', :class => 'button active' %>
+    <% else %>
+
+      <a id="login-button" class="button" class="active" href="javascript:void(0)">
+        Log in
+      </a>
+    <% end %>
+    <a class="button is-primary" class="active" href="javascript:void(0)">
+      <strong>Sign up</strong>
+    </a>
+
+
+  </div>
+</div>
+
+
+

@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Paypark</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= include_gon %>
+<head>
+  <title>Paypark</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= include_gon %>
 
-    <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=' + Rails.application.credentials.google[:google_maps_api_key]+'&libraries=places'%>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=' + Rails.application.credentials.google[:google_maps_api_key] + '&libraries=places' %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= yield(:head_tags) %>
-  </head>
+  <%= yield(:head_tags) %>
+</head>
 
-  <body>
+<header>
+  <!-- summon the header -->
+  <%= render partial: "shared/header" %>
 
-  <%= render "shared/header" %>
+</header>
+<body>
 
+
+
+
+
+<div id="body1">
   <%= yield %>
+</div>
 
-  <%= render "shared/footer" %>
+<!-- summon footer -->
+<%= render partial: "shared/footer" %>
 
-  </body>
+</body>
 </html>
