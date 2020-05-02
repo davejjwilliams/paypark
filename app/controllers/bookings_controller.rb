@@ -12,13 +12,6 @@ class BookingsController < ApplicationController
   def show
   end
 
-  def driver_check
-    if (!Driver.exists?(user_id: current_user.id))
-      flash[:alert] = "You are not registered as a driver!"
-      redirect_to new_driver_path
-    end
-  end
-
   # GET /bookings/new
   def new
     driver_check
@@ -98,6 +91,14 @@ class BookingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])
+    end
+
+    # Helper method to redirect non-registered driver to the driver registration page when they try to book.
+    def driver_check
+      if (!Driver.exists?(user_id: current_user.id))
+        flash[:alert] = "You are not registered as a driver!"
+        redirect_to new_driver_path
+      end
     end
 
     # Only allow a list of trusted parameters through.
