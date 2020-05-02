@@ -22,6 +22,12 @@ Rails.application.routes.draw do
   # Temporary error route
   get 'booking_error', to: 'home#booking_error'
 
+  # Routes for scheduler
+  get "data", :to=>"scheduler#get", :as=>"data"
+  post "data(/:id)", :to => "scheduler#add"
+  put "data/:id", :to => "scheduler#update"
+  delete "data/:id", :to => "scheduler#delete"
+
   # Temporary live chat route
   get 'chat', to:'chat#chat'
 
