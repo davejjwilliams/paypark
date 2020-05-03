@@ -1,0 +1,6 @@
+<h1>This is the success view</h1>
+<%#= debug @session %>
+<%#= debug @payment_intent %>
+<%= @payment_intent.id %> <br>
+<%= @payment_intent.charges.data[0].paid %>
+<%= @payment_intent.charges %>

@@ -10,6 +10,7 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   # GET /bookings/1.json
   def show
+    session[:booking_id] = @booking.id
   end
 
   # GET /bookings/new
