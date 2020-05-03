@@ -11,12 +11,13 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+    <%= stylesheet_link_tag 'dhtmlxscheduler_material',media:'all','data-turbolinks-track'=>true %>
+    <%= javascript_include_tag 'dhtmlxscheduler', 'data-turbolinks-track' => true %>
+
+    <script src="https://js.stripe.com/v3/"></script>
+
     <%= yield(:head_tags) %>
   </head>
-
-  <% if user_signed_in? %>
-  <%= tag :meta, name: current_user.name %>
-  <% end %>
 
   <body>
 

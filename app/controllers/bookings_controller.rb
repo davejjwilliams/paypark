@@ -10,13 +10,7 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   # GET /bookings/1.json
   def show
-  end
-
-  def driver_check
-    if (!Driver.exists?(user_id: current_user.id))
-      flash[:alert] = "You are not registered as a driver!"
-      redirect_to new_driver_path
-    end
+    session[:booking_id] = @booking.id
   end
 
   # GET /bookings/new
@@ -38,6 +32,8 @@ class BookingsController < ApplicationController
     # Ensure bookings are hourly
     @booking.start_time = @booking.start_time.change(min: 0)
     @booking.end_time = @booking.end_time.change(min: 0)
+
+    @booking.price = @booking.homeowner.driveway_price * (@booking.end_time - @booking.start_time)/3600
 
     # Get all other bookings under this homeowner
     @other_bookings = Booking.where(:homeowner_id => @booking.homeowner_id)
@@ -100,8 +96,16 @@ class BookingsController < ApplicationController
       @booking = Booking.find(params[:id])
     end
 
+    # Helper method to redirect non-registered driver to the driver registration page when they try to book.
+    def driver_check
+      if (!Driver.exists?(user_id: current_user.id))
+        flash[:alert] = "You are not registered as a driver!"
+        redirect_to new_driver_path
+      end
+    end
+
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.require(:booking).permit(:driver_id, :homeowner_id, :price, :start_time, :end_time, :complete, :withdrawn)
+      params.require(:booking).permit(:driver_id, :homeowner_id, :price, :start_time, :end_time, :complete, :withdrawn, :paid, :payment_intent)
     end
 end
