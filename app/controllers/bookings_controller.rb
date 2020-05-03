@@ -33,6 +33,8 @@ class BookingsController < ApplicationController
     @booking.start_time = @booking.start_time.change(min: 0)
     @booking.end_time = @booking.end_time.change(min: 0)
 
+    @booking.price = @booking.homeowner.driveway_price * (@booking.end_time - @booking.start_time)/3600
+
     # Get all other bookings under this homeowner
     @other_bookings = Booking.where(:homeowner_id => @booking.homeowner_id)
 

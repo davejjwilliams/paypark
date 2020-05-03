@@ -10,7 +10,7 @@ class ChargesController < ApplicationController
         line_items: [{
                          name: @booking.homeowner.address,
                          description: "From: " + Time.parse(@booking.start_time.to_s).strftime('%F %T %z') + " Until: " + Time.parse(@booking.end_time.to_s).strftime('%F %T %z'),
-                         amount: 100,
+                         amount: (@booking.price*100).to_i,
                          currency: 'gbp',
                          quantity: 1,
                      }],
