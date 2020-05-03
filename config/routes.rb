@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   # Stripe routes
   scope '/charges' do
     post 'create', to: 'charges#create', as: 'charges_create'
+    post 'refund', to: 'charges#refund', as: 'charges_refund'
     get 'cancel', to: 'charges#cancel', as: 'charges_cancel'
     get 'success', to: 'charges#success', as: 'charges_success'
   end

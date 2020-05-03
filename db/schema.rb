@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_210339) do
+ActiveRecord::Schema.define(version: 2020_05_03_101641) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "driver_id"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2020_04_27_210339) do
     t.boolean "withdrawn", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "payment_intent", default: ""
+    t.boolean "paid", default: false, null: false
   end
 
   create_table "conversations", force: :cascade do |t|
