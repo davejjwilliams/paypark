@@ -10,7 +10,7 @@ class Conversation < ApplicationRecord
   # Guarantee that the sender is not the same as the recipient
   validates :sender_id, uniqueness: { scope: :recipient_id }
 
-  # Return the conversation between two users
+  # Define scope
   scope :between, -> (sender_id, recipient_id) do
     where(sender_id: sender_id, recipient_id: recipient_id).or(where(sender_id: recipient_id, recipient_id: sender_id))
   end
