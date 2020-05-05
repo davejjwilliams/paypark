@@ -45,6 +45,9 @@
   <%= @booking.payment_intent %>
 </p>
 
+<td><%= @hash["make"] + " " + @hash["model"] + " IN " + @hash["colour"] %></td>
+
+
 <% if @booking.paid %>
   <%= button_to 'Refund', charges_refund_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
 <% else %>

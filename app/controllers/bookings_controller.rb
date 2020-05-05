@@ -11,6 +11,12 @@ class BookingsController < ApplicationController
   # GET /bookings/1.json
   def show
     session[:booking_id] = @booking.id
+    api_key = 'DvlaSearchDemoAccount'
+    url = "https://dvlasearch.appspot.com/DvlaSearch?apikey=#{api_key}&licencePlate=#{@booking.driver.registration_number}"
+
+    uri = URI(url)
+    response = Net::HTTP.get(uri)
+    @hash = JSON.parse(response)
   end
 
   # GET /bookings/new
@@ -88,6 +94,32 @@ class BookingsController < ApplicationController
       format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    list = Driver.where(id: (Booking.where(homeowner_id: (Homeowner.find_by_user_id(current_user.id))).pluck(:driver_id))).pluck(:registration_number)
+
+    number_plate = 1
+    puts number_plate
+    make = params[:make]
+    # make = dvla(number_plate)
+
+
+    api_key = 'DvlaSearchDemoAccount'
+    url = "https://dvlasearch.appspot.com/DvlaSearch?apikey=#{api_key}&licencePlate=#{list.first}"
+    uri = URI(url)
+    response = Net::HTTP.get(uri)
+    hash = JSON.parse(response)
+    puts hash
+    make_key = "make"
+    model_key = "model"
+    model_colour = "colour"
+    make = hash[make_key]
+    model = hash[model_key]
+    colour = hash[model_colour]
+    puts make
+    redirect_to bookings_path(:make => make, :model => model, :colour => colour)
+
   end
 
   private
