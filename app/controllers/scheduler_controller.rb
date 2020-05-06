@@ -3,8 +3,7 @@ class SchedulerController < ApplicationController
   before_action :authenticate_user!
 
   def get
-    homeowner = Homeowner.find_by(params[:dvwid])
-    session[:current_driveway] = params[:dvwid]
+    homeowner = Homeowner.find(session[:current_driveway])
     driveway_bookings = Booking.all.where(homeowner_id: homeowner.id)
 
     render :json => driveway_bookings.map {|booking| {

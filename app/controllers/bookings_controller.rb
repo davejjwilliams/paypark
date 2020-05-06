@@ -11,13 +11,34 @@ class BookingsController < ApplicationController
   # GET /bookings/1.json
   def show
     session[:booking_id] = @booking.id
+
+    @session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [{
+                         name: @booking.homeowner.address,
+                         description: "From: " + Time.parse(@booking.start_time.to_s).strftime('%F %T %z') + " Until: " + Time.parse(@booking.end_time.to_s).strftime('%F %T %z'),
+                         amount: (@booking.price*100).to_i,
+                         currency: 'gbp',
+                         quantity: 1,
+                     }],
+        success_url: charges_success_url + "?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url: charges_cancel_url,
+        )
+
+    if @booking.nil?
+      redirect_to root_path
+      return
+    end
+
+
   end
 
   # GET /bookings/new
   def new
     driver_check
     @booking = Booking.new
-    @homeowner = Homeowner.find(params[:dvwid])
+    session[:current_driveway] = params[:dvwid]
+    @homeowner = Homeowner.find(session[:current_driveway])
   end
 
   # GET /bookings/1/edit

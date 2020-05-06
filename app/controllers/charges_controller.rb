@@ -1,33 +1,5 @@
 class ChargesController < ApplicationController
 
-  def create
-
-    @booking = Booking.find(params[:booking_id])
-
-    key
-    @session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        line_items: [{
-                         name: @booking.homeowner.address,
-                         description: "From: " + Time.parse(@booking.start_time.to_s).strftime('%F %T %z') + " Until: " + Time.parse(@booking.end_time.to_s).strftime('%F %T %z'),
-                         amount: (@booking.price*100).to_i,
-                         currency: 'gbp',
-                         quantity: 1,
-                     }],
-        success_url: charges_success_url + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: charges_cancel_url,
-        )
-
-    if @booking.nil?
-      redirect_to root_path
-      return
-    end
-
-    respond_to do |format|
-      format.js #render create.js.erb
-    end
-  end
-
   def success
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
@@ -47,16 +19,20 @@ class ChargesController < ApplicationController
       booking.save
     else
       # booking is not paid for
-      booking.paid = false
-      booking.save
+      booking.destroy!
     end
 
-    session[:product_id] = 0
+    session[:booking_id] = 0
     redirect_to booking
   end
 
   def cancel
-
+    if session[:booking_id] != 0
+      booking = Booking.find(session[:booking_id])
+      booking.destroy!
+      session[:booking_id] = 0
+    end
+    redirect_to root_path
   end
 
   def refund
