@@ -17,7 +17,8 @@ class BookingsController < ApplicationController
   def new
     driver_check
     @booking = Booking.new
-    @homeowner = Homeowner.find(params[:dvwid])
+    session[:current_driveway] = params[:dvwid]
+    @homeowner = Homeowner.find(session[:current_driveway])
   end
 
   # GET /bookings/1/edit
