@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
   resources :bookings
+
+  # Homeowner and Driver Booking Lists
+  get 'homeowner_bookings', to: 'bookings#homeowner_bookings'
+  get 'driver_bookings', to: 'bookings#driver_bookings'
+
   resources :drivers
   resources :homeowners
   devise_for :users

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bookings For Your Driveway</h1>
+
+<% if @homeowner_bookings.length == 0 %>
+  <br>
+  <h2>You don't have any bookings yet :(  </h2>
+<% else %>
+<table>
+  <thead>
+  <tr>
+    <th>Driver</th>
+    <th>Homeowner</th>
+    <th>Price</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Complete</th>
+    <th>Withdrawn</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @homeowner_bookings.each do |booking| %>
+    <tr>
+      <td><%= booking.driver_id %></td>
+      <td><%= booking.homeowner_id %></td>
+      <td><%= booking.price %></td>
+      <td><%= booking.start_time %></td>
+      <td><%= booking.end_time %></td>
+      <td><%= booking.complete %></td>
+      <td><%= booking.withdrawn %></td>
+      <td><%= link_to 'Show', booking %></td>
+      <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
+      <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>

@@ -1,10 +1,32 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /bookings
   # GET /bookings.json
   def index
     @bookings = Booking.all
+  end
+
+  # GET /homeowner_bookings
+  def homeowner_bookings
+    if Homeowner.exists?(:user_id => current_user.id)
+      @homeowner = Homeowner.find_by_user_id(current_user.id)
+      @homeowner_bookings = Booking.where(homeowner_id: @homeowner.id)
+    else
+      redirect_to root_path
+    end
+  end
+
+  # GET /driver_bookings
+  def driver_bookings
+    if Driver.exists?(:user_id => current_user.id)
+      @driver = Driver.find_by_user_id(current_user.id)
+      @driver_bookings = Booking.where(driver_id: @driver.id)
+    else
+      redirect_to root_path
+    end
+
   end
 
   # GET /bookings/1
