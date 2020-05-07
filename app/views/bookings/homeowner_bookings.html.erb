@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bookings For Your Driveway</h1>
+<br>
+<h1>Upcoming Bookings</h1>
+<% if @upcoming_homeowner_bookings.length == 0 %>
+  <h2>You don't have any bookings yet :(</h2>
+<% else %>
+<table>
+  <thead>
+  <tr>
+    <th>Driver</th>
+    <th>Car Info</th>
+    <th>Price</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th colspan="1"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @upcoming_homeowner_bookings.each do |booking| %>
+    <tr>
+      <td><%= booking.driver.user.name %></td>
+      <td><%= booking.driver.car_info %></td>
+      <td><%= booking.price %></td>
+      <td><%= booking.start_time %></td>
+      <td><%= booking.end_time %></td>
+      <td><%= link_to 'Show', booking %></td>
+    </tr>
+
+  <h1></h1>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<h1>Completed Bookings</h1>
+
+<% if @complete_homeowner_bookings.length == 0 %>
+  <h2>Completed bookings will appear here!</h2>
+<% else %>
+  <table>
+    <thead>
+    <tr>
+      <th>Driver</th>
+      <th>Car Info</th>
+      <th>Price</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Withdrawn</th>
+      <th colspan="1"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @complete_homeowner_bookings.each do |booking| %>
+      <tr>
+        <td><%= booking.driver.user.name %></td>
+        <td><%= booking.driver.car_info %></td>
+        <td><%= booking.price %></td>
+        <td><%= booking.start_time %></td>
+        <td><%= booking.end_time %></td>
+        <td><%= booking.withdrawn %></td>
+        <td><%= link_to 'Show', booking %></td>
+      </tr>
+
+      <h1></h1>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

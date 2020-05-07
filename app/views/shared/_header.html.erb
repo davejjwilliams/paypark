@@ -12,6 +12,7 @@
   <% if Driver.exists?(session[:driver_id]) %>
     <% driver = Driver.find(session[:driver_id]) %>
     <%= link_to "Driver Page", driver %>
+    <%= link_to "Driver Bookings", driver_bookings_path %>
   <% else %>
     <%= link_to "Register Your Car!", new_driver_path %>
   <% end %>
@@ -19,6 +20,7 @@
   <% if Homeowner.exists?(session[:homeowner_id]) %>
     <% homeowner = Homeowner.find(session[:homeowner_id]) %>
     <%= link_to "Homeowner Page", homeowner %>
+    <%= link_to "Homeowner Bookings", homeowner_bookings_path %>
   <% else %>
     <%= link_to "Register Your Driveway!", new_homeowner_path %>
   <% end %>
