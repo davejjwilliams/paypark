@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :bookings
+  resources :bookings, :except => [:edit]
 
   # Homeowner and Driver Booking Lists
   get 'homeowner_bookings', to: 'bookings#homeowner_bookings'

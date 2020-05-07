@@ -66,5 +66,4 @@
   <%= button_to 'Pay', charges_create_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
 <% end %>
 
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
 <%= link_to 'Back', bookings_path %>
