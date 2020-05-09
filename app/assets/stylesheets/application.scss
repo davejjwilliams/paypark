@@ -14,7 +14,32 @@
  *= require_self
  */
 
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+$navbar-colour: #5B2A9D;
+$background-colour: #FFFFFF;
+$text-colour: #47525E;
+
+.header {
+    background-color: $navbar-colour;
+}
+
 .footer {
     position: fixed;
+    background-color: $navbar-colour;
     bottom: 0;
+    width: 100%;
+}
+
+h1 {
+    color: $text-colour;
+}
+
+h2 {
+    color: $text-colour;
+}
+
+h3 {
+    color: $text-colour;
 }

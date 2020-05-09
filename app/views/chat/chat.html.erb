@@ -4,11 +4,13 @@
   <% end %>
 </ul>
 
-<h2 class="panel-title">Homeowners you have booked with:</h2>
+<h3>Homeowners you have booked with</h3>
 
-<ul>
-  <% @driver_conversations_with.each do |user| %>
-    <li><%= link_to User.find(user.user_id).name, conversations_path(user_id: user), remote: true, method: :post %></li>
+<ul id="conv-users-list">
+  <% if !Driver.find_by_user_id(current_user.id).nil? %>
+    <% @driver_conversations_with.each do |user| %>
+      <li><%= link_to User.find(user.user_id).name, conversations_path(user_id: user), remote: true, method: :post %></li>
+    <% end %>
   <% end %>
 </ul>
 

@@ -2,10 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.panel {
+  width: 60%;
+}
+
 .message-sent {
   color: #6020FF;
 }
 
 .message-received {
   color: #100880;
+}
+
+#conv-users-list {
+  list-style: none;
+  font-size: 15px;
+}
+
+#conversations-list {
+  list-style: none;
+  padding-top: 2%;
+  padding-left: 2%;
+}
+
+#messages-list {
+  list-style: none;
 }
