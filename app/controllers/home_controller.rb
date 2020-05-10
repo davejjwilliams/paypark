@@ -7,6 +7,20 @@ class HomeController < ApplicationController
 
   def omniauth
     @user = User.from_omniauth(auth)
+
+    # Find token
+    token = @user.tokens.find_or_initialize_by(provider: 'google')
+    # Access_token is used to authenticate requests
+    token.access_token = auth.credentials.token
+    token.expires_at = auth.credentials.expires_at
+    puts "ACCESS TOKEN EXPIRES IN #{token.expires_at}"
+    # Refresh_token to request new access_token
+    # Note: Refresh_token is only sent once during the first request
+    refresh_token = auth.credentials.refresh_token
+    token.refresh_token = refresh_token if refresh_token.present?
+    # save token
+    token.save
+
     @user.save
     session[:user_id] = @user.id
     puts "THE CURRENT USER ID IS: " + session[:user_id].to_s
