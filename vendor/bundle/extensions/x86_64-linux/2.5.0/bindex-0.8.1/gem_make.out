@@ -1,0 +1,15 @@
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/bindex-0.8.1/ext/skiptrace
+/usr/bin/ruby2.5 -r ./siteconf20200429-31115-11ns6q8.rb extconf.rb
+creating Makefile
+
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20200429-31115-1c6ll59/skiptrace/internal
