@@ -1,3 +1,5 @@
+require 'google/api_client/client_secrets.rb'
+require 'google/apis/calendar_v3'
 class ChargesController < ApplicationController
 
   def success
@@ -14,6 +16,47 @@ class ChargesController < ApplicationController
 
     if (@payment_intent.charges.data[0].paid)
       # booking is paid for
+      token = current_user.google_token
+      puts "Current Token Is: #{token.access_token}"
+      # Initialize Google Calendar API
+      service = Google::Apis::CalendarV3::CalendarService.new
+      # Use google keys to authorize
+      service.authorization = token.google_secret.to_authorization
+      # Request for a new access token just incase it expired
+      if token.expired?
+        service.authorization = Signet::OAuth2::Client.new(    { token_credential_uri: 'https://oauth2.googleapis.com/token',
+                                                                 access_token: current_user.google_token,
+                                                                 expires_at: token.expires_at,
+                                                                 refresh_token: token.refresh_token,
+                                                                 client_id: Rails.application.credentials.google[:google_client_id],
+                                                                 client_secret: Rails.application.credentials.google[:google_client_secret] })
+
+        new_access_token = service.authorization.refresh!
+        token.access_token = new_access_token['access_token']
+        token.expires_at = Time.now.to_i + new_access_token['expires_in'].to_i
+        token.save
+      end
+      puts "\n\n\n\nTEST DATE: #{booking.start_time.utc.iso8601}\n\n\n\n"
+      event = Google::Apis::CalendarV3::Event.new(
+          summary: 'PayPark Booking',
+          location: booking.homeowner.address,
+          description: "Parking reservation from #{booking.start_time} until #{booking.end_time} at #{booking.homeowner.address}",
+          start: Google::Apis::CalendarV3::EventDateTime.new(
+              date_time: booking.start_time.utc.rfc3339,
+              time_zone: 'Europe/London'
+          ),
+          end: Google::Apis::CalendarV3::EventDateTime.new(
+              date_time: booking.end_time.utc.rfc3339,
+              time_zone: 'Europe/London'
+          )
+      )
+
+      result = service.insert_event('primary', event)
+      puts "Event summary is: #{event.summary}"
+      puts "Event created: #{result.html_link}"
+      puts "The Calendar Event ID is #{(Base64.decode64(result.html_link[42..-1])).split.first}"
+
+      booking.calendar_event_id = (Base64.decode64(result.html_link[42..-1])).split.first
       booking.paid = true
       booking.payment_intent = @payment_intent.id
       booking.save

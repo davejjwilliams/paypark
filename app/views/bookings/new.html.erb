@@ -17,6 +17,7 @@
 </div>
 
 <script>
+    scheduler.config.readonly = true;
     scheduler.config.xml_date="%Y-%m-%d %H:%i";
     scheduler.init("scheduler_here", new Date(), "week");
     scheduler.load("<%= data_path %>/", "json");

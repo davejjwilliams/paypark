@@ -58,6 +58,11 @@
   <%= @booking.payment_intent %>
 </p>
 
+<p>
+  <strong>Calendar Event ID:</strong>
+  <%= @booking.calendar_event_id %>
+</p>
+
 <% if @booking.paid %>
   <% if ((@booking.start_time - Time.now)/3600) > 24 %>
     <%= button_to 'Refund', charges_refund_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
