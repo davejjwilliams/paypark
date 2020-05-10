@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_102535) do
+ActiveRecord::Schema.define(version: 2020_05_10_195417) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "driver_id"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_102535) do
     t.datetime "updated_at", null: false
     t.string "payment_intent", default: ""
     t.boolean "paid", default: false, null: false
+    t.string "calendar_event_id", default: "", null: false
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -71,6 +72,16 @@ ActiveRecord::Schema.define(version: 2020_05_06_102535) do
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "tokens", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.integer "expires_at"
+    t.string "provider"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
