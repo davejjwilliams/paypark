@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_11_131905) do
+ActiveRecord::Schema.define(version: 2020_05_11_132446) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "driver_id"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_131905) do
     t.date "request_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "processed", default: false, null: false
     t.index ["homeowner_id"], name: "index_withdrawal_requests_on_homeowner_id"
   end
 

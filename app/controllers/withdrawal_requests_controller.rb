@@ -9,25 +9,35 @@ class WithdrawalRequestsController < ApplicationController
 
   # POST /withdraw
   def withdraw
-    # create new withdrawal
-    withdrawal = WithdrawalRequest.new
-    withdrawal.homeowner_id = params[:homeowner_id]
-    withdrawal.request_date = Time.now
+    if Booking.exists?(homeowner_id: homeowner.id, complete: true, withdrawn: false)
+      # create new withdrawal
+      withdrawal = WithdrawalRequest.new
+      withdrawal.homeowner_id = params[:homeowner_id]
+      withdrawal.request_date = Time.now
 
-    homeowner = Homeowner.find(params[:homeowner_id])
-    complete_not_withdrawn_bookings = Booking.where(homeowner_id: homeowner.id, complete: true, withdrawn: false)
+      homeowner = Homeowner.find(params[:homeowner_id])
+      complete_not_withdrawn_bookings = Booking.where(homeowner_id: homeowner.id, complete: true, withdrawn: false)
 
-    amount = 0
-    # for each complete booking, set withdrawn status to true and add price to amount sum
-    complete_not_withdrawn_bookings.each do |booking|
-      amount += booking.price
-      booking.withdrawn = true
-      booking.save!
+      amount = 0
+      # for each complete booking, set withdrawn status to true and add price to amount sum
+      complete_not_withdrawn_bookings.each do |booking|
+        amount += booking.price
+        booking.withdrawn = true
+        booking.save!
+      end
+
+      withdrawal.amount = amount
+      withdrawal.save!
     end
-
-    withdrawal.amount = amount
-    withdrawal.save!
     redirect_to homeowner_bookings_path
+  end
+
+  # POST /process
+  def process_request
+    request = WithdrawalRequest.find(params[:request_id])
+    request.processed = true
+    request.save!
+    redirect_to withdrawal_requests_path
   end
 
   # GET /withdrawal_requests/1
@@ -92,6 +102,6 @@ class WithdrawalRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def withdrawal_request_params
-      params.require(:withdrawal_request).permit(:homeowner_id, :amount, :request_date)
+      params.require(:withdrawal_request).permit(:homeowner_id, :amount, :request_date, :processed)
     end
 end
