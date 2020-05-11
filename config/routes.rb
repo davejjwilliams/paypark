@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :withdrawal_requests
   resources :bookings, :except => [:edit]
 
   # Homeowner and Driver Booking Lists
@@ -43,6 +44,12 @@ Rails.application.routes.draw do
 
   # Temporary live chat route
   get 'chat', to:'chat#chat'
+
+  # Create Withdrawal Request
+  post 'withdraw', to: 'withdrawal_requests#withdraw', as: 'withdraw'
+
+  # Process Withdrawal Request
+  post 'process_request', to: 'withdrawal_requests#process_request', as: 'process_request'
 
   # Resources for chat
   resources :conversations, only: [:create] do

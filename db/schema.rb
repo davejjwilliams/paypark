@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_195417) do
+ActiveRecord::Schema.define(version: 2020_05_11_132446) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "driver_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_05_10_195417) do
     t.integer "number_ratings", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "paypal_email", default: "", null: false
     t.index ["user_id"], name: "index_homeowners_on_user_id"
   end
 
@@ -96,6 +97,16 @@ ActiveRecord::Schema.define(version: 2020_05_10_195417) do
     t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "withdrawal_requests", force: :cascade do |t|
+    t.integer "homeowner_id"
+    t.decimal "amount"
+    t.date "request_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "processed", default: false, null: false
+    t.index ["homeowner_id"], name: "index_withdrawal_requests_on_homeowner_id"
   end
 
 end

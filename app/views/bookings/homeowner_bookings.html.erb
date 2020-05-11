@@ -40,6 +40,7 @@
 <% if @complete_homeowner_bookings.length == 0 %>
   <h2>Completed bookings will appear here!</h2>
 <% else %>
+  <%= button_to 'Withdraw Earnings', withdraw_path, method: :post, params: {homeowner_id: @homeowner.id}, remote: true %>
   <table>
     <thead>
     <tr>
