@@ -15,11 +15,11 @@ class WithdrawalRequestsController < ApplicationController
     withdrawal.request_date = Time.now
 
     homeowner = Homeowner.find(params[:homeowner_id])
-    complete_bookings = Booking.where(homeowner_id: homeowner.id, complete: true)
+    complete_not_withdrawn_bookings = Booking.where(homeowner_id: homeowner.id, complete: true, withdrawn: false)
 
     amount = 0
     # for each complete booking, set withdrawn status to true and add price to amount sum
-    complete_bookings.each do |booking|
+    complete_not_withdrawn_bookings.each do |booking|
       amount += booking.price
       booking.withdrawn = true
       booking.save!
