@@ -1,12 +1,15 @@
+var markers = []; //used to store markers found to be in bounds
+
 function initMap() {
+    //SPAWN MAP
     var cen = {lat: 51.5, lng: -0.13};
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 14,
         center: cen
     });
 
+    //GEOLOCATION
     infoWindow = new google.maps.InfoWindow;
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
@@ -34,18 +37,19 @@ function initMap() {
         infoWindow.open(map);
     }
 
-    var marker, count, contentString;
+    //PLACE MARKERS
+    var marker, contentString;
     var infowindow = new google.maps.InfoWindow({
         //content: contentString
     });
-
     gon.driveways.forEach(myFunction);
     function myFunction(item, index){
         marker = new google.maps.Marker({
             position: {lat: parseFloat(gon.driveways[index].latitude), lng: parseFloat(gon.driveways[index].longitude)},
             map: map,
+            title: gon.driveways[index].address,
+            id: gon.driveways[index].id
         });
-        //var link = "/homeowners/".concat(gon.driveways[index].id);
         var link = "/bookings/new?dvwid=".concat(gon.driveways[index].id);
         google.maps.event.addListener(marker, 'click', (function (marker) {
             return function () {
@@ -58,9 +62,16 @@ function initMap() {
                 infowindow.open(map, marker);
             }
                 ;
-        })(marker, count));
+        })(marker));
+        markers.push(marker); //store markers to found to be in bounds later
     }
 
+    //CHECK MARKERS IN BOUNDS
+    map.addListener('idle', function() {
+        showVisibleMarkers();
+    });
+
+    //SEARCH BOX
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
@@ -109,4 +120,23 @@ function initMap() {
         });
         map.fitBounds(bounds);
     });
+
+    //LIST MARKERS IN BOUNDS
+    function showVisibleMarkers() {
+        var local = [];
+        for (var i = 0; i < markers.length; i++) {
+            if (map.getBounds().contains(markers[i].getPosition()) === true) {
+                local.push(markers[i].title)
+            }
+        }
+        displayLocals(local);
+    }
+}
+
+function displayLocals(local)
+{
+    document.getElementById('localsList').children[0].innerHTML = "";
+    for(var i = 0; i < local.length; i++){
+        document.getElementById("localsList").children[0].innerHTML += "<li>"+local[i]+"</li>";
+    }
 }

@@ -1,3 +1,16 @@
+<% unless @booking.paid %>
+  <script type="text/javascript" charset="utf-8">
+      const stripe = Stripe('<%= Rails.configuration.stripe[:publishable_key] %>');
+
+      stripe.redirectToCheckout({
+          sessionId: '<%= @session.id %>'
+      }).then(function (result) {
+          console.log(result.error.message);
+      });
+  </script>
+<% end %>
+
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -45,11 +58,17 @@
   <%= @booking.payment_intent %>
 </p>
 
+<p>
+  <strong>Calendar Event ID:</strong>
+  <%= @booking.calendar_event_id %>
+</p>
+
 <% if @booking.paid %>
-  <%= button_to 'Refund', charges_refund_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
+  <% if ((@booking.start_time - Time.now)/3600) > 24 %>
+    <%= button_to 'Refund', charges_refund_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
+  <% end %>
 <% else %>
   <%= button_to 'Pay', charges_create_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
 <% end %>
 
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
 <%= link_to 'Back', bookings_path %>

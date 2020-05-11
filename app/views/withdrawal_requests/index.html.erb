@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Withdrawal Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Homeowner</th>
+      <th>Payment Email</th>
+      <th>Amount</th>
+      <th>Request date</th>
+      <th>Processed</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @withdrawal_requests.each do |withdrawal_request| %>
+      <tr>
+        <td><%= withdrawal_request.homeowner.user.name %></td>
+        <td><%= withdrawal_request.homeowner.paypal_email %></td>
+        <td><%= withdrawal_request.amount %></td>
+        <td><%= withdrawal_request.request_date %></td>
+        <td><%= withdrawal_request.processed %></td>
+        <td><%= link_to 'Show', withdrawal_request %></td>
+        <td><%= link_to 'Edit', edit_withdrawal_request_path(withdrawal_request) %></td>
+        <td><%= link_to 'Destroy', withdrawal_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% unless withdrawal_request.processed %>
+        <td><%= button_to 'Paid', process_request_path, method: :post, params: {request_id: withdrawal_request.id}, remote: true %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Withdrawal Request', new_withdrawal_request_path %>

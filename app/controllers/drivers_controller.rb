@@ -28,6 +28,17 @@ class DriversController < ApplicationController
     @driver = Driver.new(driver_params)
     @driver.user_id = current_user.id
 
+    url = "https://dvlasearch.appspot.com/DvlaSearch?apikey=#{Rails.application.credentials.dvla[:dvla_api_key]}&licencePlate=#{@driver.registration_number}"
+    uri = URI(url)
+    response = Net::HTTP.get(uri)
+    @hash = JSON.parse(response)
+
+    if @hash.key?("make")
+      @driver.car_info = @hash["make"] + " " + @hash["model"] + " IN " + @hash["colour"]
+    else
+      @driver.car_info = "Registration number not linked to vehicle!!!"
+    end
+
     respond_to do |format|
       if @driver.save
         session[:driver_id] = @driver.id
@@ -73,6 +84,6 @@ class DriversController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def driver_params
-      params.require(:driver).permit(:user_id, :registration_number)
+      params.require(:driver).permit(:user_id, :registration_number, :car_info)
     end
 end

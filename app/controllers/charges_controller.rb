@@ -1,32 +1,6 @@
+require 'google/api_client/client_secrets.rb'
+require 'google/apis/calendar_v3'
 class ChargesController < ApplicationController
-
-  def create
-
-    @booking = Booking.find(params[:booking_id])
-
-    key
-    @session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        line_items: [{
-                         name: @booking.homeowner.address,
-                         description: "From: " + Time.parse(@booking.start_time.to_s).strftime('%F %T %z') + " Until: " + Time.parse(@booking.end_time.to_s).strftime('%F %T %z'),
-                         amount: (@booking.price*100).to_i,
-                         currency: 'gbp',
-                         quantity: 1,
-                     }],
-        success_url: charges_success_url + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: charges_cancel_url,
-        )
-
-    if @booking.nil?
-      redirect_to root_path
-      return
-    end
-
-    respond_to do |format|
-      format.js #render create.js.erb
-    end
-  end
 
   def success
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
@@ -42,21 +16,66 @@ class ChargesController < ApplicationController
 
     if (@payment_intent.charges.data[0].paid)
       # booking is paid for
+      token = current_user.google_token
+      puts "Current Token Is: #{token.access_token}"
+      # Initialize Google Calendar API
+      service = Google::Apis::CalendarV3::CalendarService.new
+      # Use google keys to authorize
+      service.authorization = token.google_secret.to_authorization
+      # Request for a new access token just incase it expired
+      if token.expired?
+        service.authorization = Signet::OAuth2::Client.new(    { token_credential_uri: 'https://oauth2.googleapis.com/token',
+                                                                 access_token: current_user.google_token,
+                                                                 expires_at: token.expires_at,
+                                                                 refresh_token: token.refresh_token,
+                                                                 client_id: Rails.application.credentials.google[:google_client_id],
+                                                                 client_secret: Rails.application.credentials.google[:google_client_secret] })
+
+        new_access_token = service.authorization.refresh!
+        token.access_token = new_access_token['access_token']
+        token.expires_at = Time.now.to_i + new_access_token['expires_in'].to_i
+        token.save
+      end
+      puts "\n\n\n\nTEST DATE: #{booking.start_time.utc.iso8601}\n\n\n\n"
+      event = Google::Apis::CalendarV3::Event.new(
+          summary: 'PayPark Booking',
+          location: booking.homeowner.address,
+          description: "Parking reservation from #{booking.start_time} until #{booking.end_time} at #{booking.homeowner.address}",
+          start: Google::Apis::CalendarV3::EventDateTime.new(
+              date_time: booking.start_time.utc.rfc3339,
+              time_zone: 'Europe/London'
+          ),
+          end: Google::Apis::CalendarV3::EventDateTime.new(
+              date_time: booking.end_time.utc.rfc3339,
+              time_zone: 'Europe/London'
+          )
+      )
+
+      result = service.insert_event('primary', event)
+      puts "Event summary is: #{event.summary}"
+      puts "Event created: #{result.html_link}"
+      puts "The Calendar Event ID is #{(Base64.decode64(result.html_link[42..-1])).split.first}"
+
+      booking.calendar_event_id = (Base64.decode64(result.html_link[42..-1])).split.first
       booking.paid = true
       booking.payment_intent = @payment_intent.id
       booking.save
     else
       # booking is not paid for
-      booking.paid = false
-      booking.save
+      booking.destroy!
     end
 
-    session[:product_id] = 0
+    session[:booking_id] = 0
     redirect_to booking
   end
 
   def cancel
-
+    if session[:booking_id] != 0
+      booking = Booking.find(session[:booking_id])
+      booking.destroy!
+      session[:booking_id] = 0
+    end
+    redirect_to root_path
   end
 
   def refund
@@ -67,6 +86,29 @@ class ChargesController < ApplicationController
     refund = Stripe::Refund.create({
                                        payment_intent: booking.payment_intent,
                                    })
+
+    token = current_user.google_token
+    puts "Current Token Is: #{token.access_token}"
+    # Initialize Google Calendar API
+    service = Google::Apis::CalendarV3::CalendarService.new
+    # Use google keys to authorize
+    service.authorization = token.google_secret.to_authorization
+    # Request for a new access token just in case it expired
+    if token.expired?
+      service.authorization = Signet::OAuth2::Client.new(    { token_credential_uri: 'https://oauth2.googleapis.com/token',
+                                                               access_token: current_user.google_token,
+                                                               expires_at: token.expires_at,
+                                                               refresh_token: token.refresh_token,
+                                                               client_id: Rails.application.credentials.google[:google_client_id],
+                                                               client_secret: Rails.application.credentials.google[:google_client_secret] })
+
+      new_access_token = service.authorization.refresh!
+      token.access_token = new_access_token['access_token']
+      token.expires_at = Time.now.to_i + new_access_token['expires_in'].to_i
+      token.save
+    end
+
+    service.delete_event('primary', booking.calendar_event_id)
 
     # destroy booking
     booking.destroy!

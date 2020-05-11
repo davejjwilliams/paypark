@@ -10,6 +10,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
+# Google gem for calendar
+gem 'google-api-client'
+
 # Gems required for live chat
 gem 'jquery-rails'
 

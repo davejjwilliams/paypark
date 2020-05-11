@@ -1,5 +1,7 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :check_completion
 
   # GET /bookings
   # GET /bookings.json
@@ -7,21 +9,66 @@ class BookingsController < ApplicationController
     @bookings = Booking.all
   end
 
+  # GET /homeowner_bookings
+  def homeowner_bookings
+    if Homeowner.exists?(:user_id => current_user.id)
+      @homeowner = Homeowner.find_by_user_id(current_user.id)
+      @upcoming_homeowner_bookings = Booking.where(homeowner_id: @homeowner.id, complete: false)
+      @complete_homeowner_bookings = Booking.where(homeowner_id: @homeowner.id, complete: true)
+    else
+      redirect_to root_path
+    end
+  end
+
+  # GET /driver_bookings
+  def driver_bookings
+    if Driver.exists?(:user_id => current_user.id)
+      @driver = Driver.find_by_user_id(current_user.id)
+      @upcoming_driver_bookings = Booking.where(driver_id: @driver.id, complete: false)
+      @complete_driver_bookings = Booking.where(driver_id: @driver.id, complete: true)
+    else
+      redirect_to root_path
+    end
+
+  end
+
   # GET /bookings/1
   # GET /bookings/1.json
   def show
     session[:booking_id] = @booking.id
+
+    @session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [{
+                         name: @booking.homeowner.address,
+                         description: "From: " + Time.parse(@booking.start_time.to_s).strftime('%F %T %z') + " Until: " + Time.parse(@booking.end_time.to_s).strftime('%F %T %z'),
+                         amount: (@booking.price*100).to_i,
+                         currency: 'gbp',
+                         quantity: 1,
+                     }],
+        success_url: charges_success_url + "?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url: charges_cancel_url,
+        )
+
+    if @booking.nil?
+      redirect_to root_path
+    end
+
+
   end
 
   # GET /bookings/new
   def new
     driver_check
-    @booking = Booking.new
-    @homeowner = Homeowner.find(params[:dvwid])
-  end
 
-  # GET /bookings/1/edit
-  def edit
+    if (!params[:dvwid].nil?)
+      @booking = Booking.new
+      session[:current_driveway] = params[:dvwid]
+      @homeowner = Homeowner.find(session[:current_driveway])
+    else
+      redirect_to root_path
+    end
+
   end
 
   # POST /bookings
@@ -107,5 +154,14 @@ class BookingsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def booking_params
       params.require(:booking).permit(:driver_id, :homeowner_id, :price, :start_time, :end_time, :complete, :withdrawn, :paid, :payment_intent)
+    end
+
+    def check_completion
+      Booking.all.each do |booking|
+        if (booking.end_time < Time.now)
+          booking.complete = true
+          booking.save!
+        end
+      end
     end
 end
