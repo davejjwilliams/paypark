@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Withdrawal Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Homeowner</th>
+      <th>Amount</th>
+      <th>Request date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @withdrawal_requests.each do |withdrawal_request| %>
+      <tr>
+        <td><%= withdrawal_request.homeowner %></td>
+        <td><%= withdrawal_request.amount %></td>
+        <td><%= withdrawal_request.request_date %></td>
+        <td><%= link_to 'Show', withdrawal_request %></td>
+        <td><%= link_to 'Edit', edit_withdrawal_request_path(withdrawal_request) %></td>
+        <td><%= link_to 'Destroy', withdrawal_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Withdrawal Request', new_withdrawal_request_path %>

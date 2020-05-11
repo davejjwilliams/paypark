@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :withdrawal_requests
   resources :bookings, :except => [:edit]
 
   # Homeowner and Driver Booking Lists

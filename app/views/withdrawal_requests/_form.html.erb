@@ -1,0 +1,32 @@
+<%= form_with(model: withdrawal_request, local: true) do |form| %>
+  <% if withdrawal_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(withdrawal_request.errors.count, "error") %> prohibited this withdrawal_request from being saved:</h2>
+
+      <ul>
+      <% withdrawal_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :homeowner_id %>
+    <%= form.text_field :homeowner_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :request_date %>
+    <%= form.date_select :request_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
