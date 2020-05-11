@@ -6,8 +6,10 @@ class HomeController < ApplicationController
   end
 
   def omniauth
+    puts "AUTH STUFF: #{auth.inspect}"
     @user = User.from_omniauth(auth)
 
+    puts "USER STUFF: #{User.from_omniauth(auth).inspect} Name:#{@user.name} Email:#{@user.email} "
     # Find token
     token = @user.tokens.find_or_initialize_by(provider: 'google')
     # Access_token is used to authenticate requests

@@ -5,8 +5,8 @@ class Token < ApplicationRecord
         { "web" =>
               { "access_token" => access_token,
                 "refresh_token" => refresh_token,
-                "client_id" => ENV['G_CLIENT_ID'],
-                "client_secret" => ENV['G_CLIENT_SECRET'],
+                "client_id" => Rails.application.credentials[:google_client_id],
+                "client_secret" => Rails.application.credentials[:google_client_secret],
               }
         }
     )
