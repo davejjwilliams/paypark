@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :update, :destroy]
   before_action :authenticate_user!
+  before_action :check_completion
 
   # GET /bookings
   # GET /bookings.json
@@ -153,5 +154,14 @@ class BookingsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def booking_params
       params.require(:booking).permit(:driver_id, :homeowner_id, :price, :start_time, :end_time, :complete, :withdrawn, :paid, :payment_intent)
+    end
+
+    def check_completion
+      Booking.all.each do |booking|
+        if (booking.end_time < Time.now)
+          booking.complete = true
+          booking.save!
+        end
+      end
     end
 end

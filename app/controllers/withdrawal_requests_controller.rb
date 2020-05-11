@@ -7,6 +7,29 @@ class WithdrawalRequestsController < ApplicationController
     @withdrawal_requests = WithdrawalRequest.all
   end
 
+  # POST /withdraw
+  def withdraw
+    # create new withdrawal
+    withdrawal = WithdrawalRequest.new
+    withdrawal.homeowner_id = params[:homeowner_id]
+    withdrawal.request_date = Time.now
+
+    homeowner = Homeowner.find(params[:homeowner_id])
+    complete_bookings = Booking.where(homeowner_id: homeowner.id, complete: true)
+
+    amount = 0
+    # for each complete booking, set withdrawn status to true and add price to amount sum
+    complete_bookings.each do |booking|
+      amount += booking.price
+      booking.withdrawn = true
+      booking.save!
+    end
+
+    withdrawal.amount = amount
+    withdrawal.save!
+    redirect_to homeowner_bookings_path
+  end
+
   # GET /withdrawal_requests/1
   # GET /withdrawal_requests/1.json
   def show

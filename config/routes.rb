@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   # Temporary live chat route
   get 'chat', to:'chat#chat'
 
+  # Create Withdrawal Request
+  post 'withdraw', to: 'withdrawal_requests#withdraw', as: 'withdraw'
+
   # Resources for chat
   resources :conversations, only: [:create] do
     member do
