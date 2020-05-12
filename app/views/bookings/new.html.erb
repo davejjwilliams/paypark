@@ -31,6 +31,7 @@
 <br>
 
 <h1>Price Per Hour: <%= number_to_currency(@homeowner.driveway_price, unit: "£") %></h1>
+<h1>Average Rating: <%= @homeowner.total_ratings/@homeowner.number_ratings %> Stars</h1>
 
 <%= render 'form', booking: @booking %>
 
