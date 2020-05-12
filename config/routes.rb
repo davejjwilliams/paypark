@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :withdrawal_requests
   resources :bookings, :except => [:edit]
 
+  # Rate Button
+  post 'rate', to: 'bookings#rate'
+
   # Homeowner and Driver Booking Lists
   get 'homeowner_bookings', to: 'bookings#homeowner_bookings'
   get 'driver_bookings', to: 'bookings#driver_bookings'

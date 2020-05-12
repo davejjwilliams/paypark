@@ -45,6 +45,7 @@
       <th>Price</th>
       <th>Start time</th>
       <th>End time</th>
+      <th>Rating</th>
       <th colspan="1"></th>
     </tr>
     </thead>
@@ -57,6 +58,11 @@
         <td><%= booking.price %></td>
         <td><%= booking.start_time %></td>
         <td><%= booking.end_time %></td>
+        <% if booking.rating == 0 %>
+          <td>Not Rated Yet</td>
+        <% else %>
+          <td><%= booking.rating %></td>
+         <% end %>
         <td><%= link_to 'Show', booking %></td>
       </tr>
     <% end %>

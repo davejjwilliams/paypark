@@ -9,13 +9,13 @@ class WithdrawalRequestsController < ApplicationController
 
   # POST /withdraw
   def withdraw
+    homeowner = Homeowner.find(params[:homeowner_id])
     if Booking.exists?(homeowner_id: homeowner.id, complete: true, withdrawn: false)
       # create new withdrawal
       withdrawal = WithdrawalRequest.new
       withdrawal.homeowner_id = params[:homeowner_id]
       withdrawal.request_date = Time.now
 
-      homeowner = Homeowner.find(params[:homeowner_id])
       complete_not_withdrawn_bookings = Booking.where(homeowner_id: homeowner.id, complete: true, withdrawn: false)
 
       amount = 0

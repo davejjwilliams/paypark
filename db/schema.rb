@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_11_132446) do
+ActiveRecord::Schema.define(version: 2020_05_12_102644) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "driver_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_132446) do
     t.string "payment_intent", default: ""
     t.boolean "paid", default: false, null: false
     t.string "calendar_event_id", default: "", null: false
+    t.integer "rating", default: 0, null: false
   end
 
   create_table "conversations", force: :cascade do |t|

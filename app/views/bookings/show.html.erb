@@ -63,6 +63,20 @@
   <%= @booking.calendar_event_id %>
 </p>
 
+<p>
+  <strong>Rating:</strong>
+  <%= @booking.rating %>
+</p>
+
+<% if @booking.complete and @booking.rating == 0 %>
+  <%= form_tag "/rate" do %>
+    <%#= hidden_field :form_booking_id, :value => @booking.id %>
+    <%= hidden_field_tag 'form_booking_id', @booking.id  %>
+    <%= select_tag :rating, raw("<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>") %>
+    <%= submit_tag "Rate" %>
+  <% end %>
+<% end %>
+
 <% if @booking.paid %>
   <% if ((@booking.start_time - Time.now)/3600) > 24 %>
     <%= button_to 'Refund', charges_refund_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
