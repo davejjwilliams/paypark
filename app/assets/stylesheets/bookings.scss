@@ -1,3 +1,39 @@
 // Place all the styles related to the Bookings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$navbar-colour: #5B2A9D;
+
+.dhx_cal_container {
+  position: relative;
+  width: 60%;
+  height: 50%;
+  float:left;
+  min-width: 450px;
+  min-height: 500px;
+}
+
+.dhx_tab_element_active {
+  color: $navbar-colour;
+}
+
+.time_select_00 {
+  display: inline;
+  font-size: 15px;
+}
+
+/*.dt-span select {
+  color: #FFFFFF;
+  background-color: #5B2A9D;
+}*/
+
+#booking-form {
+  width: 40%;
+  min-width: 400px;
+  padding-left: 2%;
+  float:none;
+  display:inline-block;
+}
+
+#new-booking-title {
+  text-align: center;
+}
