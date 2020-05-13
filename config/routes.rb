@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   # Rate Button
   post 'rate', to: 'bookings#rate'
 
+  # Booking Time Search
+  post 'timesearch', to: 'map#timesearch'
+  post 'clearsearch', to: 'map#clearsearch'
+
   # Homeowner and Driver Booking Lists
   get 'homeowner_bookings', to: 'bookings#homeowner_bookings'
   get 'driver_bookings', to: 'bookings#driver_bookings'
