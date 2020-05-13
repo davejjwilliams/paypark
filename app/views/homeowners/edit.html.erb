@@ -38,8 +38,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :driveway_active %>
-    <%= form.check_box :driveway_active %>
+    <%= form.label :active_start %>
+    <%= form.datetime_select :active_start %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active_end %>
+    <%= form.datetime_select :active_end %>
   </div>
 
   <div class="actions">

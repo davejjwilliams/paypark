@@ -4,7 +4,13 @@ class MapController < ApplicationController
   before_action :authenticate_user!
 
   def map
-    gon.driveways = Homeowner.all.where(driveway_active: true, driveway_verified: true)
+    puts "THE BOOKING SEARCH START TIME IS: #{session[:booking_start_time]}"
+    puts "THE BOOKING SEARCH END TIME IS: #{session[:booking_end_time]}"
+    unless  session[:booking_start_time].nil? and session[:booking_end_time].nil?
+      gon.driveways = Homeowner.where("active_start < ? and active_end > ? and driveway_verified = ?", session[:booking_start_time].to_datetime, session[:booking_end_time].to_datetime, true)
+    else
+      gon.driveways = Homeowner.where("active_start < ? and active_end > ? and driveway_verified = ?", DateTime.now, DateTime.now, true)
+    end
 
     puts "Current User Name is: #{current_user.email}"
     token = current_user.google_token
@@ -32,4 +38,17 @@ class MapController < ApplicationController
     calendar_id = "primary"
     @response = service.list_events(calendar_id, max_results: 10, single_events: true, order_by: "startTime", time_min: DateTime.now.rfc3339)
   end
+
+  def timesearch
+    session[:booking_start_time] = params[:start_time]
+    session[:booking_end_time] = params[:end_time]
+    redirect_to root_path
+  end
+
+  def clearsearch
+    session[:booking_start_time]=nil
+    session[:booking_end_time]=nil
+    redirect_to root_path
+  end
+
 end

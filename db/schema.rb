@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_102644) do
+ActiveRecord::Schema.define(version: 2020_05_13_102710) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "driver_id"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 2020_05_12_102644) do
     t.decimal "longitude"
     t.text "driveway_description"
     t.decimal "driveway_price"
-    t.boolean "driveway_active", default: false
     t.date "last_modified"
     t.text "activation_code"
     t.boolean "driveway_verified", default: false
@@ -63,6 +62,8 @@ ActiveRecord::Schema.define(version: 2020_05_12_102644) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "paypal_email", default: "", null: false
+    t.datetime "active_start"
+    t.datetime "active_end"
     t.index ["user_id"], name: "index_homeowners_on_user_id"
   end
 
