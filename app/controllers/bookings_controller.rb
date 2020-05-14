@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :update, :destroy]
   before_action :authenticate_user!
+  before_action :check_completion
 
   # GET /bookings
   # GET /bookings.json
@@ -111,6 +112,20 @@ class BookingsController < ApplicationController
     end
   end
 
+  # POST /rate
+  def rate
+    puts "THE BOOKING IS #{params[:form_booking_id]}"
+    puts "THE RATING IS #{params[:rating]}"
+    booking = Booking.find(params[:form_booking_id])
+    booking.rating = params[:rating]
+    booking.save!
+    homeowner = booking.homeowner
+    homeowner.total_ratings += params[:rating].to_i
+    homeowner.number_ratings += 1
+    homeowner.save!
+    redirect_to driver_bookings_path
+  end
+
   # PATCH/PUT /bookings/1
   # PATCH/PUT /bookings/1.json
   def update
@@ -153,5 +168,14 @@ class BookingsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def booking_params
       params.require(:booking).permit(:driver_id, :homeowner_id, :price, :start_time, :end_time, :complete, :withdrawn, :paid, :payment_intent)
+    end
+
+    def check_completion
+      Booking.all.each do |booking|
+        if (booking.end_time < Time.now)
+          booking.complete = true
+          booking.save!
+        end
+      end
     end
 end

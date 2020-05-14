@@ -8,6 +8,14 @@
 <% end %>
 
 <h1>THE MAP</h1>
+
+<h2>Upcoming Events:</h2>
+<% @response.items.each do |event| %>
+  <% start = event.start.date || event.start.date_time %>
+  <ul><%= "#{event.summary} (#{start})" %></ul>
+  <!--    <ul><%#= event.summary + " Start:" + Time.parse(event.startTime.to_s).strftime('%F %T %z')%></ul>-->
+<% end %>
+
 <% if user_signed_in? %>
   <p>USER INFO:</p>
   <%= current_user.name %>
@@ -17,9 +25,23 @@
   <p>NO ONE IS SIGNED IN</p>
 <% end %>
 
+<% unless session[:booking_start_time].nil? and session[:booking_end_time].nil? %>
+  <h2>Searching For Driveways Between <%= session[:booking_start_time] %> until <%= session[:booking_end_time] %></h2>
+  <%= button_to 'Clear Times', clearsearch_path, method: :post %>
+<% end %>
+
+
 <p>
 <div class ="field"> <input id="pac-input" class="controls" type="text" placeholder="Search address and drag to driveway"> </div>
 </p>
+
+<%= form_tag "/timesearch" do %>
+  <%= datetime_field_tag 'start_time' %>
+  <%= datetime_field_tag 'end_time' %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+
 
 <p>
 <div id="map"></div>

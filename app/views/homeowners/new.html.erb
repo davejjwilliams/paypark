@@ -24,6 +24,11 @@
   <div id="map2"></div>
 
   <div class="field">
+    <%= form.label :paypal_email %>
+    <%= form.text_area :paypal_email %>
+  </div>
+
+  <div class="field">
     <%= form.label :address %>
     <%= form.text_area :address, :readonly => true %>
   </div>

@@ -11,13 +11,14 @@
       <th>Longitude</th>
       <th>Description</th>
       <th>Price</th>
-      <th>Driveway Active</th>
       <th>Last modified</th>
       <th>Code</th>
       <th>Verified</th>
       <th>Total ratings</th>
       <th>Number ratings</th>
       <th>Average Rating</th>
+      <th>Active Start</th>
+      <th>Active End</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -31,7 +32,6 @@
         <td><%= homeowner.longitude %></td>
         <td><%= homeowner.driveway_description %></td>
         <td><%= homeowner.driveway_price %></td>
-        <td><%= homeowner.driveway_active %></td>
         <td><%= homeowner.last_modified %></td>
         <td><%= homeowner.activation_code %></td>
         <td><%= homeowner.driveway_verified %></td>
@@ -39,10 +39,12 @@
         <td><%= homeowner.number_ratings %></td>
         <td>
         <% if homeowner.total_ratings == 0 %>
-          0
+          No Ratings Yet
         <% else %>
           <%= (homeowner.total_ratings.to_f/homeowner.number_ratings) %>
         <% end %>
+        <td><%= homeowner.active_start %></td>
+        <td><%= homeowner.active_end %></td>
         </td>
         <td><%= link_to 'Show', homeowner %></td>
         <td><%= link_to 'Edit', edit_homeowner_path(homeowner) %></td>

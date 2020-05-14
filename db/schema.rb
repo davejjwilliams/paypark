@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_102535) do
+ActiveRecord::Schema.define(version: 2020_05_13_102710) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "driver_id"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2020_05_06_102535) do
     t.datetime "updated_at", null: false
     t.string "payment_intent", default: ""
     t.boolean "paid", default: false, null: false
+    t.string "calendar_event_id", default: "", null: false
+    t.integer "rating", default: 0, null: false
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -52,7 +54,6 @@ ActiveRecord::Schema.define(version: 2020_05_06_102535) do
     t.decimal "longitude"
     t.text "driveway_description"
     t.decimal "driveway_price"
-    t.boolean "driveway_active", default: false
     t.date "last_modified"
     t.text "activation_code"
     t.boolean "driveway_verified", default: false
@@ -60,6 +61,9 @@ ActiveRecord::Schema.define(version: 2020_05_06_102535) do
     t.integer "number_ratings", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "paypal_email", default: "", null: false
+    t.datetime "active_start"
+    t.datetime "active_end"
     t.index ["user_id"], name: "index_homeowners_on_user_id"
   end
 
@@ -71,6 +75,16 @@ ActiveRecord::Schema.define(version: 2020_05_06_102535) do
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "tokens", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.integer "expires_at"
+    t.string "provider"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -85,6 +99,16 @@ ActiveRecord::Schema.define(version: 2020_05_06_102535) do
     t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "withdrawal_requests", force: :cascade do |t|
+    t.integer "homeowner_id"
+    t.decimal "amount"
+    t.date "request_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "processed", default: false, null: false
+    t.index ["homeowner_id"], name: "index_withdrawal_requests_on_homeowner_id"
   end
 
 end

@@ -23,6 +23,11 @@
   </p>
 
   <div class="field">
+    <%= form.label :paypal_email %>
+    <%= form.text_area :paypal_email %>
+  </div>
+
+  <div class="field">
     <%= form.label :driveway_description %>
     <%= form.text_area :driveway_description %>
   </div>
@@ -33,8 +38,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :driveway_active %>
-    <%= form.check_box :driveway_active %>
+    <%= form.label :active_start %>
+    <%= form.datetime_select :active_start %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active_end %>
+    <%= form.datetime_select :active_end %>
   </div>
 
   <div class="actions">
