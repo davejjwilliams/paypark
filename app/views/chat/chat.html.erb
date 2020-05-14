@@ -1,9 +1,3 @@
-<ul id="conversations-list">
-  <% @conversations.each do |conversation| %>
-    <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
-  <% end %>
-</ul>
-
 <h3>Homeowners you have booked with</h3>
 
 <ul id="conv-users-list">
@@ -17,3 +11,10 @@
 <% if !Homeowner.find_by_user_id(current_user.id).nil? %>
   <%= render 'homeowner_conversations' %>
 <% end %>
+
+<ul id="conversations-list">
+  <% @conversations.each do |conversation| %>
+    <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
+  <% end %>
+</ul>
+
