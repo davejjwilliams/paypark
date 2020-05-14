@@ -1,0 +1,15 @@
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/websocket-driver-0.7.1/ext/websocket-driver
+/usr/bin/ruby2.5 -r ./siteconf20200514-27095-vppas2.rb extconf.rb
+creating Makefile
+
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/websocket-driver-0.7.1/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/websocket-driver-0.7.1/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/websocket-driver-0.7.1/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20200514-27095-1gsomvc

@@ -5,6 +5,27 @@ class HomeController < ApplicationController
   def booking_error
   end
 
+  def request_contact
+   name = params[:name]
+   email = params[:email]
+   telephone = params[:telephone]
+   message = params[:message]
+
+   if email.blank? or name.blank? or telephone.blank?
+    flash[:alert] = I18n.t('home.request_contact.no_email')
+
+
+
+    else
+     # Send an email
+     ContactMailer.contact_email(email, name, telephone, message).deliver_now
+     flash[:notice] = I18n.t('home.request_contact.email_sent')
+    end
+
+     redirect_to contact_path
+  end
+
+
   def omniauth
     puts "AUTH STUFF: #{auth.inspect}"
     @user = User.from_omniauth(auth)

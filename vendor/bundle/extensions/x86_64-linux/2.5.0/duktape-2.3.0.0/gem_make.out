@@ -1,0 +1,17 @@
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/duktape-2.3.0.0/ext/duktape
+/usr/bin/ruby2.5 -r ./siteconf20200514-27095-5mdhwt.rb extconf.rb
+checking for rb_sym2str()... yes
+creating Makefile
+
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/duktape-2.3.0.0/ext/duktape
+make "DESTDIR=" clean
+
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/duktape-2.3.0.0/ext/duktape
+make "DESTDIR="
+compiling duktape.c
+compiling duktape_ext.c
+linking shared-object duktape_ext.so
+
+current directory: /user/HS222/sc01716/com2027/paypark/vendor/bundle/gems/duktape-2.3.0.0/ext/duktape
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 duktape_ext.so ./.gem.20200514-27095-s8at0i

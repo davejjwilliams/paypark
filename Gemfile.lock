@@ -274,7 +274,7 @@ DEPENDENCIES
   omniauth
   omniauth-google-oauth2
   puma (~> 3.11)
-  rails (~> 5.2.4, >= 5.2.4.2)
+  rails (~> 5.2.3)
   sass-rails (~> 5.0)
   selenium-webdriver
   sqlite3
@@ -285,7 +285,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.6.5p114
+   ruby 2.5.1p114
 
 BUNDLED WITH
-   1.17.2
+   1.16.1
