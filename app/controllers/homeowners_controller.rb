@@ -29,6 +29,7 @@ class HomeownersController < ApplicationController
   # POST /homeowners
   # POST /homeowners.json
   def create
+    
     @homeowner = Homeowner.new(homeowner_params)
     @homeowner.user_id = current_user.id
     @homeowner.activation_code = (0...8).map { (65 + rand(26)).chr }.join
@@ -36,6 +37,7 @@ class HomeownersController < ApplicationController
 
     respond_to do |format|
       if @homeowner.save
+        HomeownerMailer.homeowner_confirmation(@homeowner).deliver_now
         session[:homeowner_id] = @homeowner.id
         format.html { redirect_to @homeowner, notice: 'Homeowner was successfully created.' }
         format.json { render :show, status: :created, location: @homeowner }
