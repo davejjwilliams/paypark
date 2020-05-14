@@ -8,9 +8,11 @@ class SchedulerController < ApplicationController
 
     render :json => driveway_bookings.map {|booking| {
         :id => booking.id,
-        :start_date => booking.start_time.to_datetime.to_formatted_s(:db),
-        :end_date => booking.end_time.to_datetime.to_formatted_s(:db),
-        :text => "Event Text"
+        :start_date => booking.start_time.to_formatted_s(:db),
+        :end_date => booking.end_time.to_formatted_s(:db),
+        :text => "Booked",
+        :color => "#5B2A9D",
+        :textColor => "#FFFFFF"
     }}
   end
 

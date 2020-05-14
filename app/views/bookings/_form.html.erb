@@ -25,15 +25,17 @@
 
   <div class="field">
     <%= form.label :start_time %>
-    <%= form.datetime_select :start_time %>
+    <span class="dt-span"><%= form.datetime_select :start_time, :minute_step => 60, :discard_minute => true, :class => 'datetime' %></span>
+    <p class="time_select_00"> :00 </p>
   </div>
 
   <div class="field">
     <%= form.label :end_time %>
-    <%= form.datetime_select :end_time %>
+    <span class="dt-span"><%= form.datetime_select :end_time, :discard_minute => true, :class => 'datetime' %></span>
+    <p class="time_select_00"> :00 </p>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class => 'button is-primary' %>
   </div>
 <% end %>

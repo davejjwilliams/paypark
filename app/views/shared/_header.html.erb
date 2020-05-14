@@ -1,35 +1,37 @@
-<p>To be edited by the front-end team when all pages are complete!</p>
-<p>This is a header! You shouldn't see anything more than this if you aren't signed in!</p>
-<% if user_signed_in? %>
-  Testing Links:
-  <%= link_to "Drivers Index", drivers_path %>
-  <%= link_to "Homeowners Index", homeowners_path %>
-  <%= link_to "Bookings Index", bookings_path %>
+<div class="header">
+  <p>To be edited by the front-end team when all pages are complete!</p>
+  <p>This is a header! You shouldn't see anything more than this if you aren't signed in!</p>
+  <% if user_signed_in? %>
+    Testing Links:
+    <%= link_to "Drivers Index", drivers_path %>
+    <%= link_to "Homeowners Index", homeowners_path %>
+    <%= link_to "Bookings Index", bookings_path %>
   <%= link_to "Withdrawal Requests", withdrawal_requests_path %>
-  <br>
-  Real Links:
-  <%= link_to "The Map", root_path %>
+    <br>
+    Real Links:
+    <%= link_to "The Map", root_path %>
 
-  <% if Driver.exists?(session[:driver_id]) %>
-    <% driver = Driver.find(session[:driver_id]) %>
-    <%= link_to "Driver Page", driver %>
-    <%= link_to "Driver Bookings", driver_bookings_path %>
-  <% else %>
-    <%= link_to "Register Your Car!", new_driver_path %>
+    <% if Driver.exists?(session[:driver_id]) %>
+      <% driver = Driver.find(session[:driver_id]) %>
+      <%= link_to "Driver Page", driver %>
+      <%= link_to "Driver Bookings", driver_bookings_path %>
+    <% else %>
+      <%= link_to "Register Your Car!", new_driver_path %>
+    <% end %>
+
+    <% if Homeowner.exists?(session[:homeowner_id]) %>
+      <% homeowner = Homeowner.find(session[:homeowner_id]) %>
+      <%= link_to "Homeowner Page", homeowner %>
+      <%= link_to "Homeowner Bookings", homeowner_bookings_path %>
+    <% else %>
+      <%= link_to "Register Your Driveway!", new_homeowner_path %>
+    <% end %>
+
+    <p>This is your name: <%= current_user.name %></p>
+    <%= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
   <% end %>
 
-  <% if Homeowner.exists?(session[:homeowner_id]) %>
-    <% homeowner = Homeowner.find(session[:homeowner_id]) %>
-    <%= link_to "Homeowner Page", homeowner %>
-    <%= link_to "Homeowner Bookings", homeowner_bookings_path %>
-  <% else %>
-    <%= link_to "Register Your Driveway!", new_homeowner_path %>
+  <% 5.times do %>
+    <br>
   <% end %>
-
-  <p>This is your name: <%= current_user.name %></p>
-  <%= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
-<% end %>
-
-<% 5.times do %>
-  <br>
-<% end %>
+</div>

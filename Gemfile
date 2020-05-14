@@ -6,6 +6,9 @@ ruby '2.6.5'
 # User Models
 gem 'devise'
 
+# Bulma front-end styling
+gem 'bulma-rails'
+
 # Google Sign-In Authentication Gems
 gem 'omniauth'
 gem 'omniauth-google-oauth2'

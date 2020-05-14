@@ -1,45 +1,44 @@
-<h1>New Booking</h1>
-<!--Scheduler Code-->
-<div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:800px;'>
-  <div class="dhx_cal_navline">
-    <div class="dhx_cal_prev_button">&nbsp;</div>
-    <div class="dhx_cal_next_button">&nbsp;</div>
-    <div class="dhx_cal_today_button"></div>
-    <div class="dhx_cal_date"></div>
-    <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
-    <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
-    <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+<div class="bookings-container">
+  <!--Scheduler Code-->
+  <div id="scheduler_here" class="dhx_cal_container">
+    <div class="dhx_cal_navline">
+      <div class="dhx_cal_prev_button">&nbsp;</div>
+      <div class="dhx_cal_next_button">&nbsp;</div>
+      <div class="dhx_cal_today_button"></div>
+      <div class="dhx_cal_date"></div>
+      <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+      <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+      <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+    </div>
+    <div class="dhx_cal_header">
+    </div>
+    <div class="dhx_cal_data">
+    </div>
   </div>
-  <div class="dhx_cal_header">
-  </div>
-  <div class="dhx_cal_data">
+
+  <script>
+      scheduler.config.xml_date="%Y-%m-%d %H:%i";
+      scheduler.init("scheduler_here", new Date(), "week");
+      scheduler.load("<%= data_path %>/", "json");
+
+      var dp = new dataProcessor("<%= data_path %>/");
+      dp.init(scheduler);
+      dp.setTransactionMode("REST");
+  </script>
+
+  <br>
+  <br>
+
+  <div id="booking-form">
+    <h1 id="new-booking-title">New Booking</h1>
+    <br>
+    <h2>This driveway is available between <%= @homeowner.active_start %> and <%= @homeowner.active_end %></h2>
+    <h2>Price Per Hour: <%= number_to_currency(@homeowner.driveway_price, unit: "£") %></h2>
+    <% if @homeowner.number_ratings > 0 %>
+      <h2>Average Rating: <%= @homeowner.total_ratings/@homeowner.number_ratings %> Stars</h2>
+    <% else %>
+      <h2>No Ratings Yet</h2>
+    <% end %>
+    <%= render 'form', booking: @booking %>
   </div>
 </div>
-
-<script>
-    scheduler.config.readonly = true;
-    scheduler.config.xml_date="%Y-%m-%d %H:%i";
-    scheduler.init("scheduler_here", new Date(), "week");
-    scheduler.load("<%= data_path %>/", "json");
-
-    var dp = new dataProcessor("<%= data_path %>/");
-    dp.init(scheduler);
-    dp.setTransactionMode("REST");
-</script>
-
-<br>
-<br>
-
-<h1>This driveway is available between <%= @homeowner.active_start %> and <%= @homeowner.active_end %></h1>
-
-<h1>Price Per Hour: <%= number_to_currency(@homeowner.driveway_price, unit: "£") %></h1>
-
-<% if @homeowner.number_ratings > 0 %>
-  <h1>Average Rating: <%= @homeowner.total_ratings/@homeowner.number_ratings %> Stars</h1>
-<% else %>
-  <h1>No Ratings Yet</h1>
-<% end %>
-
-<%= render 'form', booking: @booking %>
-
-<%= link_to 'Back', bookings_path %>
