@@ -1,37 +1,58 @@
 <div class="header">
-  <p>To be edited by the front-end team when all pages are complete!</p>
-  <p>This is a header! You shouldn't see anything more than this if you aren't signed in!</p>
-  <% if user_signed_in? %>
-    Testing Links:
-    <%= link_to "Drivers Index", drivers_path %>
-    <%= link_to "Homeowners Index", homeowners_path %>
-    <%= link_to "Bookings Index", bookings_path %>
-  <%= link_to "Withdrawal Requests", withdrawal_requests_path %>
-    <br>
-    Real Links:
-    <%= link_to "The Map", root_path %>
+  <div class="navbar-brand">
 
-    <% if Driver.exists?(session[:driver_id]) %>
-      <% driver = Driver.find(session[:driver_id]) %>
-      <%= link_to "Driver Page", driver %>
-      <%= link_to "Driver Bookings", driver_bookings_path %>
-    <% else %>
-      <%= link_to "Register Your Car!", new_driver_path %>
+
+    <a class="active" href="javascript:void(0)" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+    <div class="nav-image">
+      <%= link_to root_path do %>
+        <%= image_tag("logo_paypark.png", size: "57x57", :class => "nav-image") %>
+      <% end %>
+    </div>
+
+
+
+    <% if user_signed_in? %>
+      <% if Driver.exists?(session[:driver_id]) %>
+        <% driver = Driver.find(session[:driver_id]) %>
+        <%= link_to "Driver Page", driver, :id => "driver-page-button", :class => "nav-buttons" %>
+        <%= link_to "Driver Bookings", driver_bookings_path, :class => "nav-buttons" %>
+      <% else %>
+      <% end %>
+
+
+      <% if Homeowner.exists?(session[:homeowner_id]) %>
+        <% homeowner = Homeowner.find(session[:homeowner_id]) %>
+        <%= link_to "Homeowner Page", homeowner, :class => "nav-buttons" %>
+        <%= link_to "Homeowner Bookings", homeowner_bookings_path, :class => "nav-buttons" %>
+      <% else %>
+      <% end %>
     <% end %>
 
-    <% if Homeowner.exists?(session[:homeowner_id]) %>
-      <% homeowner = Homeowner.find(session[:homeowner_id]) %>
-      <%= link_to "Homeowner Page", homeowner %>
-      <%= link_to "Homeowner Bookings", homeowner_bookings_path %>
+
+    <% if user_signed_in? %>
+      <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => 'button active', :id => "logout-button" %>
+
     <% else %>
-      <%= link_to "Register Your Driveway!", new_homeowner_path %>
+      <a id="signup-button" class="button is-primary" class="active" href="javascript:void(0)">
+        <strong>Sign up</strong>
+      </a>
+
+      <div id="login-button">
+
+        <%= link_to "Login", '/auth/google_oauth2', :class => "button active" %>
+
     <% end %>
+    </div>
+  </div>
 
-    <p>This is your name: <%= current_user.name %></p>
-    <%= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
-  <% end %>
 
-  <% 5.times do %>
-    <br>
-  <% end %>
 </div>
+
+
+
+
+

@@ -1,0 +1,86 @@
+@import "colours";
+
+#header {
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  height: 8%;
+  background-color: $navbar-colour;
+
+}
+
+#navbutton {
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+
+}
+
+.nav-image {
+  position: fixed;
+}
+
+.header-details {
+  margin-top: 0.5%;
+  font-size: 1.3em;
+  color: rgba(11, 11, 15, 0.68);
+}
+
+#welcome-tag {
+  padding-left: 1%;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: $navbar-colour;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+
+#navbar, .header {
+  overflow: hidden;
+  background-color: $navbar-colour;
+}
+
+#logout-button {
+  margin-left: 90%;
+  margin-right: 6%;
+  margin-top: 0.3%;
+  position: fixed;
+
+
+}
+
+#signup-button {
+  margin-left: 81%;
+  margin-top: 0.3%;
+
+}
+
+#login-button {
+  margin-left: 1%;
+  margin-top: 0.3%;
+}
+
+#driver-page-button {
+  margin-left: 30%;
+
+}
+
+.nav-buttons {
+  font-family: Roboto;
+  color: $link-colour;
+  font-size: 1.2em;
+  padding-left: 2%;
+  margin-top: 0.8%;
+}

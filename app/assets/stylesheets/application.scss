@@ -17,32 +17,31 @@
 // Bulma footer padding is huge; this is how you change it (MUST be before import)
 $footer-padding: 0.25rem 0.5rem 1.5rem;
 
- @import "bulma";
+@import "bulma";
+@import "colours";
 
-$navbar-colour: #5B2A9D;
-$background-colour: #FFFFFF;
-$text-colour: #47525E;
 
-.header {
-    background-color: $navbar-colour;
-}
-
-.footer {
-    position: fixed;
-    background-color: $navbar-colour;
-    bottom: 0;
-    width: 100%;
-    height: 1%;
+body {
+  min-width: 20%;
+  min-height: 30%;
 }
 
 h1 {
-    color: $text-colour;
+  color: $text-colour;
+  font-family: Roboto;
 }
 
 h2 {
-    color: $text-colour;
+  color: $text-colour;
+  font-family: Roboto;
 }
 
 h3 {
-    color: $text-colour;
+  color: $text-colour;
+  font-family: Roboto;
+}
+
+p {
+  color: $text-colour;
+  font-family: Roboto;
 }

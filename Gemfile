@@ -9,6 +9,9 @@ gem 'devise'
 # Bulma front-end styling
 gem 'bulma-rails'
 
+# gem for icons
+gem 'font-awesome-sass'
+
 # Google Sign-In Authentication Gems
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
