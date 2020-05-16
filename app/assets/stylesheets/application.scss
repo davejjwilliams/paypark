@@ -18,8 +18,14 @@
 $footer-padding: 0.25rem 0.5rem 1.5rem;
 
 @import "bulma";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import "colours";
 
+//not sure what this does
+html {
+  height: 100%;
+}
 
 body {
   min-width: 20%;

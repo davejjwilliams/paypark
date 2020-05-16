@@ -20,15 +20,13 @@
         <% driver = Driver.find(session[:driver_id]) %>
         <%= link_to "Driver Page", driver, :id => "driver-page-button", :class => "nav-buttons" %>
         <%= link_to "Driver Bookings", driver_bookings_path, :class => "nav-buttons" %>
-      <% else %>
       <% end %>
 
 
       <% if Homeowner.exists?(session[:homeowner_id]) %>
         <% homeowner = Homeowner.find(session[:homeowner_id]) %>
-        <%= link_to "Homeowner Page", homeowner, :class => "nav-buttons" %>
+        <%= link_to "Homeowner Page", homeowner, :class => "nav-buttons", :id => "homeowner-page-button" %>
         <%= link_to "Homeowner Bookings", homeowner_bookings_path, :class => "nav-buttons" %>
-      <% else %>
       <% end %>
     <% end %>
 
@@ -37,13 +35,9 @@
       <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => 'button active', :id => "logout-button" %>
 
     <% else %>
-      <a id="signup-button" class="button is-primary" class="active" href="javascript:void(0)">
-        <strong>Sign up</strong>
-      </a>
 
-      <div id="login-button">
 
-        <%= link_to "Login", '/auth/google_oauth2', :class => "button active" %>
+        <%= link_to "Login", '/auth/google_oauth2', :class => "button active", :id => "login-button" %>
 
     <% end %>
     </div>

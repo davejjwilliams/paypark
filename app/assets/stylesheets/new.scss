@@ -1,0 +1,48 @@
+
+#map-holder {
+
+  width: 100%;
+  position: absolute;
+}
+.box1 {
+  padding: 0;
+  position: absolute;
+
+
+}
+.container1 {
+  width: 100%;
+  height: 40%;
+
+
+
+}
+
+.stack-top{
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+}
+#address-search {
+  text-align: center;
+  font-size: 1.2em;
+
+
+
+
+}
+#search-bar {
+  padding: 0;
+  margin-bottom: 0;
+  background-color: transparent;
+  margin-left: 40%;
+  margin-top: 3%;
+  width: 15%;
+
+}
+
+#container2 {
+  border: 2px solid red;
+  width: 100%;
+  height: 50%;
+}

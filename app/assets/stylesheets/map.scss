@@ -3,9 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #map {
-  width: 80%;
-  height: 600px;
-  float: left;
+  width: 100%;
+  height: 40%;
+}
+#map-container {
+  height: 40%;
+  width: 100%;
 }
 
 #localsList{
