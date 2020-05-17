@@ -1,11 +1,11 @@
 @import "colours";
 
-#header {
+.header {
   position: fixed;
   text-align: center;
   top: 0;
   width: 100%;
-  height: 8%;
+  height: 60px;
   background-color: $navbar-colour;
 
 }
