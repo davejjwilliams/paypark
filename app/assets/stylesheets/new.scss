@@ -95,6 +95,7 @@
   //border: 2px solid purple;
   height: 90%;
   width: 100%;
+  overflow: scroll;
 }
 
 #column-one-text {
@@ -125,6 +126,7 @@
   width: 100%;
   height: 10%;
   text-align: center;
+  word-wrap: break-word;
 }
 
 #column-two-title2 {
@@ -138,7 +140,8 @@
   width: 100%;
   height: 60%;
 }
-#main-logo{
+
+#main-logo {
   height: 100%;
   width: 90%;
   margin-left: 5%;
@@ -160,12 +163,13 @@
   top: 7%;
   background-color: #78c7cb;
 }
-#column-two-button span{
+
+#column-two-button span {
   font-size: 3vh;
 }
 
 #column-three-title-div {
-  //border: 2px solid magenta;
+  border: 2px solid magenta;
   width: 100%;
   height: 10%;
 }
@@ -176,9 +180,14 @@
 }
 
 #column-three-message-div {
-  //border: 2px solid magenta;
+  border: 2px solid magenta;
   width: 100%;
   height: 90%;
+}
+#column-three-text-div{
+  border: 2px solid #14ff2f;
+  width: 100%;
+  height: 40%;
 }
 
 //--------------------HAPPY CUSTOMERS SLIDE CSS---------------------------
@@ -206,7 +215,7 @@
 
 }
 
-#content-1{
+#content-1 {
   //border-color: green;
   //border-style: solid;
   width: 100%;
@@ -216,9 +225,9 @@
 }
 
 #text {
-
+  overflow: scroll;
   width: 100%;
-  //border-color: #730E15;
+  border-color: #730E15;
 
 }
 
@@ -226,7 +235,7 @@
   display: flex;
   width: 100%;
   height: 50%;
-  //border-color: #163b73;
+  border-color: #163b73;
 }
 
 //--------------------HAPPY CUSTOMERS SLIDE CSS---------------------------
