@@ -1,78 +1,10 @@
 @import "colours";
-//
-//.header {
-//  //border: 2px solid turquoise;
-//  //position: fixed;
-//  //text-align: center;
-//  //top: 0;
-//  //width: 100%;
-//  //height: 6vh;
-//  //background-color: $navbar-colour;
-//
-//}
-//
-//
-//#navbutton {
-//  margin-left: 2%;
-//  margin-right: 2%;
-//  margin-top: 2%;
-//  margin-bottom: 2%;
-//
-//}
-//
-//.nav-image {
-//  height: 100%;
-//  width: 90%;
-//  margin-left: 5%;
-//  margin-right: 5%;
-//}
-//#logo-div{
-//  border: 2px solid magenta;
-//  height: 4.4%;
-//  width: 4.4%;
-//
-//}
-//
-//
-//
-//#logout-button {
-//  right: 0;
-//  margin-top: 0.3%;
-//  position: fixed;
-//
-//
-//}
-//
-//
-//#login-button {
-//  right: 0;
-//  margin-top: 0.3%;
-//  margin-bottom: 0.3%;
-//  position: fixed;
-//  margin-right: 4%;
-//
-//}
-//
-//
-//#driver-page-button {
-//  margin-left: 30%;
-//
-//}
-//
-//.nav-buttons {
-//  font-family: Roboto;
-//  color: $link-colour;
-//  font-size: 1.2em;
-//  padding-left: 2%;
-//  margin-top: 0.8%;
-//}
-//
-//#homeowner-page-button {
-//  margin-left: 40%;
-//}
 
 #nb{
   background-color: $navbar-colour;
+  overflow: hidden;
+
+
 }
 #nav-button{
   background-color: #00a8de;

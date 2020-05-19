@@ -56,7 +56,7 @@
     <a href="/">
 
 
-      <%= image_tag("logo_paypark.png", size: "70x500", :class => "nav-image") %>
+      <%= image_tag("logo_paypark.png", size: "55x450", :class => "nav-image") %>
 
 
     </a>
@@ -83,7 +83,7 @@
 
         <% if Homeowner.exists?(session[:homeowner_id]) %>
 
-          <%= link_to "Homeowner Page", @Homeowner, :class => "navbar-item", :id => "homeowner-page-button", :id => "nav-button", :style => "margin-left: 2%;" %>
+          <%= link_to "Homeowner Page", homeowners_path, :class => "navbar-item", :id => "homeowner-page-button", :id => "nav-button", :style => "margin-left: 2%;" %>
 
           <%= link_to "Homeowner Bookings", homeowner_bookings_path, :class => "navbar-item", :id => "nav-button" %>
 

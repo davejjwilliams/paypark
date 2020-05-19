@@ -137,6 +137,6 @@ function displayLocals(local)
 {
     document.getElementById('localsList').children[0].innerHTML = "";
     for(var i = 0; i < local.length; i++){
-        document.getElementById("localsList").children[0].innerHTML += "<li>"+local[i]+"</li>";
+        document.getElementById("localsList").children[0].innerHTML += "<li>"+local[i]+"</li>"+"&nbsp";
     }
 }

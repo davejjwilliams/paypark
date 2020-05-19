@@ -2,30 +2,27 @@
 
 
 
-#partial_footer {
-
+#footer-bottom {
     position: fixed;
     bottom: 0;
     background-color: $navbar-colour;
     width: 100vw;
-    height: 3%;
-
-
-
-
 }
+
 
 #footer-button1 {
   margin-left: 44%;
   margin-right: 3%;
   color: $link-colour;
+  color: white;
 }
 #footer-button2 {
   color: $link-colour;
   font-family: Roboto;
+  color: white;
 }
 
 #copyright {
   float: right;
-  margin-right: 1%;
+  margin-right: 3%;
 }
