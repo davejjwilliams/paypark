@@ -1,7 +1,7 @@
 <% provide :head_tags do %>
   <meta name='turbolinks-visit-control' content='reload'>
   <script>
-      document.addEventListener("DOMContentLoaded", function(){
+      document.addEventListener("DOMContentLoaded", function () {
           initMap()
       });
   </script>
@@ -22,40 +22,71 @@
 
 
 <div id="overall-container">
-<div id="home-top-div">
-  <h2 class="title is-marginless" id="home-title">Upcoming Events:</h2>
+  <div id="home-top-div">
 
-  <div id="home-search-bar"><input id="pac-input" class="controls input" type="text" placeholder="Search address and drag to driveway"></div>
-  <div id="home-search-bar-time">
-  <%= form_tag "/timesearch" do %>
-    <p id="home-top-div-text">From: </p><%= datetime_field_tag 'start_time' %>
-    <%= datetime_field_tag 'end_time' %>
-    <%= submit_tag "Search", :class => "button is-small", :id => "home-top-div-search-button" %>
-  <% end %>
-  </div>
-</div>
-<div id="center-div">
-  <div id="map"></div>
-</div>
-<div id="right-div">
-  <div id="right-div-title-div">
-    <h1 style="text-align: center" class="title">Available Parking Spots:</h1>
-  </div>
-  <div id="right-div-text-div">
-
-    <% @response.items.each do |event| %>
-      <% start = event.start.date || event.start.date_time %>
-      <ul><%= "#{event.summary} (#{start})" %></ul>
-      <ul><%#= event.summary + " Start:" + Time.parse(event.startTime.to_s).strftime('%F %T %z')%></ul>
-    <% end %>
+    <h2 class="title is-marginless" id="home-title">Upcoming Events:</h2>
 
 
-    <% unless session[:booking_start_time].nil? and session[:booking_end_time].nil? %>
-      <h2>Searching For Driveways Between <%= session[:booking_start_time] %> until <%= session[:booking_end_time] %></h2>
-      <%= button_to 'Clear Times', clearsearch_path, method: :post %>
-    <% end %>
-    <div id="localsList"><ul></ul></div>
+    <div id="home-search-bar">
+      <input id="pac-input" class="controls input" type="text" placeholder="Search address and drag to driveway"></div>
+    <div id="home-search-bar-time">
+      <%= form_tag "/timesearch" do %>
+        <p id="home-top-div-text">From: </p><%= datetime_field_tag 'start_time' %>
+        <%= datetime_field_tag 'end_time' %>
+        <%= submit_tag "Search", :class => "button is-small", :id => "home-top-div-search-button" %>
+      <% end %>
+
+    </div>
 
   </div>
-</div>
+
+
+
+  <div id="center-div">
+    <div id="home-dropdown" class="box1 stack-top">
+    <div class="dropdown is-hoverable">
+      <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+          <span>Upcoming Events</span>
+          <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+        </button>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div class="dropdown-content">
+          <% @response.items.each do |event| %>
+            <% start = event.start.date || event.start.date_time %>
+            <div class="dropdown-item">
+              <ul><%= "#{event.summary} (#{start})" %></ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div id="map" class="box1"></div>
+  </div>
+
+
+
+  <div id="right-div">
+
+    <div id="right-div-title-div">
+      <h1 style="text-align: center" class="title">Available Parking Spots:</h1>
+    </div>
+    <div id="right-div-text-div">
+
+
+      <% unless session[:booking_start_time].nil? and session[:booking_end_time].nil? %>
+        <h2>Searching For Driveways Between <%= session[:booking_start_time] %>
+          until <%= session[:booking_end_time] %></h2>
+        <%= button_to 'Clear Times', clearsearch_path, method: :post %>
+      <% end %>
+      <div id="localsList">
+        <ul></ul>
+      </div>
+
+    </div>
+  </div>
 </div>

@@ -16,6 +16,7 @@
   height: 85%;
   width: 80%;
   float: left;
+  position: relative;
 }
 
 #right-div {
@@ -64,4 +65,14 @@
   height: 5rem;
   font-size: 1vh;
   word-wrap: break-word;
+}
+.bottom-box{
+  position: absolute;
+}
+.stack-top-box{
+  z-index: 9;
+}
+#home-dropdown{
+  margin-top: 7%;
+  margin-left: 0.4%;
 }
