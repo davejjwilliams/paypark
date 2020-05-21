@@ -13,7 +13,19 @@
 
 
   <div id="top-div">
-  <p id="top-div-title">Welcome to PayPark</p>
+    <div class="box1 stack-top" id="search-bar">
+
+      <div class="field">
+        <div class="control has-icons-left">
+          <p id="top-div-title"><b>Welcome To PayPark</b></p>
+
+      </span>
+        </div>
+
+
+      </div>
+    </div>
+    <div id="surrey-image-holder" class="box1"><%= image_tag("surrey_background.png", :id => "surrey-background")%></div>
 
 
   </div>
@@ -72,7 +84,7 @@
               (function cycle() {
 
                   divs.eq(i).fadeIn(2000)
-                      .delay(2000)
+                      .delay(8000)
                       .fadeOut(2000, cycle);
 
                   i = ++i % divs.length;
@@ -102,7 +114,7 @@
                     ++quoteIndex;
                     quotes.eq(quoteIndex % quotes.length)
                         .fadeIn(2000)
-                        .delay(2000)
+                        .delay(8000)
                         .fadeOut(2000, showNextQuote);
                 }
 

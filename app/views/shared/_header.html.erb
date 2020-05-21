@@ -57,6 +57,26 @@
       <div class="navbar-item">
         <div class="buttons">
           <% if user_signed_in? %>
+<!--            <div class="dropdown is-hoverable">-->
+<!--              <div class="dropdown-trigger">-->
+<!--                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">-->
+<!--                  <span>Account</span>-->
+<!--                  <span class="icon is-small">-->
+<!--        <i class="fas fa-angle-down" aria-hidden="true"></i>-->
+<!--      </span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <div class="dropdown-menu" id="dropdown-menu" role="menu">-->
+<!--                <div class="dropdown-content">-->
+                  <%# @response.items.each do |event| %>
+                    <%# start = event.start.date || event.start.date_time %>
+<!--                    <div class="dropdown-item">-->
+<!--                      <ul><%#= "#{event.summary} (#{start})" %></ul>-->
+<!--                    </div>-->
+                  <%# end %>
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
             <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => 'button active', :id => "logout-button" %>
           <% else %>
             <%= link_to "Login/Signup", '/auth/google_oauth2', :class => "button active", :id => "login-button" %>
