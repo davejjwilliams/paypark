@@ -1,8 +1,11 @@
 <p id="notice"><%= notice %></p>
+<br><br><br>
 
-<h1>Drivers</h1>
+<div id="driver_new_top">Drivers</div>
+<%= link_to 'New Driver', new_driver_path, :class => 'button is-primary' %>
 
-<table>
+<div id="driver_new_mid" >
+<table class="table is-striped" border="1" width="100%">
   <thead>
     <tr>
       <th>User</th>
@@ -18,14 +21,10 @@
         <td><%= driver.user.name %></td>
         <td><%= driver.registration_number %></td>
         <td><%= driver.car_info %></td>
-        <td><%= link_to 'Show', driver %></td>
-        <td><%= link_to 'Edit', edit_driver_path(driver) %></td>
-        <td><%= link_to 'Destroy', driver, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_driver_path(driver), :class => 'button is-info' %></td>
+        <td><%= link_to 'Delete', driver, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button is-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Driver', new_driver_path %>
+</div>

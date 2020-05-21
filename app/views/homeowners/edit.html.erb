@@ -1,5 +1,5 @@
-<h1>Editing Homeowner</h1>
-
+<br><br>
+<div id="homeowner_edit_top"><strong>Edit Driveway</strong></div>
 <%= form_with(model: @homeowner, local: true) do |form| %>
   <% if @homeowner.errors.any? %>
     <div id="error_explanation">
@@ -13,43 +13,51 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_area :address, :readonly => true %>
-  </div>
-
-  <p>
+  <div id="static_map_edit">
     <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=400x300&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %>
-  </p>
 
-  <div class="field">
-    <%= form.label :paypal_email %>
-    <%= form.text_area :paypal_email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :driveway_description %>
-    <%= form.text_area :driveway_description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :driveway_price %>
-    <%= form.text_field :driveway_price %>
-  </div>
-
-  <div class="field">
+  <div class="field" style="text-align: center; margin-top: 5%">
     <%= form.label :active_start %>
     <%= form.datetime_select :active_start %>
   </div>
 
-  <div class="field">
+  <div class="field" style="text-align: center">
     <%= form.label :active_end %>
     <%= form.datetime_select :active_end %>
   </div>
+  </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div>
+  <div class="field" style="text-align: center">
+    <%= form.label :paypal_email %>
+    <br>
+    <%= form.text_field(:paypal_email, :class => 'input', :id => "homeowner_fields") %>
+  </div>
+
+  <div class="field" style="text-align: center">
+    <%= form.label :address %>
+    <br>
+    <%= form.text_field(:address, :class => 'input', :id => "homeowner_fields", :readonly => true) %>
+  </div>
+
+  <div class="field" style="text-align: center">
+    <%= form.label :driveway_description %>
+    <br>
+    <%= form.text_field(:driveway_description, :class => 'input', :id => "homeowner_fields") %>
+  </div>
+
+  <div class="field" style="text-align: center">
+    <%= form.label :driveway_price %>
+    <br>
+    <%= form.text_field(:driveway_price, :class => 'input', :id => "homeowner_fields") %>
+  </div>
+
+  <div class="actions" style="text-align: center; margin-top: 2%">
+    <%= form.submit({class: "button is-primary"}) %>
   </div>
 <% end %>
 
-<%= link_to 'Back', homeowners_path %>
+<div style="text-align: center; margin-top: 2%">
+  <%= link_to 'Back', @homeowner, :class => 'button is-primary' %>
+</div>
+</div>

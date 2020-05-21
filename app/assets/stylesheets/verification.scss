@@ -1,3 +1,22 @@
 // Place all the styles related to the Verification controller here.
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#verification_top{
+    height:10%;
+    width: 100%;
+    color: #47525E;
+    font-family: 'Roboto';
+    text-align: center;
+    margin-top: 10%;
+    font-size: xx-large;
+}
+
+#verification_mid{
+  height:50%;
+  width: 100%;
+  color: #47525E;
+  font-family: 'Roboto';
+  text-align: center;
+  margin-top: 13%;
+}
