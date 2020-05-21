@@ -64,14 +64,7 @@
     <div id="right-div-text-div">
 
 
-      <% unless session[:booking_start_time].nil? and session[:booking_end_time].nil? %>
-        <h2>Searching For Driveways Between <%= session[:booking_start_time] %>
-          until <%= session[:booking_end_time] %></h2>
-        <%= button_to 'Clear Times', clearsearch_path, method: :post %>
-      <% end %>
-      <div id="localsList">
-        <ul></ul>
-      </div>
+
 
     </div>
   </div>
