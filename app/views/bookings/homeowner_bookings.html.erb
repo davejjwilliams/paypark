@@ -1,47 +1,50 @@
+<div id="overall-container">
 <p id="notice"><%= notice %></p>
 
-<h1>Bookings For Your Driveway</h1>
+
+<h1 id="homeowners_bookings_title" class="title">Bookings For Your Driveway</h1>
 <br>
-<h1>Upcoming Bookings</h1>
 <% if @upcoming_homeowner_bookings.length == 0 %>
-  <h2>You don't have any bookings yet :(</h2>
+
+    <h2 class="subtitle is-6">You don't have any bookings yet</h2>
+  </div>
 <% else %>
-<table>
-  <thead>
-  <tr>
-    <th>Driver</th>
-    <th>Car Info</th>
-    <th>Price</th>
-    <th>Start time</th>
-    <th>End time</th>
-    <th colspan="1"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @upcoming_homeowner_bookings.each do |booking| %>
+  <table class="table is-hoverable is-fullwidth is-bordered">
+    <thead>
     <tr>
-      <td><%= booking.driver.user.name %></td>
-      <td><%= booking.driver.car_info %></td>
-      <td><%= booking.price %></td>
-      <td><%= booking.start_time %></td>
-      <td><%= booking.end_time %></td>
-      <td><%= link_to 'Show', booking %></td>
+      <th>Driver</th>
+      <th>Car Info</th>
+      <th>Price</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th colspan="1"></th>
     </tr>
+    </thead>
 
-  <h1></h1>
-  <% end %>
-  </tbody>
-</table>
+    <tbody>
+    <% @upcoming_homeowner_bookings.each do |booking| %>
+      <tr>
+        <td><%= booking.driver.user.name %></td>
+        <td><%= booking.driver.car_info %></td>
+        <td><%= booking.price %></td>
+        <td><%= booking.start_time %></td>
+        <td><%= booking.end_time %></td>
+        <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
+      </tr>
+
+      <h1></h1>
+    <% end %>
+    </tbody>
+  </table>
 <% end %>
 
-<h1>Completed Bookings</h1>
+<h1 class="subtitle">Completed Bookings</h1>
 
 <% if @complete_homeowner_bookings.length == 0 %>
-  <h2>Completed bookings will appear here!</h2>
+  <h2 class="subtitle is-6">You do not have any completed bookings</h2>
 <% else %>
   <%= button_to 'Withdraw Earnings', withdraw_path, method: :post, params: {homeowner_id: @homeowner.id}, remote: true %>
-  <table>
+  <table class="table is-hoverable is-fullwidth is-bordered">
     <thead>
     <tr>
       <th>Driver</th>
@@ -63,7 +66,7 @@
         <td><%= booking.start_time %></td>
         <td><%= booking.end_time %></td>
         <td><%= booking.withdrawn %></td>
-        <td><%= link_to 'Show', booking %></td>
+        <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
       </tr>
 
       <h1></h1>
