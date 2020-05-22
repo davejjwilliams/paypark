@@ -2,7 +2,9 @@ require 'test_helper'
 
 class DriversControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user = users(:one)
     @driver = drivers(:one)
+    sign_in @user
   end
 
   test "should get index" do

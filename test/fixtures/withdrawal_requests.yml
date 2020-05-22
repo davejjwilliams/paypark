@@ -3,9 +3,9 @@
 one:
   homeowner: one
   amount: 9.99
-  request_date: 2020-05-11
+  request_date: <%= Time.now %>
 
 two:
-  homeowner: two
+  homeowner: one
   amount: 9.99
-  request_date: 2020-05-11
+  request_date: <%= Time.now %>
