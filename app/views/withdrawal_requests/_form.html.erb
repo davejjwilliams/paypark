@@ -11,22 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :homeowner_id %>
-    <%= form.text_field :homeowner_id %>
+  <div class="field" style="text-align: center">
+    <%= form.label :homeowner_id, :class => "subtitle" %>
+    <br>
+    <%= form.text_field :homeowner_id, :class => "input", :style => "width: 50%" %>
   </div>
 
-  <div class="field">
-    <%= form.label :amount %>
-    <%= form.text_field :amount %>
+  <div class="field" style="text-align: center">
+    <%= form.label :amount, :class => "subtitle" %><br>
+
+    <%= form.text_field :amount, :class => "input", :style => "width: 50%" %>
   </div>
 
-  <div class="field">
-    <%= form.label :request_date %>
+  <div class="field" style="text-align: center">
+    <%= form.label :request_date, :class => "subtitle" %>
     <%= form.date_select :request_date %>
   </div>
+  <br><br>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions" style="text-align: center">
+    <%= form.submit :class => "button is-primary" %>
   </div>
 <% end %>

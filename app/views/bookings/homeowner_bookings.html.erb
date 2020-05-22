@@ -2,12 +2,12 @@
 <p id="notice"><%= notice %></p>
 
 
-<h1 id="homeowners_bookings_title" class="title">Bookings For Your Driveway</h1>
+<h1 style="text-align: center" class="title">Bookings For Your Driveway</h1>
 <br>
 <% if @upcoming_homeowner_bookings.length == 0 %>
 
-    <h2 class="subtitle is-6">You don't have any bookings yet</h2>
-  </div>
+    <h2 style="text-align: center" class="subtitle is-6">You don't have any bookings yet</h2>
+
 <% else %>
   <table class="table is-hoverable is-fullwidth is-bordered">
     <thead>
@@ -38,10 +38,10 @@
   </table>
 <% end %>
 
-<h1 class="subtitle">Completed Bookings</h1>
+<h1 style="text-align: center" class="subtitle">Completed Bookings</h1>
 
 <% if @complete_homeowner_bookings.length == 0 %>
-  <h2 class="subtitle is-6">You do not have any completed bookings</h2>
+  <h2 style="text-align: center" class="subtitle is-6">You do not have any completed bookings</h2>
 <% else %>
   <%= button_to 'Withdraw Earnings', withdraw_path, method: :post, params: {homeowner_id: @homeowner.id}, remote: true %>
   <table class="table is-hoverable is-fullwidth is-bordered">
@@ -74,3 +74,4 @@
     </tbody>
   </table>
 <% end %>
+</div>

@@ -1,3 +1,4 @@
+<div id="overall-container">
 <% unless @booking.paid %>
   <script type="text/javascript" charset="utf-8">
       const stripe = Stripe('<%= Rails.configuration.stripe[:publishable_key] %>');
@@ -86,3 +87,4 @@
 <% end %>
 
 <%= link_to 'Back', bookings_path %>
+</div>

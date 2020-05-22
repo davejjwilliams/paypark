@@ -1,6 +1,8 @@
+<div id="overall-container">
 <h3>Drivers who have booked with you</h3>
 <ul id="conv-users-list">
   <% @homeowner_conversations_with.each do |user| %>
     <li><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post %></li>
   <% end %>
 </ul>
+</div>

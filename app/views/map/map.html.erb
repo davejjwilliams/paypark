@@ -13,13 +13,14 @@
     <h2 class="title is-marginless" id="home-title">Find Parking</h2>
 
 
+
     <div id="home-search-bar">
       <input id="pac-input" class="controls input" type="text" placeholder="Search address and drag to driveway"></div>
-    <div id="home-search-bar-time">
+    <div id="home-search-bar-time" style="text-align: center">
       <%= form_tag "/timesearch" do %>
-        <p id="home-top-div-text">From: </p><%= datetime_field_tag 'start_time' %>
-        <%= datetime_field_tag 'end_time' %>
-        <%= submit_tag "Search", :class => "button is-small", :id => "home-top-div-search-button" %>
+        <%= datetime_field_tag 'start_time', :style => "text-align: center"  %>
+        <%= datetime_field_tag 'end_time', :style => "text-align: center" %>
+        <%= submit_tag "Search", :class => "button is-small", :id => "home-top-div-search-button", :style => "text-align: center"  %>
       <% end %>
 
     </div>

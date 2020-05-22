@@ -3,6 +3,13 @@
 
 
 
+
+
+
+
+
+
+
 <nav class="navbar" role="navigation" aria-label="main navigation" id="nb">
   <div class="navbar-brand">
     <a href="/">
@@ -28,27 +35,44 @@
     <div class="navbar-start">
 
       <% if user_signed_in? %>
-        <% if Driver.exists?(session[:driver_id]) %>
-          <% driver = Driver.find(session[:driver_id]) %>
-
-          <%= link_to "Driver Page", driver, :id => "driver-page-button", :class => "navbar-item", :id => "nav-button" %>
 
 
-          <%= link_to "Driver Bookings", driver_bookings_path, :class => "navbar-item", :id => "nav-button" %>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" id="nav-button">
+            My Bookings
+          </a>
 
-        <% end %>
+          <div class="navbar-dropdown">
+            <% if Homeowner.exists?(user_id: current_user.id) %>
+              <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
+              <hr class="navbar-divider">
 
+              <%= link_to "Homeowner", homeowner_bookings_path, :class => "navbar-item", :id => "nav-button" %>
+              <%= link_to "Become a driver", new_driver_path, :class => "navbar-item", :id => "nav-button"  %>
+            <% end %>
+            <% if Driver.exists?(session[:driver_id]) %>
+              <% driver = Driver.find(session[:driver_id]) %>
+              <hr class="navbar-divider">
+
+              <%= link_to "Driver Page", driver, :id => "driver-page-button", :class => "navbar-item", :id => "nav-button" %>
+
+
+              <%= link_to "Driver Bookings", driver_bookings_path, :class => "navbar-item", :id => "nav-button" %>
+              <%= link_to "Become a homeowner", new_homeowner_path, :class => "navbar-item", :id => "nav-button" %>
+
+
+
+            <% end %>
+            <hr class="navbar-divider">
+            <%= link_to "Chat", chat_path, :class => "navbar-item", :id => "nav-button" %>
+
+          </div>
+        </div>
         <% if Homeowner.exists?(user_id: current_user.id) %>
           <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
-          <%= link_to "Homeowner Page", current_homeowner, :class => "navbar-item", :id => "homeowner-page-button", :id => "nav-button" %>
-
-          <%= link_to "Homeowner Bookings", homeowner_bookings_path, :class => "navbar-item", :id => "nav-button" %>
+          <%= link_to "My Driveway", current_homeowner, :class => "navbar-item", :id => "homeowner-page-button", :id => "nav-button" %>
         <% end %>
       <% end %>
-
-
-
-
 
 
     </div>
@@ -57,30 +81,22 @@
       <div class="navbar-item">
         <div class="buttons">
           <% if user_signed_in? %>
-<!--            <div class="dropdown is-hoverable">-->
-<!--              <div class="dropdown-trigger">-->
-<!--                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">-->
-<!--                  <span>Account</span>-->
-<!--                  <span class="icon is-small">-->
-<!--        <i class="fas fa-angle-down" aria-hidden="true"></i>-->
-<!--      </span>-->
-<!--                </button>-->
-<!--              </div>-->
-<!--              <div class="dropdown-menu" id="dropdown-menu" role="menu">-->
-<!--                <div class="dropdown-content">-->
-                  <%# @response.items.each do |event| %>
-                    <%# start = event.start.date || event.start.date_time %>
-<!--                    <div class="dropdown-item">-->
-<!--                      <ul><%#= "#{event.summary} (#{start})" %></ul>-->
-<!--                    </div>-->
-                  <%# end %>
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-            <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => 'button active', :id => "logout-button" %>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" id="nav-button">
+                My Account
+              </a>
+
+              <div class="navbar-dropdown">
+
+                <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => "navbar-item", :id => "nav-button" %>
+
+              </div>
           <% else %>
             <%= link_to "Login/Signup", '/auth/google_oauth2', :class => "button active", :id => "login-button" %>
           <% end %>
+          </div>
+
+
         </div>
       </div>
     </div>
@@ -103,10 +119,10 @@
     }
 </script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         // Check for click events on the navbar burger icon
-        $(".navbar-burger").click(function() {
+        $(".navbar-burger").click(function () {
 
             // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
             $(".navbar-burger").toggleClass("is-active");
