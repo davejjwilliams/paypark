@@ -31,14 +31,14 @@
   <br>
 
   <div id="booking-form">
-    <h1 id="new-booking-title">New Booking</h1>
+    <h1 id="new-booking-title" class="title">New Booking</h1>
     <br>
-    <h2>This driveway is available between <%= @homeowner.active_start %> and <%= @homeowner.active_end %></h2>
-    <h2>Price Per Hour: <%= number_to_currency(@homeowner.driveway_price, unit: "£") %></h2>
+    <h2 class="subtitle">This driveway is available between <%= @homeowner.active_start %> and <%= @homeowner.active_end %></h2>
+    <h2 class="subtitle">Price Per Hour: <%= number_to_currency(@homeowner.driveway_price, unit: "£") %></h2>
     <% if @homeowner.number_ratings > 0 %>
-      <h2>Average Rating: <%= @homeowner.total_ratings/@homeowner.number_ratings %> Stars</h2>
+      <h2 class="subtitle">Average Rating: <%= @homeowner.total_ratings/@homeowner.number_ratings %> Stars</h2>
     <% else %>
-      <h2>No Ratings Yet</h2>
+      <h2 class="subtitle">No Ratings Yet</h2>
     <% end %>
     <%= render 'form', booking: @booking %>
   </div>
