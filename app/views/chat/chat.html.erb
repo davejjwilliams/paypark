@@ -1,14 +1,16 @@
-<h3>Homeowners you have booked with</h3>
+<div id="overall-container">
+<h3 class="subtitle" style="text-align: center">Homeowners you have booked with</h3>
 
 <ul id="conv-users-list">
   <% if !Driver.find_by_user_id(current_user.id).nil? %>
     <% @driver_conversations_with.each do |user| %>
-      <li><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post %></li>
+      <li style="text-align: center"><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post, :class => "button is-link" %></li>
     <% end %>
   <% end %>
 </ul>
-
+  <br>
 <% if !Homeowner.find_by_user_id(current_user.id).nil? %>
+
   <%= render 'homeowner_conversations' %>
 <% end %>
 
@@ -18,3 +20,4 @@
   <% end %>
 </ul>
 
+</div>

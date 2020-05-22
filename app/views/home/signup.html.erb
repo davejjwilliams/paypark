@@ -1,4 +1,10 @@
-<h1>THIS IS THE SIGN UP SCREEN</h1>
-<p>Would you like to be a homeowner or a driver?</p>
-<%= link_to "Driver G", new_driver_path %>
-<%= link_to "Homeowner", new_homeowner_path %>
+<div id="overall-container">
+  <div id="sign_up_top"><strong>Sign Up</strong></div>
+
+  <div id="sign_up_mid"><strong>Would you like to be a homeowner or a driver?</strong></div>
+
+<div id="sign_up_bot">
+<%= link_to "Driver", new_driver_path, :class => "button is-danger is-outlined is-large"  %>
+<%= link_to "Homeowner", new_homeowner_path, :class => "button is-info is-outlined is-large" %>
+</div>
+</div>

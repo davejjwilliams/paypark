@@ -1,3 +1,93 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+//this is styling for the map.html.erb page but it is the applications home page
+
+#home-top-div {
+  top: 0;
+  width: 100%;
+  height: 15%;
+}
+
+#center-div {
+  height: 85%;
+  width: 80%;
+  float: left;
+  position: relative;
+}
+
+#right-div {
+  height: 85%;
+  width: 20%;
+  float: left;
+}
+#home-title{
+  text-align: center;
+
+  position: relative;
+}
+#home-search-bar{
+  padding: 0;
+  margin-bottom: 0;
+  background-color: transparent;
+  flex-grow: 1;
+  width: 20vw;
+  margin-left: 39%;
+}
+
+#home-top-div-search-end{
+  float: right;
+}
+#home-search-bar-time{
+  margin: auto;
+  width: 60%;
+}
+#localsList{
+  width: 100%;
+  word-wrap: break-word;
+
+
+
+}
+#right-div-text-div{
+  overflow: scroll;
+  height: 42rem;
+
+}
+#right-div-title-div{
+  height: 5rem;
+  font-size: 1vh;
+  word-wrap: break-word;
+}
+.bottom-box{
+  position: absolute;
+}
+.stack-top-box{
+  z-index: 9;
+}
+#home-dropdown{
+  margin-top: 7%;
+  margin-left: 0.4%;
+}
+
+#sign_up_top{
+  color: #47525E;
+  font-family: 'Roboto';
+  text-align: center;
+  font-size: xx-large
+}
+
+#sign_up_mid{
+  height:20%;
+  width: 100%;
+  color: #47525E;
+  font-family: 'Roboto';
+  text-align: center;
+  margin-top: 7%;
+  font-size: x-large;
+}
+
+#sign_up_bot{
+  text-align: center;
+}

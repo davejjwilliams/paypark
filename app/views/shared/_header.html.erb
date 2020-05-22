@@ -1,37 +1,146 @@
-<div class="header">
-  <p>To be edited by the front-end team when all pages are complete!</p>
-  <p>This is a header! You shouldn't see anything more than this if you aren't signed in!</p>
-  <% if user_signed_in? %>
-    Testing Links:
-    <%= link_to "Drivers Index", drivers_path %>
-    <%= link_to "Homeowners Index", homeowners_path %>
-    <%= link_to "Bookings Index", bookings_path %>
-  <%= link_to "Withdrawal Requests", withdrawal_requests_path %>
-    <br>
-    Real Links:
-    <%= link_to "The Map", root_path %>
 
-    <% if Driver.exists?(session[:driver_id]) %>
-      <% driver = Driver.find(session[:driver_id]) %>
-      <%= link_to "Driver Page", driver %>
-      <%= link_to "Driver Bookings", driver_bookings_path %>
-    <% else %>
-      <%= link_to "Register Your Car!", new_driver_path %>
-    <% end %>
 
-    <% if Homeowner.exists?(session[:homeowner_id]) %>
-      <% homeowner = Homeowner.find(session[:homeowner_id]) %>
-      <%= link_to "Homeowner Page", homeowner %>
-      <%= link_to "Homeowner Bookings", homeowner_bookings_path %>
-    <% else %>
-      <%= link_to "Register Your Driveway!", new_homeowner_path %>
-    <% end %>
 
-    <p>This is your name: <%= current_user.name %></p>
-    <%= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
-  <% end %>
 
-  <% 5.times do %>
-    <br>
-  <% end %>
-</div>
+
+
+
+
+
+
+
+
+<nav class="navbar" role="navigation" aria-label="main navigation" id="nb">
+  <div class="navbar-brand">
+    <a href="/">
+
+
+      <%= image_tag("logo_paypark.png", size: "55x450", :class => "nav-image") %>
+
+
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+      <span aria-hidden="true" style="color: white"></span>
+      <span aria-hidden="true" style="color: white"></span>
+      <span aria-hidden="true" style="color: white"></span>
+
+
+    </a>
+
+
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+
+      <% if user_signed_in? %>
+
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" id="nav-button">
+            My Bookings
+          </a>
+
+          <div class="navbar-dropdown">
+            <% if Homeowner.exists?(user_id: current_user.id) %>
+              <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
+              <hr class="navbar-divider">
+
+              <%= link_to "Homeowner Bookings", homeowner_bookings_path, :class => "navbar-item", :id => "nav-button" %>
+            <% end %>
+            <% if Driver.exists?(session[:driver_id]) %>
+              <% driver = Driver.find(session[:driver_id]) %>
+              <hr class="navbar-divider">
+
+              <%= link_to "Driver Page", driver, :id => "driver-page-button", :class => "navbar-item", :id => "nav-button" %>
+
+
+              <%= link_to "Driver Bookings", driver_bookings_path, :class => "navbar-item", :id => "nav-button" %>
+
+
+
+            <% end %>
+            <hr class="navbar-divider">
+            <%= link_to "Chat", chat_path, :class => "navbar-item", :id => "nav-button" %>
+
+          </div>
+        </div>
+        <% if Homeowner.exists?(user_id: current_user.id) %>
+          <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
+          <%= link_to "My Driveway", current_homeowner, :class => "navbar-item", :id => "homeowner-page-button", :id => "nav-button" %>
+        <% end %>
+      <% end %>
+
+
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <% if user_signed_in? %>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" id="nav-button">
+                &nbsp &nbsp My Account &nbsp
+              </a>
+
+              <div class="navbar-dropdown">
+                <hr class="navbar-divider">
+                <span class="subtitle is-6"><%= current_user.name  %></span>
+                <hr class="navbar-divider">
+                <span class="subtitle is-6"><%= current_user.email %></span>
+                <hr class="navbar-divider">
+                <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => "navbar-item", :id => "nav-button" %>
+
+                <% if Driver.exists?(session[:driver_id]) %>
+                  <% driver = Driver.find(session[:driver_id]) %>
+                  <%= link_to "Become a homeowner", new_homeowner_path, :class => "navbar-item", :id => "nav-button" %>
+                <% end %>
+                <% if Homeowner.exists?(user_id: current_user.id) %>
+                  <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
+                  <%= link_to "Become a driver", new_driver_path, :class => "navbar-item", :id => "nav-button"  %>
+                <% end %>
+
+
+
+              </div>
+          <% else %>
+            <%= link_to "Login/Signup", '/auth/google_oauth2', :class => "button active", :id => "login-button" %>
+          <% end %>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<script>
+    window.onscroll = function () {
+        myFunction()
+    };
+
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>
+<script>
+    $(document).ready(function () {
+
+        // Check for click events on the navbar burger icon
+        $(".navbar-burger").click(function () {
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            $(".navbar-burger").toggleClass("is-active");
+            $(".navbar-menu").toggleClass("is-active");
+
+        });
+    });
+</script>

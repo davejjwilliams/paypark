@@ -1,88 +1,96 @@
-<% unless @booking.paid %>
-  <script type="text/javascript" charset="utf-8">
-      const stripe = Stripe('<%= Rails.configuration.stripe[:publishable_key] %>');
+<div id="overall-container">
+  <% unless @booking.paid %>
+    <script type="text/javascript" charset="utf-8">
+        const stripe = Stripe('<%= Rails.configuration.stripe[:publishable_key] %>');
 
-      stripe.redirectToCheckout({
-          sessionId: '<%= @session.id %>'
-      }).then(function (result) {
-          console.log(result.error.message);
-      });
-  </script>
-<% end %>
-
-
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Driver:</strong>
-  <%= @booking.driver_id %>
-</p>
-
-<p>
-  <strong>Homeowner:</strong>
-  <%= @booking.homeowner_id %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @booking.price %>
-</p>
-
-<p>
-  <strong>Start time:</strong>
-  <%= @booking.start_time %>
-</p>
-
-<p>
-  <strong>End time:</strong>
-  <%= @booking.end_time %>
-</p>
-
-<p>
-  <strong>Complete:</strong>
-  <%= @booking.complete %>
-</p>
-
-<p>
-  <strong>Withdrawn:</strong>
-  <%= @booking.withdrawn %>
-</p>
-
-<p>
-  <strong>Paid:</strong>
-  <%= @booking.paid %>
-</p>
-
-<p>
-  <strong>Payment Intent:</strong>
-  <%= @booking.payment_intent %>
-</p>
-
-<p>
-  <strong>Calendar Event ID:</strong>
-  <%= @booking.calendar_event_id %>
-</p>
-
-<p>
-  <strong>Rating:</strong>
-  <%= @booking.rating %>
-</p>
-
-<% if @booking.complete and @booking.rating == 0 %>
-  <%= form_tag "/rate" do %>
-    <%#= hidden_field :form_booking_id, :value => @booking.id %>
-    <%= hidden_field_tag 'form_booking_id', @booking.id  %>
-    <%= select_tag :rating, raw("<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>") %>
-    <%= submit_tag "Rate" %>
+        stripe.redirectToCheckout({
+            sessionId: '<%= @session.id %>'
+        }).then(function (result) {
+            console.log(result.error.message);
+        });
+    </script>
   <% end %>
-<% end %>
 
-<% if @booking.paid %>
-  <% if ((@booking.start_time - Time.now)/3600) > 24 %>
-    <%= button_to 'Refund', charges_refund_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
+
+  <p id="notice"><%= notice %></p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>Driver:</strong>
+    <%= @booking.driver_id %>
+  </p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>Homeowner:</strong>
+    <%= @booking.homeowner_id %>
+  </p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>Price:</strong>
+    <%= @booking.price %>
+  </p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>Start time:</strong>
+    <%= @booking.start_time %>
+  </p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>End time:</strong>
+    <%= @booking.end_time %>
+  </p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>Complete:</strong>
+    <%= @booking.complete %>
+  </p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>Withdrawn:</strong>
+    <%= @booking.withdrawn %>
+  </p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>Paid:</strong>
+    <%= @booking.paid %>
+  </p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>Payment Intent:</strong>
+    <%= @booking.payment_intent %>
+  </p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>Calendar Event ID:</strong>
+    <%= @booking.calendar_event_id %>
+  </p>
+
+  <p style="text-align: center" class="subtitle">
+    <strong>Rating:</strong>
+    <%= @booking.rating %>
+  </p>
+
+  <% if @booking.complete and @booking.rating == 0 %>
+    <%= form_tag "/rate" do %>
+      <%#= hidden_field :form_booking_id, :value => @booking.id %>
+      <%= hidden_field_tag 'form_booking_id', @booking.id %>
+      <div style="text-align: center">
+        <%= select_tag :rating, raw("<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>") %>
+      </div>
+      <div style="text-align: center">
+        <%= submit_tag "Rate", :class => "button is-info" %>
+      </div>
+    <% end %>
   <% end %>
-<% else %>
-  <%= button_to 'Pay', charges_create_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
-<% end %>
 
-<%= link_to 'Back', bookings_path %>
+  <% if @booking.paid %>
+    <% if ((@booking.start_time - Time.now) / 3600) > 24 %>
+      <div style="text-align: center">
+        <%= button_to 'Refund', charges_refund_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
+      </div>
+    <% end %>
+  <% else %>
+    <div style="text-align: center">
+      <%= button_to 'Pay', charges_create_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
+    </div>
+  <% end %>
+</div>

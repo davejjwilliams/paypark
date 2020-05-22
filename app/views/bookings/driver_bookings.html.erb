@@ -1,16 +1,18 @@
+<div id="overall-container">
 <p id="notice"><%= notice %></p>
 
-<h1>Bookings</h1>
+
+<h1 style="text-align: center" class="title">Bookings</h1>
 
 <% if @upcoming_driver_bookings.length == 0 %>
-  <h2>You haven't made any bookings yet :(</h2>
+  <h2 style="text-align: center" class="subtitle is-6">You don't have any bookings yet</h2>
 <% else %>
-  <table>
+  <table class="table is-hoverable is-fullwidth is-bordered">
     <thead>
     <tr>
       <th>Address</th>
       <th>Homeowner</th>
-      <th>Price</th>
+      <th>Price £</th>
       <th>Start time</th>
       <th>End time</th>
       <th colspan="1"></th>
@@ -25,24 +27,24 @@
         <td><%= booking.price %></td>
         <td><%= booking.start_time %></td>
         <td><%= booking.end_time %></td>
-        <td><%= link_to 'Show', booking %></td>
+        <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 <% end %>
 
-<h1>Completed Bookings</h1>
+  <h1 style="text-align: center" class="subtitle">Completed Bookings</h1>
 
 <% if @complete_driver_bookings.length == 0 %>
-  <h2>Completed bookings will appear here!</h2>
+  <h2 style="text-align: center" class="subtitle is-6">You do not have any completed bookings</h2>
 <% else %>
-  <table>
+  <table class="table is-hoverable is-fullwidth is-bordered">
     <thead>
     <tr>
       <th>Address</th>
       <th>Homeowner</th>
-      <th>Price</th>
+      <th>Price £</th>
       <th>Start time</th>
       <th>End time</th>
       <th>Rating</th>
@@ -63,9 +65,10 @@
         <% else %>
           <td><%= booking.rating %></td>
          <% end %>
-        <td><%= link_to 'Show', booking %></td>
+        <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 <% end %>
+</div>

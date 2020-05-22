@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Paypark</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= include_gon %>
+<head>
+  <title>Paypark</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= include_gon %>
 
-    <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=' + Rails.application.credentials.google[:google_maps_api_key]+'&libraries=places'%>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=' + Rails.application.credentials.google[:google_maps_api_key] + '&libraries=places' %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= stylesheet_link_tag 'dhtmlxscheduler_material',media:'all','data-turbolinks-track'=>true %>
-    <%= javascript_include_tag 'dhtmlxscheduler', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'dhtmlxscheduler_material', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'dhtmlxscheduler', 'data-turbolinks-track' => true %>
 
-    <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= yield(:head_tags) %>
-  </head>
-
-  <body>
-
+  <%= yield(:head_tags) %>
   <%= render "shared/header" %>
+</head>
 
-  <%= yield %>
+<body>
 
-  <%= render "shared/footer" %>
 
-  </body>
+<%= yield %>
+
+<%= render partial: "shared/footer" %>
+
+</body>
 </html>

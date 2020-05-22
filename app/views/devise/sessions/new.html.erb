@@ -1,32 +1,200 @@
-<h1>Welcome to PayPark!</h1>
-<p>This will be the login page.</p>
-<% if user_signed_in? %>
-  <p>Welcome, <%= current_user.name %>! </p>
-  <%= link_to t('logout'), destroy_user_session_path, method: 'delete' %>
-<% else %>
-  <%= link_to "Click here to log in!", '/auth/google_oauth2' %>
+<% provide :head_tags do %>
+  <meta name='turbolinks-visit-control' content='reload'>
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          initMap()
+      });
+  </script>
 <% end %>
+<div id="overall-container">
+
+
+
+
+
+  <div id="top-div">
+    <div class="box1 stack-top" id="search-bar">
+
+      <div class="field">
+        <div class="control has-icons-left">
+          <p id="top-div-title"><b>Welcome To PayPark</b></p>
+
+      </span>
+        </div>
+
+
+      </div>
+    </div>
+    <div id="surrey-image-holder" class="box1"><%= image_tag("surrey_background.png", :id => "surrey-background")%></div>
+
+
+  </div>
+  <div id="bottom-div">
+    <div id="column-one">
+      <div id="column-one-title-div">
+        <h1 class="title" id="column-one-title">What we do</h1>
+      </div>
+      <div id="column-one-text-div">
+        <p id="column-one-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.
+
+          Cras efficitur dui laoreet nulla vulputate, vel venenatis diam fermentum. Vestibulum vitae eros scelerisque, finibus risus id, maximus ex. Cras imperdiet orci nulla, quis tristique ante varius sit amet. Donec nec placerat ex. Quisque sollicitudin non metus vitae ornare. Sed malesuada ante ac velit placerat pharetra. Fusce vitae purus a lorem molestie luctus.
+
+          Aliquam erat volutpat. Quisque luctus mollis consectetur. In molestie feugiat turpis, at feugiat lectus congue id. Suspendisse pretium pharetra facilisis. Maecenas at mi feugiat, maximus metus at, efficitur neque. Fusce nec velit aliquet, ultrices quam pulvinar, tempus lacus. Morbi iaculis hendrerit augue, id tincidunt mi aliquet a. Vivamus nec neque sed magna elementum pulvinar eget nec odio. Sed at euismod ipsum.
+
+          Vestibulum porttitor velit ut suscipit tempus. Nunc quis tortor fringilla, hendrerit ipsum venenatis, pharetra felis.</p>
+      </div>
+    </div>
+    <div id="column-two">
+      <div id="column-two-title1-div">
+        <h1 class="title" id="column-two-title1">Got a question?</h1>
+      </div>
+      <div id="column-two-title2-div">
+        <h1 class="title" id="column-two-title2">Ask us now!</h1>
+      </div>
+      <div id="column-two-logo-div">
+        <%= image_tag("logo_paypark.png", :id => "main-logo")%>
+      </div>
+      <div id="column-two-button-div">
+        <button class="button" id="column-two-button"><span>Talk to us</span></button>
+      </div>
+    </div>
+    <div id="column-three">
+<!--      <div id="column-three-text-div"></div>-->
+      <div id="column-three-title-div">
+        <h1 class="title" id="column-three-title">Our happy customers:</h1>
+      </div>
+      <div id="column-three-message-div">
+
+        <div id="parent">
+          <div id="picture">
+            <div class='container1'>
+
+              <%= image_tag("cat.png", :id => "content-1")%>
+
+              <%= image_tag("omaba.png", :id => "content-1")%>
+              <%= image_tag("stock_human.png", :id => "content-1")%>
+
+            </div>
+          </div>
+
+          <script>
+              var divs = $('img[id^="content-"]').hide(),
+                  i = 0;
+
+              (function cycle() {
+
+                  divs.eq(i).fadeIn(2000)
+                      .delay(8000)
+                      .fadeOut(2000, cycle);
+
+                  i = ++i % divs.length;
+
+              })();
+          </script>
+
+
+
+
+          <div id="text">
+            <p class="quotes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.</p>
+            <p class="quotes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.</p>
+            <p class="quotes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.</p>
+            <br><br><br><br>
+          </div>
+        </div>
+
+
+        <script>
+            (function() {
+
+                var quotes = $(".quotes");
+                var quoteIndex = -1;
+
+                function showNextQuote() {
+                    ++quoteIndex;
+                    quotes.eq(quoteIndex % quotes.length)
+                        .fadeIn(2000)
+                        .delay(8000)
+                        .fadeOut(2000, showNextQuote);
+                }
+
+                showNextQuote();
+
+            })();
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 <!--  <div class="field">-->
 <!--    <%#= f.label :email %><br />-->
-    <%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
 <!--  </div>-->
 
 <!--  <div class="field">-->
 <!--    <%#= f.label :password %><br />-->
-    <%#= f.password_field :password, autocomplete: "current-password" %>
+<%#= f.password_field :password, autocomplete: "current-password" %>
 <!--  </div>-->
 
-  <%# if devise_mapping.rememberable? %>
+<%# if devise_mapping.rememberable? %>
 <!--    <div class="field">-->
-      <%#= f.check_box :remember_me %>
-      <%#= f.label :remember_me %>
+<%#= f.check_box :remember_me %>
+<%#= f.label :remember_me %>
 <!--    </div>-->
-  <%# end %>
+<%# end %>
 
 <!--  <div class="actions">-->
-    <%#= f.submit "Log in" %>
+<%#= f.submit "Log in" %>
 <!--  </div>-->
 <%# end %>
 

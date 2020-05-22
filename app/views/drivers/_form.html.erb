@@ -11,12 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :registration_number %>
-    <%= form.text_field :registration_number %>
+  <div class="field" id="driver_new_mid">
+    <%= form.label :please_enter_your_registration_number %>
+    <br>
+    <%= form.text_field(:registration_number, :class => 'input', :id => "driver_field") %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions" id="driver_new_bot">
+    <%= form.submit({class: "button is-info"}) %>
   </div>
 <% end %>

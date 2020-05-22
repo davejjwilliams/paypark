@@ -1,5 +1,15 @@
 <p id="notice"><%= notice %></p>
+<div id="overall-container">
 
+  <div id="homeowner_show_top" style="margin-top: 2%"><strong>Your Driveway</strong></div>
+<div style="width: 30%; height: 40%; float: left; margin-top: 5%">
+  <p id="static_map_show">
+    <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=600x600&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %>
+  </p>
+</div>
+
+<div id="square">
+  <div id="homeowner_show_mid">
 <p>
   <strong>User:</strong>
   <%= @homeowner.user.name %>
@@ -68,13 +78,12 @@
     <%= (@homeowner.total_ratings.to_f / @homeowner.number_ratings) %>
   <% end %>
 </p>
-
-<p>
-  <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=400x300&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %>
-</p>
-
+<div style="margin-top: 3%">
 <% unless @homeowner.driveway_verified %>
-  <%= link_to 'Verify Driveway', verification_path %> |
+  <%= link_to 'Verify Driveway', verification_path, :class => 'button is-success' %>
 <% end %>
-<%= link_to 'Edit', edit_homeowner_path(@homeowner) %> |
-<%= link_to 'Back', homeowners_path %>
+<%= link_to 'Edit', edit_homeowner_path(@homeowner), :class => 'button is-info' %>
+</div>
+</div>
+</div>
+</div>

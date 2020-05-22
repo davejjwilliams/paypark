@@ -1,19 +1,22 @@
 <p id="notice"><%= notice %></p>
+<br><br>
+<div id="driver_new_top"><strong>Your Car</strong></div>
 
-<p>
-  <strong>User:</strong>
-  <%= @driver.user.name %>
-</p>
-
-<p>
-  <strong>Registration number:</strong>
-  <%= @driver.registration_number %>
-</p>
-
-<p>
-  <strong>Car Info:</strong>
-  <%= @driver.car_info %>
-</p>
-
-<%= link_to 'Edit', edit_driver_path(@driver) %> |
-<%= link_to 'Back', drivers_path %>
+<div id="circle">
+  <div id="driver_show_mid">
+    <strong>User</strong>
+    <br>
+    <%= @driver.user.name %>
+    <br>
+    <strong>Registration number</strong>
+    <br>
+    <%= @driver.registration_number %>
+    <br>
+    <strong>Car Info</strong>
+    <br>
+    <%= @driver.car_info %>
+    <div style="margin-top: 12%">
+    <%= link_to 'Edit', edit_driver_path(@driver), :class => 'button is-info' %>
+    </div>
+</div>
+</div>

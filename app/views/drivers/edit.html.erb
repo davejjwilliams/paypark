@@ -1,6 +1,11 @@
-<h1>Editing Driver</h1>
+<br><br><br>
+
+<div id="driver_new_top" style="margin-bottom: 9%"><strong>Edit Driver</strong></div>
 
 <%= render 'form', driver: @driver %>
 
-<%= link_to 'Show', @driver %> |
-<%= link_to 'Back', drivers_path %>
+<br>
+
+<div id="driver_new_bot">
+  <%= link_to 'Back', @driver, :class => 'button is-primary' %>
+</div>
