@@ -1,8 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  driver_id: 1
-  homeowner_id: 1
+  driver: one
+  homeowner: one
   price: 9.99
   start_time: 2021-04-27 22:03:39
   end_time: 2021-04-27 23:03:39
@@ -10,8 +10,8 @@ one:
   withdrawn: false
 
 two:
-  driver_id: 1
-  homeowner_id: 1
+  driver: two
+  homeowner: one
   price: 9.99
   start_time: 2021-04-28 22:03:39
   end_time: 2021-04-28 23:03:39

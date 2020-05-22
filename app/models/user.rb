@@ -14,6 +14,12 @@ class User < ApplicationRecord
     end
   end
 
+  after_create :signup_confirmation
+  def signup_confirmation
+    UserMailer.signup_confirmation(self).deliver
+
+  end
+
   def google_token
     tokens.find_by(provider: 'google')
   end

@@ -36,6 +36,7 @@ class HomeownersController < ApplicationController
 
     respond_to do |format|
       if @homeowner.save
+        HomeownerMailer.homeowner_confirmation(@homeowner).deliver_now
         session[:homeowner_id] = @homeowner.id
         format.html { redirect_to @homeowner, notice: 'Homeowner was successfully created.' }
         format.json { render :show, status: :created, location: @homeowner }

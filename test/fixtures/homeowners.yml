@@ -7,7 +7,8 @@ one:
   longitude: 9.99
   driveway_description: MyText
   driveway_price: 9.99
-  driveway_active: false
+  active_start: <%= DateTime.now - 1.day %>
+  active_end: <%= DateTime.now + 1.day %>
   last_modified: 2020-04-06
   activation_code: MyText
   driveway_verified: false
@@ -21,7 +22,8 @@ two:
   longitude: 9.99
   driveway_description: MyText
   driveway_price: 9.99
-  driveway_active: false
+  active_start: <%= DateTime.now - 1.day %>
+  active_end: <%= DateTime.now + 1.day %>
   last_modified: 2020-04-06
   activation_code: MyText
   driveway_verified: false
