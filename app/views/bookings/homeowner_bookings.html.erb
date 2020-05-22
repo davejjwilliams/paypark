@@ -14,7 +14,7 @@
     <tr>
       <th>Driver</th>
       <th>Car Info</th>
-      <th>Price</th>
+      <th>Price £</th>
       <th>Start time</th>
       <th>End time</th>
       <th colspan="1"></th>
@@ -43,13 +43,13 @@
 <% if @complete_homeowner_bookings.length == 0 %>
   <h2 style="text-align: center" class="subtitle is-6">You do not have any completed bookings</h2>
 <% else %>
-  <%= button_to 'Withdraw Earnings', withdraw_path, method: :post, params: {homeowner_id: @homeowner.id}, remote: true %>
+  <%= button_to 'Withdraw Earnings', withdraw_path, method: :post, params: {homeowner_id: @homeowner.id}, remote: true, :class => "button is-info" %>
   <table class="table is-hoverable is-fullwidth is-bordered">
     <thead>
     <tr>
       <th>Driver</th>
       <th>Car Info</th>
-      <th>Price</th>
+      <th>Price £ </th>
       <th>Start time</th>
       <th>End time</th>
       <th>Withdrawn</th>

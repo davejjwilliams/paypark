@@ -15,6 +15,10 @@ class DriversController < ApplicationController
 
   # GET /drivers/new
   def new
+    if Driver.exists?(user_id: current_user.id)
+      @driver = Driver.find_by_user_id(current_user.id)
+      redirect_to "/drivers/#{@driver.id}"
+    end
     @driver = Driver.new
   end
 
@@ -77,13 +81,14 @@ class DriversController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_driver
-      @driver = Driver.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def driver_params
-      params.require(:driver).permit(:user_id, :registration_number, :car_info)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_driver
+    @driver = Driver.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def driver_params
+    params.require(:driver).permit(:user_id, :registration_number, :car_info)
+  end
 end

@@ -4,7 +4,7 @@
   <div id="homeowner_show_top" style="margin-top: 2%"><strong>Your Driveway</strong></div>
 <div style="width: 30%; height: 40%; float: left; margin-top: 5%">
   <p id="static_map_show">
-    <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=400x300&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map", size: "400x450" %>
+    <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=600x600&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %>
   </p>
 </div>
 

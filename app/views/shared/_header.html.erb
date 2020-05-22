@@ -47,8 +47,7 @@
               <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
               <hr class="navbar-divider">
 
-              <%= link_to "Homeowner", homeowner_bookings_path, :class => "navbar-item", :id => "nav-button" %>
-              <%= link_to "Become a driver", new_driver_path, :class => "navbar-item", :id => "nav-button"  %>
+              <%= link_to "Homeowner Bookings", homeowner_bookings_path, :class => "navbar-item", :id => "nav-button" %>
             <% end %>
             <% if Driver.exists?(session[:driver_id]) %>
               <% driver = Driver.find(session[:driver_id]) %>
@@ -58,7 +57,6 @@
 
 
               <%= link_to "Driver Bookings", driver_bookings_path, :class => "navbar-item", :id => "nav-button" %>
-              <%= link_to "Become a homeowner", new_homeowner_path, :class => "navbar-item", :id => "nav-button" %>
 
 
 
@@ -83,12 +81,27 @@
           <% if user_signed_in? %>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link" id="nav-button">
-                My Account
+                &nbsp &nbsp My Account &nbsp
               </a>
 
               <div class="navbar-dropdown">
-
+                <hr class="navbar-divider">
+                <span class="subtitle is-6"><%= current_user.name  %></span>
+                <hr class="navbar-divider">
+                <span class="subtitle is-6"><%= current_user.email %></span>
+                <hr class="navbar-divider">
                 <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => "navbar-item", :id => "nav-button" %>
+
+                <% if Driver.exists?(session[:driver_id]) %>
+                  <% driver = Driver.find(session[:driver_id]) %>
+                  <%= link_to "Become a homeowner", new_homeowner_path, :class => "navbar-item", :id => "nav-button" %>
+                <% end %>
+                <% if Homeowner.exists?(user_id: current_user.id) %>
+                  <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
+                  <%= link_to "Become a driver", new_driver_path, :class => "navbar-item", :id => "nav-button"  %>
+                <% end %>
+
+
 
               </div>
           <% else %>
