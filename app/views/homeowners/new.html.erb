@@ -4,7 +4,9 @@
       document.addEventListener("DOMContentLoaded", initMapHO);
   </script>
 <% end %>
+
 <br><br><br>
+
 <h1 id="homeowners_enter_address">Please enter your address:</h1>
 
 <%= form_with(model: @homeowner, local: true) do |form| %>
@@ -65,7 +67,7 @@
   </div>
 
   <div class="actions" style="text-align: center">
-    <%= form.submit({class: "button is-primary"}) %>
+    <%= form.submit({class: "button is-info"}) %>
   </div>
 
 <% end %>
@@ -74,3 +76,4 @@
 <div style="text-align: center">
 <%= link_to 'Back', signup_path, :class => 'button is-primary' %>
 </div>
+<br>
