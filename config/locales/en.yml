@@ -43,12 +43,12 @@ en:
       enter_name: Enter your name
       email: "*Email:"
       enter_email: Enter your email address
-      telephone: "*Telephone:"
+      telephone: "Telephone:"
       enter_telephone: Enter your telephone number
       message: "Message:"
       enter_message: What do you want to say?
       submit: Contact Us
 
     request_contact:
-      no_email: YOU MUST COMPLETE ALL FIELDS LABELED WITH AN ASTERIKS *!
+      no_email: Please complete all fields
       email_sent: Thank you. We will be in touch shortly

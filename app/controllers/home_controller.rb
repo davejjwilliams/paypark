@@ -11,7 +11,7 @@ class HomeController < ApplicationController
    telephone = params[:telephone]
    message = params[:message]
 
-   if email.blank? or name.blank? or telephone.blank?
+   if email.blank? or name.blank?
     flash[:alert] = I18n.t('home.request_contact.no_email')
 
 
