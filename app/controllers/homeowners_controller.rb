@@ -25,6 +25,9 @@ class HomeownersController < ApplicationController
 
   # GET /homeowners/1/edit
   def edit
+    unless @homeowner.driveway_verified
+      redirect_to @homeowner, notice: "Your driveway isn't verified yet!"
+    end
   end
 
   # POST /homeowners

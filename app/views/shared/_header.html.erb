@@ -94,6 +94,14 @@
                     <%= link_to "Become a driver", new_driver_path, :class => "navbar-item", :id => "nav-button"  %>
                   <% end %>
 
+                <% if current_user.admin? %>
+                  <hr class="navbar-divider">
+                  <%= link_to "All Homeowners", homeowners_path, :class => "navbar-item", :id => "nav-button" %>
+                  <%= link_to "All Drivers", drivers_path, :class => "navbar-item", :id => "nav-button" %>
+                  <%= link_to "All Bookings", bookings_path, :class => "navbar-item", :id => "nav-button" %>
+                  <%= link_to "Withdrawal Requests", withdrawal_requests_path, :class => "navbar-item", :id => "nav-button" %>
+                <% end %>
+
               </div>
           <% else %>
             <%= link_to "Login/Signup", '/auth/google_oauth2', :class => "button active", :id => "login-button" %>
