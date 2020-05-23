@@ -38,7 +38,7 @@ class DriversController < ApplicationController
     @hash = JSON.parse(response)
 
     if @hash.key?("make")
-      @driver.car_info = @hash["make"] + " " + @hash["model"] + " IN " + @hash["colour"]
+      @driver.car_info = @hash["colour"] + " " + @hash["make"] + " " + @hash["model"]
     else
       @driver.car_info = "Registration number not linked to vehicle!!!"
     end
@@ -60,6 +60,20 @@ class DriversController < ApplicationController
   def update
     respond_to do |format|
       if @driver.update(driver_params)
+
+        url = "https://dvlasearch.appspot.com/DvlaSearch?apikey=#{Rails.application.credentials.dvla[:dvla_api_key]}&licencePlate=#{@driver.registration_number}"
+        uri = URI(url)
+        response = Net::HTTP.get(uri)
+        @hash = JSON.parse(response)
+
+        if @hash.key?("make")
+          @driver.car_info = @hash["colour"] + " " + @hash["make"] + " " + @hash["model"]
+        else
+          @driver.car_info = "Registration number not linked to vehicle!!!"
+        end
+
+        @driver.save!
+
         format.html { redirect_to @driver, notice: 'Driver was successfully updated.' }
         format.json { render :show, status: :ok, location: @driver }
       else
