@@ -6,6 +6,7 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
+    admin_check
     @bookings = Booking.all
   end
 
@@ -152,6 +153,12 @@ class BookingsController < ApplicationController
   end
 
   private
+    def admin_check
+      unless current_user.admin?
+        redirect_to root_path, alert: "You do not have admin privileges!"
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])

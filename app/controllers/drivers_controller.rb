@@ -5,6 +5,7 @@ class DriversController < ApplicationController
   # GET /drivers
   # GET /drivers.json
   def index
+    admin_check
     @drivers = Driver.all
   end
 
@@ -17,7 +18,7 @@ class DriversController < ApplicationController
   def new
     if Driver.exists?(user_id: current_user.id)
       @driver = Driver.find_by_user_id(current_user.id)
-      redirect_to "/drivers/#{@driver.id}"
+      redirect_to "/drivers/#{@driver.id}", notice: "You are already registered as a driver!"
     end
     @driver = Driver.new
   end
@@ -95,6 +96,11 @@ class DriversController < ApplicationController
   end
 
   private
+    def admin_check
+      unless current_user.admin?
+        redirect_to root_path, alert: "You do not have admin privileges!"
+      end
+    end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_driver

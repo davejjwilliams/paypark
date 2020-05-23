@@ -3,7 +3,7 @@
 
 <p class="subtitle">
   <strong>Homeowner:</strong>
-  <%= @withdrawal_request.homeowner %>
+  <%= @withdrawal_request.homeowner.user.name %>
 </p>
 
 <p class="subtitle">
@@ -16,6 +16,5 @@
   <%= @withdrawal_request.request_date %>
 </p>
 
-<%= link_to 'Edit', edit_withdrawal_request_path(@withdrawal_request) %> |
 <%= link_to 'Back', withdrawal_requests_path %>
 </div>

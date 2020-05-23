@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :withdrawal_requests
+  resources :withdrawal_requests, :except => [:new, :edit]
   resources :bookings, :except => [:edit]
 
   # Rate Button
