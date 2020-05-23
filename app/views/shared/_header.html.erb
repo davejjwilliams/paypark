@@ -53,7 +53,7 @@
               <% driver = Driver.find(session[:driver_id]) %>
               <hr class="navbar-divider">
 
-              <%= link_to "Driver Page", driver, :id => "driver-page-button", :class => "navbar-item", :id => "nav-button" %>
+              <%= link_to "Driver Page", driver, :class => "navbar-item", :id => "nav-button" %>
 
 
               <%= link_to "Driver Bookings", driver_bookings_path, :class => "navbar-item", :id => "nav-button" %>
@@ -73,6 +73,12 @@
       <% end %>
 
 
+
+    </div>
+    <div class="navbar-item" >
+      <% flash.each do |key, value| %>
+        <%= content_tag :div, content_tag(:h4, value),  id: "#{key}", class: "nav-message" unless value.blank? %>
+      <% end %>
     </div>
 
     <div class="navbar-end">

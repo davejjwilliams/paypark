@@ -31,19 +31,13 @@ html, body {
 
 }
 
-h1 {
+h1, h2, h3 {
   color: $text-colour;
   font-family: Roboto;
 }
 
-h2 {
-  color: $text-colour;
-  font-family: Roboto;
-}
-
-h3 {
-  color: $text-colour;
-  font-family: Roboto;
+h4 {
+  color: white;
 }
 
 p {

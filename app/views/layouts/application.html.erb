@@ -19,15 +19,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <%= yield(:head_tags) %>
-  <%= render "shared/header" %>
 </head>
 
 <body>
-
+<%= render "shared/header" %>
 
 <%= yield %>
 
-<%= render partial: "shared/footer" %>
+<%= render "shared/footer" %>
 
 </body>
 </html>

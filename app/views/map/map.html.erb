@@ -7,8 +7,13 @@
   </script>
 <% end %>
 
+<% flash.each do |key, value| %>
+  <%= content_tag :div, content_tag(:p, value), :class => "subtitle is-info", :style => "text-align: center;", id: "#{key}" unless value.blank? %>
+<% end %>
+
 <div id="overall-container">
   <div id="home-top-div">
+
 
     <h2 class="title is-marginless" id="home-title">Find Parking</h2>
 

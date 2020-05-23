@@ -9,7 +9,7 @@ class ContactMailer < ApplicationMailer
     @message = message
 
     #mail cc: @email
-    mail to: Rails.application.credentials.mailer[:mailer_email], subject: "form"
+    mail to: Rails.application.credentials.mailer[:mailer_email], subject: "Contact"
   end
 
 end
