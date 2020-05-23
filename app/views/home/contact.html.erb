@@ -1,29 +1,52 @@
-<h1>
-  <%= t('.title') %>
-</h1>
-<p>
-  <%= t('.contact_us') %>
-  <% flash.each do |key, value| %>
-    <%= content_tag :div, content_tag(:p, value), id: "#{key}" unless value.blank? %>
-  <% end %>
+<div class= "form">
+ <%= form_tag request_contact_path, :style => 'align: center;', method: 'post' do %>
+   <h1 id = "contact_us">
+    <%= t('.title') %>
+   </h1>
+   <br>
 
-</p>
-<%= form_tag request_contact_path, method: 'post' do %>
-  <%= label_tag :name, t('.name') %>
-  <% if user_signed_in? %>
-    <%= text_field_tag :name , '', title: t('.enter_name') , size: 50, value: current_user.name %>
-  <% else %>
-    <%= text_field_tag :name , '', title: t('.enter_name') , size: 50 %>
-  <% end %>
-  <%= label_tag :email, t('.email') %>
-  <% if user_signed_in? %>
-    <%= email_field_tag :email , '', title: t('.enter_email'),  value: current_user.email  %>
-  <% else %>
-    <%= email_field_tag :email , '', title: t('.enter_email') %>
-  <% end %>
-  <%= label_tag :telephone, t('.telephone') %>
-  <%= telephone_field_tag :telephone, '', title: t('.enter_telephone') %>
-  <%= label_tag :message, t('.message') %>
-  <%= text_field_tag :message, '', title: t('.enter_message'), size: 100 %>
-  <%= submit_tag t('.submit') %>
-<% end %>
+   <div class = "flash", align = "center"><p>
+
+
+     <% flash.each do |key, value| %>
+       <%= content_tag :div, content_tag(:p, value), id: "#{key}" unless value.blank? %>
+     <% end %>
+
+
+
+   </p></div>
+   <br>
+   <%= label_tag :name, t('.name'), :class => 'labels_c'  %>
+   <% if user_signed_in? %>
+     <%= text_field_tag :name , '', title: t('.enter_name') ,:style => 'width: 50%;' , value: current_user.name ,:class => 'fields_c' %>
+   <% else %>
+     <%= text_field_tag :name , '', title: t('.enter_name') , :style => 'width: 50%;', :class => 'fields_c' %>
+   <% end %>
+   <br>
+   <%= label_tag :email, t('.email'), :class => 'labels_c' %>
+   <% if user_signed_in? %>
+     <%= email_field_tag :email , '', title: t('.enter_email'),  value: current_user.email, :style => 'width: 50%;', :class => 'fields_c'  %>
+   <% else %>
+     <%= email_field_tag :email , '', title: t('.enter_email'),:style => 'width: 50%;', :class => 'fields_c' %>
+   <% end %>
+   <br>
+   <%= label_tag :telephone, t('.telephone'), :class => 'labels_c' %>
+   <%= telephone_field_tag :telephone, '', title: t('.enter_telephone'), :class => 'fields_c', :style => 'width: 50%;' %>
+   <br>
+   <br>
+   <%= label_tag :message, t('.message'), :class => 'labels_c' %>
+   <br>
+   <%= text_area_tag :message,'', title: t('.enter_message'), placeholder: ' Type here your message', :class => 'fields_c', :cols => 10, :rows => 5, :style => 'width: 50%;'  %>
+   <br>
+   <br>
+   <div  style="text-align: center">
+   <%= submit_tag t('.submit') , :class => 'button is-info' , :style => 'width: 25%;' %>
+   </div>
+
+ <% end %>
+ <br>
+ <div style="text-align: center">
+ <%= link_to 'Back', contact_path, :class => 'button is-primary' %>
+ </div>
+ <br>
+</div>
