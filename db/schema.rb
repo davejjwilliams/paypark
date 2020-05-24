@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_05_13_102710) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "bookings", force: :cascade do |t|
     t.integer "driver_id"
     t.integer "homeowner_id"
@@ -39,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_102710) do
   end
 
   create_table "drivers", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "registration_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -48,7 +51,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_102710) do
   end
 
   create_table "homeowners", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.text "address"
     t.decimal "latitude"
     t.decimal "longitude"
@@ -69,8 +72,8 @@ ActiveRecord::Schema.define(version: 2020_05_13_102710) do
 
   create_table "messages", force: :cascade do |t|
     t.text "body"
-    t.integer "user_id"
-    t.integer "conversation_id"
+    t.bigint "user_id"
+    t.bigint "conversation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
@@ -102,7 +105,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_102710) do
   end
 
   create_table "withdrawal_requests", force: :cascade do |t|
-    t.integer "homeowner_id"
+    t.bigint "homeowner_id"
     t.decimal "amount"
     t.date "request_date"
     t.datetime "created_at", null: false
@@ -111,4 +114,9 @@ ActiveRecord::Schema.define(version: 2020_05_13_102710) do
     t.index ["homeowner_id"], name: "index_withdrawal_requests_on_homeowner_id"
   end
 
+  add_foreign_key "drivers", "users"
+  add_foreign_key "homeowners", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
+  add_foreign_key "withdrawal_requests", "homeowners"
 end
