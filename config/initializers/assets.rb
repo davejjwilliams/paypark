@@ -14,5 +14,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
 # Assets for scheduler
-Rails.application.config.assets.precompile += %w( dhtmlxscheduler_material.css )
+Rails.application.config.assets.precompile += %w( dhtmlxscheduler_material.scss )
 Rails.application.config.assets.precompile += %w( dhtmlxscheduler.js )
