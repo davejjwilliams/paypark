@@ -21,13 +21,6 @@ class MapController < ApplicationController
     service.authorization = token.google_secret.to_authorization
     # Request for a new access token just incase it expired
     if token.expired?
-      service.authorization = Signet::OAuth2::Client.new(    { token_credential_uri: 'https://oauth2.googleapis.com/token',
-                                                               access_token: current_user.google_token,
-                                                               expires_at: token.expires_at,
-                                                               refresh_token: token.refresh_token,
-                                                               client_id: Rails.application.credentials.google[:google_client_id],
-                                                               client_secret: Rails.application.credentials.google[:google_client_secret] })
-
       new_access_token = service.authorization.refresh!
       token.access_token = new_access_token['access_token']
       token.expires_at = Time.now.to_i + new_access_token['expires_in'].to_i
