@@ -66,6 +66,19 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.default_url_options = { :host => 'https://fierce-tor-28482.herokuapp.com/'}
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+      address:                "smtp.gmail.com",
+      port:                   465,
+      domain:                 'fierce-tor-28482.herokuapp.com',
+      user_name: Rails.application.credentials.mailer[:mailer_email],
+      password: Rails.application.credentials.mailer[:mailer_password],
+      authentication:         :login,
+      ssl:                    true,
+      openssl_verify_mode:    'none'
+  }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
