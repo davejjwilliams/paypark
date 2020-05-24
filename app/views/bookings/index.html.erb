@@ -3,7 +3,7 @@
 
 <h1>Bookings</h1>
 
-<table>
+<table class="table is-hoverable is-fullwidth is-bordered">
   <thead>
     <tr>
       <th>Driver</th>
@@ -27,8 +27,8 @@
         <td><%= booking.end_time %></td>
         <td><%= booking.complete %></td>
         <td><%= booking.withdrawn %></td>
-        <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', booking , :class => 'button'%></td>
+        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button is-danger' %></td>
       </tr>
     <% end %>
   </tbody>

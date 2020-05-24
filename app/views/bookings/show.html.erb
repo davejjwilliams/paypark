@@ -15,13 +15,13 @@
   <p id="notice"><%= notice %></p>
 
   <p style="text-align: center" class="subtitle">
-    <strong>Driver:</strong>
-    <%= @booking.driver_id %>
+    <strong>Car Details:</strong>
+    <%= @booking.driver.car_info %>
   </p>
 
   <p style="text-align: center" class="subtitle">
-    <strong>Homeowner:</strong>
-    <%= @booking.homeowner_id %>
+    <strong>Address:</strong>
+    <%= @booking.homeowner.address %>
   </p>
 
   <p style="text-align: center" class="subtitle">
@@ -39,44 +39,26 @@
     <%= @booking.end_time %>
   </p>
 
-  <p style="text-align: center" class="subtitle">
-    <strong>Complete:</strong>
-    <%= @booking.complete %>
-  </p>
+  <% if @booking.complete %>
+    <p style="text-align: center" class="subtitle">
+      <strong>Rating:</strong>
+      <% if @booking.rating == 0 %>
+        Not Yet Rated
+      <% else %>
+        <%= @booking.rating %>
+      <% end %>
 
-  <p style="text-align: center" class="subtitle">
-    <strong>Withdrawn:</strong>
-    <%= @booking.withdrawn %>
-  </p>
-
-  <p style="text-align: center" class="subtitle">
-    <strong>Paid:</strong>
-    <%= @booking.paid %>
-  </p>
-
-  <p style="text-align: center" class="subtitle">
-    <strong>Payment Intent:</strong>
-    <%= @booking.payment_intent %>
-  </p>
-
-  <p style="text-align: center" class="subtitle">
-    <strong>Calendar Event ID:</strong>
-    <%= @booking.calendar_event_id %>
-  </p>
-
-  <p style="text-align: center" class="subtitle">
-    <strong>Rating:</strong>
-    <%= @booking.rating %>
-  </p>
+    </p>
+  <% end %>
 
   <% if @booking.complete and @booking.rating == 0 %>
     <%= form_tag "/rate" do %>
       <%#= hidden_field :form_booking_id, :value => @booking.id %>
       <%= hidden_field_tag 'form_booking_id', @booking.id %>
       <div style="text-align: center">
-        <%= select_tag :rating, raw("<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>") %>
-      </div>
-      <div style="text-align: center">
+        <div class="select">
+          <%= select_tag :rating, raw("<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>"), class: "select" %>
+        </div>
         <%= submit_tag "Rate", :class => "button is-info" %>
       </div>
     <% end %>
@@ -85,12 +67,8 @@
   <% if @booking.paid %>
     <% if ((@booking.start_time - Time.now) / 3600) > 24 %>
       <div style="text-align: center">
-        <%= button_to 'Refund', charges_refund_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
+        <%= button_to 'Refund', charges_refund_path, class: "button is-primary", method: :post, params: {booking_id: @booking.id}, remote: true %>
       </div>
     <% end %>
-  <% else %>
-    <div style="text-align: center">
-      <%= button_to 'Pay', charges_create_path, method: :post, params: {booking_id: @booking.id}, remote: true %>
-    </div>
   <% end %>
 </div>

@@ -1,5 +1,7 @@
 class WithdrawalRequestsController < ApplicationController
-  before_action :set_withdrawal_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_withdrawal_request, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :admin_check
 
   # GET /withdrawal_requests
   # GET /withdrawal_requests.json
@@ -45,15 +47,6 @@ class WithdrawalRequestsController < ApplicationController
   def show
   end
 
-  # GET /withdrawal_requests/new
-  def new
-    @withdrawal_request = WithdrawalRequest.new
-  end
-
-  # GET /withdrawal_requests/1/edit
-  def edit
-  end
-
   # POST /withdrawal_requests
   # POST /withdrawal_requests.json
   def create
@@ -64,7 +57,7 @@ class WithdrawalRequestsController < ApplicationController
         format.html { redirect_to @withdrawal_request, notice: 'Withdrawal request was successfully created.' }
         format.json { render :show, status: :created, location: @withdrawal_request }
       else
-        format.html { render :new }
+        format.html { render :show }
         format.json { render json: @withdrawal_request.errors, status: :unprocessable_entity }
       end
     end
@@ -78,7 +71,7 @@ class WithdrawalRequestsController < ApplicationController
         format.html { redirect_to @withdrawal_request, notice: 'Withdrawal request was successfully updated.' }
         format.json { render :show, status: :ok, location: @withdrawal_request }
       else
-        format.html { render :edit }
+        format.html { render :show }
         format.json { render json: @withdrawal_request.errors, status: :unprocessable_entity }
       end
     end
@@ -95,6 +88,12 @@ class WithdrawalRequestsController < ApplicationController
   end
 
   private
+    def admin_check
+      unless current_user.admin?
+        redirect_to root_path, alert: "You do not have admin privileges!"
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_withdrawal_request
       @withdrawal_request = WithdrawalRequest.find(params[:id])

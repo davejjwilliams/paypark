@@ -5,6 +5,7 @@ class HomeownersController < ApplicationController
   # GET /homeowners
   # GET /homeowners.json
   def index
+    admin_check
     @homeowners = Homeowner.all
   end
 
@@ -24,6 +25,9 @@ class HomeownersController < ApplicationController
 
   # GET /homeowners/1/edit
   def edit
+    unless @homeowner.driveway_verified
+      redirect_to @homeowner, notice: "Your driveway isn't verified yet!"
+    end
   end
 
   # POST /homeowners
@@ -73,6 +77,11 @@ class HomeownersController < ApplicationController
   end
 
   private
+    def admin_check
+      unless current_user.admin?
+        redirect_to root_path, alert: "You do not have admin privileges!"
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_homeowner
       @homeowner = Homeowner.find(params[:id])

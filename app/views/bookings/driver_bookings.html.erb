@@ -11,7 +11,6 @@
     <thead>
     <tr>
       <th>Address</th>
-      <th>Homeowner</th>
       <th>Price £</th>
       <th>Start time</th>
       <th>End time</th>
@@ -23,7 +22,6 @@
     <% @upcoming_driver_bookings.each do |booking| %>
       <tr>
         <td><%= booking.homeowner.address %></td>
-        <td><%= booking.homeowner.user.name %></td>
         <td><%= booking.price %></td>
         <td><%= booking.start_time %></td>
         <td><%= booking.end_time %></td>

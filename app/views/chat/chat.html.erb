@@ -5,6 +5,7 @@
   <% if !Driver.find_by_user_id(current_user.id).nil? %>
     <% @driver_conversations_with.each do |user| %>
       <li style="text-align: center"><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post, :class => "button is-link" %></li>
+      <br>
     <% end %>
   <% end %>
 </ul>

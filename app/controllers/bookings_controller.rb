@@ -6,6 +6,7 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
+    admin_check
     @bookings = Booking.all
   end
 
@@ -60,11 +61,19 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     driver_check
+    current_homeowner = nil
+    if Homeowner.exists?(user_id: current_user.id)
+      current_homeowner = Homeowner.find_by_user_id(current_user.id)
+    end
 
     if (!params[:dvwid].nil?)
-      @booking = Booking.new
-      session[:current_driveway] = params[:dvwid]
-      @homeowner = Homeowner.find(session[:current_driveway])
+      if (!current_homeowner.nil?) and (current_homeowner.id == params[:dvwid].to_i)
+        redirect_to root_path, alert: "You cannot book at your own driveway!"
+      else
+        @booking = Booking.new
+        session[:current_driveway] = params[:dvwid]
+        @homeowner = Homeowner.find(session[:current_driveway])
+      end
     else
       redirect_to root_path
     end
@@ -152,6 +161,12 @@ class BookingsController < ApplicationController
   end
 
   private
+    def admin_check
+      unless current_user.admin?
+        redirect_to root_path, alert: "You do not have admin privileges!"
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])

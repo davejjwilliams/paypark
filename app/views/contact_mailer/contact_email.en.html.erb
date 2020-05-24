@@ -1,27 +1,21 @@
 <p>
-  <%= "Dear contact team," %>
-</p>
-<p>
-  <%= "Could you please respond to the following user request?" %>
-</p>
-<dl>
-  <dt>Name:</dt>
-  <dd>
-    <%= @name %>
-  </dd>
-  <dt>Email:</dt>
-  <dd>
-    <%= @email %>
-  </dd>
-  <dt>Telephone:</dt>
-  <dd>
-    <%= @telephone %>
-  </dd>
-</dl>
-<p>
+  Dear PayPark,
+  <% 2.times do %>
+    <br>
+  <% end %>
+
+  User Information:
+  <br>
+  Name: <%= @name %> <br>
+  Email: <%= @email %> <br>
+  <% unless @telephone.empty? %>
+    Phone Number: <%= @telephone %>
+  <% end %>
+
+  <% 2.times do %>
+    <br>
+  <% end %>
+
+  Query: <br>
   <%= @message %>
-</p>
-<p>Thanks,</p>
-<p>
-  <%= @name %>
 </p>

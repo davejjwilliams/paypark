@@ -6,23 +6,23 @@ class HomeController < ApplicationController
   end
 
   def request_contact
-   name = params[:name]
-   email = params[:email]
-   telephone = params[:telephone]
-   message = params[:message]
+    name = params[:name]
+    email = params[:email]
+    telephone = params[:telephone]
+    message = params[:message]
 
-   if email.blank? or name.blank?
-    flash[:alert] = I18n.t('home.request_contact.no_email')
-
-
+    if email.blank? or name.blank? or message.blank?
+      flash[:alert] = I18n.t('home.request_contact.no_email')
 
     else
-     # Send an email
-     ContactMailer.contact_email(email, name, telephone, message).deliver_now
-     flash[:notice] = I18n.t('home.request_contact.email_sent')
+      # Send an email
+      ContactMailer.contact_email(email, name, telephone, message).deliver_now
+      flash[:notice] = I18n.t('home.request_contact.email_sent')
+      redirect_to root_path
+      return
     end
+    redirect_to contact_path, notice: "There was a problem"
 
-     redirect_to contact_path
   end
 
 
