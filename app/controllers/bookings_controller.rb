@@ -61,11 +61,19 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     driver_check
+    current_homeowner = nil
+    if Homeowner.exists?(user_id: current_user.id)
+      current_homeowner = Homeowner.find_by_user_id(current_user.id)
+    end
 
     if (!params[:dvwid].nil?)
-      @booking = Booking.new
-      session[:current_driveway] = params[:dvwid]
-      @homeowner = Homeowner.find(session[:current_driveway])
+      if (!current_homeowner.nil?) and (current_homeowner.id == params[:dvwid].to_i)
+        redirect_to root_path, alert: "You cannot book at your own driveway!"
+      else
+        @booking = Booking.new
+        session[:current_driveway] = params[:dvwid]
+        @homeowner = Homeowner.find(session[:current_driveway])
+      end
     else
       redirect_to root_path
     end

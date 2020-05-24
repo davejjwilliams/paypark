@@ -15,13 +15,13 @@
   <p id="notice"><%= notice %></p>
 
   <p style="text-align: center" class="subtitle">
-    <strong>Driver:</strong>
-    <%= @booking.driver_id %>
+    <strong>Car Details:</strong>
+    <%= @booking.driver.car_info %>
   </p>
 
   <p style="text-align: center" class="subtitle">
-    <strong>Homeowner:</strong>
-    <%= @booking.homeowner_id %>
+    <strong>Address:</strong>
+    <%= @booking.homeowner.address %>
   </p>
 
   <p style="text-align: center" class="subtitle">
@@ -37,21 +37,6 @@
   <p style="text-align: center" class="subtitle">
     <strong>End time:</strong>
     <%= @booking.end_time %>
-  </p>
-
-  <p style="text-align: center" class="subtitle">
-    <strong>Complete:</strong>
-    <%= @booking.complete %>
-  </p>
-
-  <p style="text-align: center" class="subtitle">
-    <strong>Withdrawn:</strong>
-    <%= @booking.withdrawn %>
-  </p>
-
-  <p style="text-align: center" class="subtitle">
-    <strong>Paid:</strong>
-    <%= @booking.paid %>
   </p>
 
   <% if @booking.complete %>
