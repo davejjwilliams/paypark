@@ -13,23 +13,28 @@ class MapController < ApplicationController
     end
 
     puts "Current User Name is: #{current_user.email}"
-    token = current_user.google_token
-    puts "Current Token Is: #{token.access_token}"
-    # Initialize Google Calendar API
-    service = Google::Apis::CalendarV3::CalendarService.new
-    # Use google keys to authorize
-    service.authorization = token.google_secret.to_authorization
-    # Request for a new access token just incase it expired
-    if token.expired?
-      new_access_token = service.authorization.refresh!
-      token.access_token = new_access_token['access_token']
-      token.expires_at = Time.now.to_i + new_access_token['expires_in'].to_i
-      token.save
-    end
 
-    # Fetch the next 10 events for the user
-    calendar_id = "primary"
-    @response = service.list_events(calendar_id, max_results: 10, single_events: true, order_by: "startTime", time_min: DateTime.now.rfc3339)
+    begin
+      token = current_user.google_token
+      puts "Current Token Is: #{token.access_token}"
+      # Initialize Google Calendar API
+      service = Google::Apis::CalendarV3::CalendarService.new
+      # Use google keys to authorize
+      service.authorization = token.google_secret.to_authorization
+      # Request for a new access token just incase it expired
+      if token.expired?
+        new_access_token = service.authorization.refresh!
+        token.access_token = new_access_token['access_token']
+        token.expires_at = Time.now.to_i + new_access_token['expires_in'].to_i
+        token.save
+      end
+
+      # Fetch the next 10 events for the user
+      calendar_id = "primary"
+      @response = service.list_events(calendar_id, max_results: 10, single_events: true, order_by: "startTime", time_min: DateTime.now.rfc3339)
+    rescue StandardError => e
+      @response = "You have not given the website permissions!"
+    end
   end
 
   def timesearch
