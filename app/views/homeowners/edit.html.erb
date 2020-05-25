@@ -47,13 +47,13 @@
   </div>
 
   <div class="field" style="text-align: center">
-    <%= form.label :driveway_price %>
+    <%= form.label "Driveway Price Per Hour (£/hr)"%>
     <br>
     <%= form.text_field(:driveway_price, :class => 'input', :style => 'width: 35%;') %>
   </div>
 
   <div class="actions" style="text-align: center; margin-top: 2%">
-    <%= form.submit({class: "button is-info"}) %>
+    <%= form.submit "Confirm Availability",({class: "button is-info"}) %>
   </div>
 <% end %>
 <br>

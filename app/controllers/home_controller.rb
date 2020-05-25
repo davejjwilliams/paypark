@@ -5,6 +5,9 @@ class HomeController < ApplicationController
   def booking_error
   end
 
+  def privacy
+  end
+
   def request_contact
     name = params[:name]
     email = params[:email]

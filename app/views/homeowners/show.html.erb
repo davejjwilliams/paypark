@@ -27,7 +27,7 @@
 </p>
 
 <p>
-  <strong>Price:</strong>
+  <strong>Price £:</strong>
   <%= @homeowner.driveway_price %>
 </p>
 
@@ -38,7 +38,11 @@
 
 <p>
   <strong>Verified:</strong>
-  <%= @homeowner.driveway_verified %>
+  <% if @homeowner.driveway_verified == false  %>
+  Not Verified (verification code is sent to your email)
+  <% else %>
+  Verified
+  <% end %>
 </p>
 
 <p>
@@ -53,7 +57,7 @@
 <% unless @homeowner.driveway_verified %>
   <%= link_to 'Verify Driveway', verification_path, :class => 'button is-success' %>
     <% else %>
-    <%= link_to 'Edit', edit_homeowner_path(@homeowner), :class => 'button is-info' %>
+    <%= link_to 'Enter Availability', edit_homeowner_path(@homeowner), :class => 'button is-info' %>
 <% end %>
 
 </div>

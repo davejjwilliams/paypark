@@ -20,37 +20,37 @@
 
       <% if user_signed_in? %>
 
-        <%= link_to "Find Parking", root_path, :class => "navbar-item", :id => "nav-button" %>
+        <%= link_to "Find Parking", root_path, :class => "navbar-item nav-button" %>
 
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" id="nav-button">Bookings</a>
+          <a class="navbar-link nav-button">Bookings</a>
 
           <div class="navbar-dropdown">
             <% if Homeowner.exists?(user_id: current_user.id) %>
               <hr class="navbar-divider">
 
-              <%= link_to "Homeowner Bookings", homeowner_bookings_path, :class => "navbar-item", :id => "nav-button" %>
+              <%= link_to "Homeowner Bookings", homeowner_bookings_path, :class => "navbar-item nav-button" %>
             <% end %>
             <% if Driver.exists?(session[:driver_id]) %>
               <% driver = Driver.find(session[:driver_id]) %>
               <hr class="navbar-divider">
 
-              <%= link_to "Driver Bookings", driver_bookings_path, :class => "navbar-item", :id => "nav-button" %>
+              <%= link_to "Driver Bookings", driver_bookings_path, :class => "navbar-item nav-button" %>
 
             <% end %>
             <hr class="navbar-divider">
-            <%= link_to "Chat", chat_path, :class => "navbar-item", :id => "nav-button" %>
+            <%= link_to "Chat", chat_path, :class => "navbar-item nav-button" %>
 
           </div>
         </div>
         <% if Homeowner.exists?(user_id: current_user.id) %>
           <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
-          <%= link_to "Driveway", current_homeowner, :class => "navbar-item", :id => "homeowner-page-button", :id => "nav-button" %>
+          <%= link_to "Driveway", current_homeowner, :class => "navbar-item nav-button", :id => "homeowner-page-button" %>
         <% end %>
 
         <% if Driver.exists?(user_id: current_user.id) %>
           <% current_driver = Driver.find_by_user_id(current_user.id) %>
-          <%= link_to "Vehicle", current_driver, :class => "navbar-item", :id => "driver-page-button", :id => "nav-button" %>
+          <%= link_to "Vehicle", current_driver, :class => "navbar-item nav-button", :id => "driver-page-button" %>
         <% end %>
       <% end %>
 
@@ -68,7 +68,7 @@
         <div class="buttons">
           <% if user_signed_in? %>
             <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link" id="nav-button">
+              <a class="navbar-link nav-button">
                 &nbsp &nbsp My Account &nbsp
               </a>
 
@@ -78,28 +78,28 @@
                 <hr class="navbar-divider">
                 <span class="subtitle is-6"><%= current_user.email %></span>
                 <hr class="navbar-divider">
-                <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => "navbar-item", :id => "nav-button" %>
+                <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => "navbar-item nav-button"%>
 
                 <% if Homeowner.exists?(user_id: current_user.id) %>
                   <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
-                  <%= link_to "Driveway", current_homeowner, :class => "navbar-item", :id => "nav-button" %>
+                  <%= link_to "Driveway", current_homeowner, :class => "navbar-item nav-button" %>
                 <% else %>
-                  <%= link_to "Become a homeowner", new_homeowner_path, :class => "navbar-item", :id => "nav-button" %>
+                  <%= link_to "Become a homeowner", new_homeowner_path, :class => "navbar-item nav-button" %>
                 <% end %>
 
                 <% if Driver.exists?(user_id: current_user.id) %>
                   <% current_driver = Driver.find_by_user_id(current_user.id) %>
-                  <%= link_to "Vehicle", current_driver, :class => "navbar-item", :id => "nav-button" %>
+                  <%= link_to "Vehicle", current_driver, :class => "navbar-item nav-button"%>
                   <% else %>
-                    <%= link_to "Become a driver", new_driver_path, :class => "navbar-item", :id => "nav-button"  %>
+                    <%= link_to "Become a driver", new_driver_path, :class => "navbar-item nav-button" %>
                   <% end %>
 
                 <% if current_user.admin? %>
                   <hr class="navbar-divider">
-                  <%= link_to "All Homeowners", homeowners_path, :class => "navbar-item", :id => "nav-button" %>
-                  <%= link_to "All Drivers", drivers_path, :class => "navbar-item", :id => "nav-button" %>
-                  <%= link_to "All Bookings", bookings_path, :class => "navbar-item", :id => "nav-button" %>
-                  <%= link_to "Withdrawal Requests", withdrawal_requests_path, :class => "navbar-item", :id => "nav-button" %>
+                  <%= link_to "All Homeowners", homeowners_path, :class => "navbar-item nav-button" %>
+                  <%= link_to "All Drivers", drivers_path, :class => "navbar-item nav-button" %>
+                  <%= link_to "All Bookings", bookings_path, :class => "navbar-item nav-button" %>
+                  <%= link_to "Withdrawal Requests", withdrawal_requests_path, :class => "navbar-item nav-button" %>
                 <% end %>
 
               </div>

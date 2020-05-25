@@ -9,9 +9,6 @@
 <div id="overall-container">
 
 
-
-
-
   <div id="top-div">
     <div class="box1 stack-top" id="search-bar">
 
@@ -19,13 +16,13 @@
         <div class="control has-icons-left">
           <p id="top-div-title"><b>Welcome To PayPark</b></p>
 
-      </span>
+          </span>
         </div>
 
 
       </div>
     </div>
-    <div id="surrey-image-holder" class="box1"><%= image_tag("surrey_background.png", :id => "surrey-background")%></div>
+    <div id="surrey-image-holder" class="box1"><%= image_tag("surrey_background.png", :id => "surrey-background") %></div>
 
 
   </div>
@@ -35,13 +32,18 @@
         <h1 class="title" id="column-one-title">What we do</h1>
       </div>
       <div id="column-one-text-div">
-        <p id="column-one-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.
+        <br>
+        <p id="column-one-text">PayPark is a parking platform for homeowners to rent out their vacant private driveways to
+          drivers.
+          Once a user signs up, they can register as both a homeowner or driver who either rents out their driveway at
+          their own price or searches for parking spaces available at their specified time.
+          We aim to make looking for parking spaces quicker and more efficient to suit the drivers' needs. Using our
+          map, drivers can find available driveways at a suitable price for parking in their desired areas.
+          The "Upcoming Events" feature available on the map, can also be used by the driver to plan their parking
+          spaces ahead of their events, which are taken from their personal Google Calendar.
 
-          Cras efficitur dui laoreet nulla vulputate, vel venenatis diam fermentum. Vestibulum vitae eros scelerisque, finibus risus id, maximus ex. Cras imperdiet orci nulla, quis tristique ante varius sit amet. Donec nec placerat ex. Quisque sollicitudin non metus vitae ornare. Sed malesuada ante ac velit placerat pharetra. Fusce vitae purus a lorem molestie luctus.
 
-          Aliquam erat volutpat. Quisque luctus mollis consectetur. In molestie feugiat turpis, at feugiat lectus congue id. Suspendisse pretium pharetra facilisis. Maecenas at mi feugiat, maximus metus at, efficitur neque. Fusce nec velit aliquet, ultrices quam pulvinar, tempus lacus. Morbi iaculis hendrerit augue, id tincidunt mi aliquet a. Vivamus nec neque sed magna elementum pulvinar eget nec odio. Sed at euismod ipsum.
-
-          Vestibulum porttitor velit ut suscipit tempus. Nunc quis tortor fringilla, hendrerit ipsum venenatis, pharetra felis.</p>
+        </p>
       </div>
     </div>
     <div id="column-two">
@@ -52,14 +54,14 @@
         <h1 class="title" id="column-two-title2">Ask us now!</h1>
       </div>
       <div id="column-two-logo-div">
-        <%= image_tag("logo_paypark.png", :id => "main-logo")%>
+        <%= image_tag("logo_paypark.png", :id => "main-logo") %>
       </div>
       <div id="column-two-button-div">
         <a class="button" href="<%= contact_path %>" id="column-two-button"><span>Talk to us</span></a>
       </div>
     </div>
     <div id="column-three">
-<!--      <div id="column-three-text-div"></div>-->
+      <!--      <div id="column-three-text-div"></div>-->
       <div id="column-three-title-div">
         <h1 class="title" id="column-three-title">Our happy customers:</h1>
       </div>
@@ -69,10 +71,10 @@
           <div id="picture">
             <div class='container1'>
 
-              <%= image_tag("cat.png", :id => "content-1")%>
+              <%= image_tag("student-1.png", :id => "content-1") %>
 
-              <%= image_tag("omaba.png", :id => "content-1")%>
-              <%= image_tag("stock_human.png", :id => "content-1")%>
+              <%= image_tag("person-in-car.png", :id => "content-1") %>
+              <%= image_tag("stock_human.png", :id => "content-1") %>
 
             </div>
           </div>
@@ -93,19 +95,21 @@
           </script>
 
 
-
-
           <div id="text">
-            <p class="quotes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.</p>
-            <p class="quotes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.</p>
-            <p class="quotes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.</p>
+            <p class="quotes">PayPark helped to find a parking space for me when I went to a football game and there was
+              no parking else where. Its so quick and easy to use and it can help you find parking in seconds!</p>
+            <p class="quotes">I have used this website a countless number of times for when parking was really busy
+              during the day. Its nice to navigate through and shows the parking near you quickly. Would recommend. </p>
+            <p class="quotes">PayPark is super useful for finding parking in an emergency. Its really reliable and
+              allows you not to worry about parking while driving. You can navigate through the website really easily
+              and you can even talk to the parking spot owner if you need to sort something out. Great website!</p>
             <br><br><br><br>
           </div>
         </div>
 
 
         <script>
-            (function() {
+            (function () {
 
                 var quotes = $(".quotes");
                 var quoteIndex = -1;
@@ -122,22 +126,6 @@
 
             })();
         </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       </div>

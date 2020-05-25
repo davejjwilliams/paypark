@@ -20,10 +20,10 @@
 
 
     <div id="home-search-bar">
-      <input id="pac-input" class="controls input" type="text" placeholder="Search address and drag to driveway"></div>
-    <div id="home-search-bar-time" style="text-align: center">
+      <input id="pac-input" class="controls input" type="text" placeholder="Search for driveway"></div>
+    <div id="home-search-bar-time" style="text-align: center; margin-left: 20%;">
       <%= form_tag "/timesearch" do %>
-        <%= datetime_field_tag 'start_time', :style => "text-align: center"  %>
+        Searching for driveways between: <%= datetime_field_tag 'start_time', :style => "text-align: center"  %> and
         <%= datetime_field_tag 'end_time', :style => "text-align: center" %>
         <%= submit_tag "Search", :class => "button is-small", :id => "home-top-div-search-button", :style => "text-align: center"  %>
       <% end %>
@@ -72,7 +72,7 @@
   <div id="right-div">
 
     <div id="right-div-title-div">
-      <h1 style="text-align: center" class="title">Available parking spots in this area:</h1>
+      <h1 style="text-align: center" class="title">Available parking spots in this area <i class="fas fa-map-marker-alt" style="color: red"></i></h1>
     </div>
     <div id="right-div-text-div">
       <br><br><br>

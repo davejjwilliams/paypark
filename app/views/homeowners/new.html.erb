@@ -7,7 +7,7 @@
 
 <br><br><br>
 
-<h1 id="homeowners_enter_address">Please enter your address:</h1>
+
 
 <%= form_with(model: @homeowner, local: true) do |form| %>
   <% if @homeowner.errors.any? %>
@@ -22,13 +22,13 @@
     </div>
   <% end %>
 
-  <div class ="field" style="margin-left: 7%;"> <input id="pac-input" class="controls input" type="text" placeholder="Search address and drag to driveway" style="float: left">
-    <div id="homeowner_new_top">New Driveway</div> </div> </div>
+
+  <div id="homeowner_new_top">New Driveway</div> </div>
 
   <div>
-  <div id="map2" style="width: 50%; margin-left: 2%">
+    <div id="map2" style="width: 50%; margin-left: 2%">
+    </div>
   </div>
-</div>
 
   <div class="field" style="text-align: center">
     <%= form.label :paypal_email %>
@@ -36,7 +36,15 @@
     <%= form.text_field(:paypal_email, :class => 'input', :style => 'width: 35%;') %>
   </div>
 
-  <div class="field" style="text-align: center">
+
+  <div class="field" style="text-align: center;">
+    <%= form.label :enter_address %>
+    <br>
+    <input id="pac-input" class="controls input" type="text" placeholder="Search address and drag to driveway" style="width: 35%;">
+  </div>
+
+
+  <div class="field" style="text-align: center; display: none;">
     <%= form.label :address %>
     <br>
     <%= form.text_field(:address, :class => 'input', :style => 'width: 35%;', :readonly => true) %>
@@ -61,19 +69,19 @@
   </div>
 
   <div class="field" style="text-align: center">
-    <%= form.label :driveway_price %>
+    <%= form.label "Driveway Price Per Hour (£/hr)"%>
     <br>
     <%= form.text_field(:driveway_price, :class => 'input', :style => 'width: 35%;') %>
   </div>
 
   <div class="actions" style="text-align: center">
-    <%= form.submit({class: "button is-info"}) %>
+    <%= form.submit ({class: "button is-info"}) %>
   </div>
 
 <% end %>
 </div>
 <br>
 <div style="text-align: center">
-<%= link_to 'Back', signup_path, :class => 'button is-primary' %>
+  <%= link_to 'Back', signup_path, :class => 'button is-primary' %>
 </div>
 <br>
