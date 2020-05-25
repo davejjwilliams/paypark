@@ -1,7 +1,7 @@
 class WithdrawalRequestsController < ApplicationController
   before_action :set_withdrawal_request, only: [:show, :update, :destroy]
   before_action :authenticate_user!
-  before_action :admin_check
+  before_action :admin_check, except: [:withdraw]
 
   # GET /withdrawal_requests
   # GET /withdrawal_requests.json

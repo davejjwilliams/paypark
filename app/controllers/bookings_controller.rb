@@ -16,6 +16,11 @@ class BookingsController < ApplicationController
       @homeowner = Homeowner.find_by_user_id(current_user.id)
       @upcoming_homeowner_bookings = Booking.where(homeowner_id: @homeowner.id, complete: false)
       @complete_homeowner_bookings = Booking.where(homeowner_id: @homeowner.id, complete: true)
+      complete_not_withdrawn = Booking.where(homeowner_id: @homeowner.id, complete: true, withdrawn: false)
+      @pending_sum = 0
+      complete_not_withdrawn.each do |booking|
+        @pending_sum += booking.price
+      end
     else
       redirect_to root_path
     end
