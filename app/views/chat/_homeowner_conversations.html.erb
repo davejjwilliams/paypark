@@ -1,8 +1,0 @@
-
-<h3 class="subtitle" style="text-align: center">Drivers who have booked with you</h3>
-<ul id="conv-users-list">
-  <% @homeowner_conversations_with.each do |user| %>
-    <li style="text-align: center"><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post, :class => "button is-link" %></li>
-    <br>
-  <% end %>
-</ul>

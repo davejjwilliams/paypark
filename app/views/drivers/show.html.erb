@@ -1,9 +1,6 @@
-<p id="notice"><%= notice %></p>
-<br><br>
-<div id="driver_new_top"><strong>Your Car</strong></div>
-
-<div id="circle">
-  <div id="driver_show_mid">
+<div class="has-text-centered">
+  <h1 class="title">Your Car</h1>
+  <div id="square">
     <strong>User</strong>
     <br>
     <%= @driver.user.name %>
@@ -15,11 +12,11 @@
     <strong>Car Info</strong>
     <br>
     <%= @driver.car_info %>
-    <div style="margin-top: 12%">
-    <%= link_to 'Edit', edit_driver_path(@driver), :class => 'button is-info' %>
+    <div>
+      <%= link_to 'Edit', edit_driver_path(@driver), :class => 'button is-info' %>
       <br>
       <br>
       <%= link_to 'Find Parking', root_path, :class => 'button is-primary' %>
     </div>
-</div>
+  </div>
 </div>

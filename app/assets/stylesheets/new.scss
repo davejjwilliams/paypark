@@ -35,15 +35,6 @@
 }
 
 
-#overall-container {
-  position: absolute;
-  width: 100%;
-  top: 3.5em;
-  height: 55.4em;
-  bottom: 3%;
-
-}
-
 #top-div {
   height: 50%;
 }
@@ -186,8 +177,16 @@
 }
 #surrey-image-holder{
 
-  height: 50%;
-  width: 100%;
+  //height: 25%;
+  max-width: 100%;
+}
+
+.imagedave {
+  max-width: 100%
+}
+
+.is-horizontal-center {
+  justify-content: center;
 }
 
 //--------------------HAPPY CUSTOMERS SLIDE CSS---------------------------

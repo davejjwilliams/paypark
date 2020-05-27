@@ -1,66 +1,58 @@
 <p id="notice"><%= notice %></p>
-<div id="overall-container">
+<div class="columns is-gapless is-multiline">
+  <div class="column has-text-centered is-two-thirds">
+    <h1 class="title">Your Driveway</h1>
+    <div id="square">
+      <div id="homeowner_show_mid">
 
-  <h1 class="title" style="text-align: center"><strong>Your Driveway</strong></h1>
-<div style="width: 30%; height: 40%; float: left; margin-top: 5%">
-  <p id="static_map_show">
-    <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=600x600&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %>
-  </p>
-</div>
+        <p>
+          <strong>PayPal Email:</strong>
+          <%= @homeowner.paypal_email %>
+        </p>
 
-<div id="square">
-  <div id="homeowner_show_mid">
+        <p>
+          <strong>Address:</strong>
+          <%= @homeowner.address %>
+        </p>
 
-<p>
-  <strong>PayPal Email:</strong>
-  <%= @homeowner.paypal_email %>
-</p>
+        <p>
+          <strong>Description:</strong>
+          <%= @homeowner.driveway_description %>
+        </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @homeowner.address %>
-</p>
+        <p>
+          <strong>Price Per Hour:</strong>
+          <%= number_to_currency(@homeowner.driveway_price, unit: "£") %>
+        </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @homeowner.driveway_description %>
-</p>
+        <p>
+          <% if @homeowner.driveway_verified == false %>
+            Not Verified (verification code is sent to your email)
+          <% else %>
+            Driveway is Verified
+          <% end %>
+        </p>
 
-<p>
-  <strong>Price £:</strong>
-  <%= @homeowner.driveway_price %>
-</p>
+        <p>
+          <strong>Average Rating:</strong>
+          <% if @homeowner.number_ratings == 0 %>
+            No Ratings Yet
+          <% else %>
+            <%= (@homeowner.total_ratings.to_f / @homeowner.number_ratings) %>
+          <% end %>
+        </p>
+        <div>
+          <% unless @homeowner.driveway_verified %>
+            <%= link_to 'Verify Driveway', verification_path, :class => 'button is-success' %>
+          <% else %>
+            <%= link_to 'Enter Availability / Edit Details', edit_homeowner_path(@homeowner), :class => 'button is-info' %>
+          <% end %>
 
-<p>
-  <strong>Last modified:</strong>
-  <%= @homeowner.last_modified %>
-</p>
-
-<p>
-  <strong>Verified:</strong>
-  <% if @homeowner.driveway_verified == false  %>
-  Not Verified (verification code is sent to your email)
-  <% else %>
-  Verified
-  <% end %>
-</p>
-
-<p>
-  <strong>Average Rating:</strong>
-  <% if @homeowner.number_ratings == 0 %>
-    No Ratings Yet
-  <% else %>
-    <%= (@homeowner.total_ratings.to_f / @homeowner.number_ratings) %>
-  <% end %>
-</p>
-<div style="margin-top: 3%">
-<% unless @homeowner.driveway_verified %>
-  <%= link_to 'Verify Driveway', verification_path, :class => 'button is-success' %>
-    <% else %>
-    <%= link_to 'Enter Availability', edit_homeowner_path(@homeowner), :class => 'button is-info' %>
-<% end %>
-
-</div>
-</div>
-</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <figure class="image"><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=600x600&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %></figure>
+  </div>
 </div>

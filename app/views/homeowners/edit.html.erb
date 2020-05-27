@@ -1,63 +1,60 @@
-<br><br>
-<div id="homeowner_edit_top"><strong>Edit Driveway</strong></div>
-<%= form_with(model: @homeowner, local: true) do |form| %>
-  <% if @homeowner.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>
+<div class="columns has-text-centered is-gapless is-multiline">
+  <div class="column">
+    <%= form_with(model: @homeowner, local: true) do |form| %>
+      <% if @homeowner.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>
 
-      <ul>
-        <% @homeowner.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+          <ul>
+            <% @homeowner.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div>
+        <h1 class="title">Edit Driveway Details</h1>
+        <div class="field">
+          <%= form.label :paypal_email %>
+          <br>
+          <%= form.text_field(:paypal_email, :class => 'input') %>
+        </div>
+
+        <div class="field">
+          <%= form.label :address %>
+          <br>
+          <%= form.text_field(:address, :class => 'input', :readonly => true) %>
+        </div>
+
+        <div class="field">
+          <%= form.label :driveway_description %>
+          <br>
+          <%= form.text_field(:driveway_description, :class => 'input') %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Driveway Price Per Hour (£/hr)" %>
+          <br>
+          <%= form.text_field(:driveway_price, :class => 'input') %>
+        </div>
+
+        <div class="field">
+          <%= form.label :active_start %>
+          <%= form.datetime_select :active_start, :discard_minute => true %>
+        </div>
+
+        <div class="field">
+          <%= form.label :active_end %>
+          <%= form.datetime_select :active_end, :discard_minute => true %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Confirm Availability", ({class: "button is-info"}) %>
+        </div>
+    <% end %>
     </div>
-  <% end %>
-
-  <div id="static_map_edit">
-    <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=400x300&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %>
-
-  <div class="field" style="text-align: center; margin-top: 5%">
-    <%= form.label :active_start %>
-    <%= form.datetime_select :active_start %>
   </div>
-
-  <div class="field" style="text-align: center">
-    <%= form.label :active_end %>
-    <%= form.datetime_select :active_end %>
+  <div class="column">
+    <figure class="image"><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=400x300&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %></figure>
   </div>
-  </div>
-
-  <div>
-  <div class="field" style="text-align: center">
-    <%= form.label :paypal_email %>
-    <br>
-    <%= form.text_field(:paypal_email, :class => 'input', :style => 'width: 35%;') %>
-  </div>
-
-  <div class="field" style="text-align: center">
-    <%= form.label :address %>
-    <br>
-    <%= form.text_field(:address, :class => 'input', :readonly => true, :style => 'width: 35%;') %>
-  </div>
-
-  <div class="field" style="text-align: center">
-    <%= form.label :driveway_description %>
-    <br>
-    <%= form.text_field(:driveway_description, :class => 'input', :style => 'width: 35%;') %>
-  </div>
-
-  <div class="field" style="text-align: center">
-    <%= form.label "Driveway Price Per Hour (£/hr)"%>
-    <br>
-    <%= form.text_field(:driveway_price, :class => 'input', :style => 'width: 35%;') %>
-  </div>
-
-  <div class="actions" style="text-align: center; margin-top: 2%">
-    <%= form.submit "Confirm Availability",({class: "button is-info"}) %>
-  </div>
-<% end %>
-<br>
-<div style="text-align: center;">
-  <%= link_to 'Back', @homeowner, :class => 'button is-primary' %>
-</div>
 </div>

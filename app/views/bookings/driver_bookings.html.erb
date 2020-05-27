@@ -1,72 +1,77 @@
-<div id="overall-container">
 <p id="notice"><%= notice %></p>
 
+<div class="has-text-centered">
+  <h1 class="title">Bookings</h1>
 
-<h1 style="text-align: center" class="title">Bookings</h1>
+  <% if @upcoming_driver_bookings.length == 0 %>
+    <h2 class="subtitle is-6">You don't have any bookings yet</h2>
+  <% else %>
+    <div style="overflow-x: auto;">
+      <table class="table is-hoverable is-fullwidth is-bordered">
+        <thead>
+        <tr>
+          <th>Address</th>
+          <th>Homeowner</th>
+          <th>Price £/hr</th>
+          <th>Start time</th>
+          <th>End time</th>
+          <th colspan="1"></th>
+        </tr>
+        </thead>
 
-<% if @upcoming_driver_bookings.length == 0 %>
-  <h2 style="text-align: center" class="subtitle is-6">You don't have any bookings yet</h2>
-<% else %>
-  <table class="table is-hoverable is-fullwidth is-bordered">
-    <thead>
-    <tr>
-      <th>Address</th>
-      <th>Price £/hr</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th colspan="1"></th>
-    </tr>
-    </thead>
+        <tbody>
+        <% @upcoming_driver_bookings.each do |booking| %>
+          <tr>
+            <td><%= booking.homeowner.address %></td>
+            <td><%= booking.homeowner.user.name %></td>
+            <td><%= number_to_currency(booking.price, unit: "£") %></td>
+            <td><%= booking.start_time %></td>
+            <td><%= booking.end_time %></td>
+            <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 
-    <tbody>
-    <% @upcoming_driver_bookings.each do |booking| %>
+  <h1 class="title">Completed Bookings</h1>
+
+  <% if @complete_driver_bookings.length == 0 %>
+    <h2 class="subtitle is-6">You do not have any completed bookings</h2>
+  <% else %>
+    <div style="overflow-x: auto;">
+    <table class="table is-hoverable is-fullwidth is-bordered">
+      <thead>
       <tr>
-        <td><%= booking.homeowner.address %></td>
-        <td><%= booking.price %></td>
-        <td><%= booking.start_time %></td>
-        <td><%= booking.end_time %></td>
-        <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
+        <th>Address</th>
+        <th>Homeowner</th>
+        <th>Price £/hr</th>
+        <th>Start time</th>
+        <th>End time</th>
+        <th>Rating</th>
+        <th colspan="1"></th>
       </tr>
-    <% end %>
-    </tbody>
-  </table>
-<% end %>
+      </thead>
 
-  <h1 style="text-align: center" class="subtitle">Completed Bookings</h1>
-
-<% if @complete_driver_bookings.length == 0 %>
-  <h2 style="text-align: center" class="subtitle is-6">You do not have any completed bookings</h2>
-<% else %>
-  <table class="table is-hoverable is-fullwidth is-bordered">
-    <thead>
-    <tr>
-      <th>Address</th>
-      <th>Homeowner</th>
-      <th>Price £/hr</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>Rating</th>
-      <th colspan="1"></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @complete_driver_bookings.each do |booking| %>
-      <tr>
-        <td><%= booking.homeowner.address %></td>
-        <td><%= booking.homeowner.user.name %></td>
-        <td><%= booking.price %></td>
-        <td><%= booking.start_time %></td>
-        <td><%= booking.end_time %></td>
-        <% if booking.rating == 0 %>
-          <td>Not Rated Yet</td>
-        <% else %>
-          <td><%= booking.rating %></td>
-         <% end %>
-        <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-<% end %>
+      <tbody>
+      <% @complete_driver_bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.homeowner.address %></td>
+          <td><%= booking.homeowner.user.name %></td>
+          <td><%= number_to_currency(booking.price, unit: "£") %></td>
+          <td><%= booking.start_time %></td>
+          <td><%= booking.end_time %></td>
+          <% if booking.rating == 0 %>
+            <td>Not Rated Yet</td>
+          <% else %>
+            <td><%= booking.rating %></td>
+          <% end %>
+          <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    </div>
+  <% end %>
 </div>

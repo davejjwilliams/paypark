@@ -6,26 +6,15 @@
   bottom: 0;
   background-color: $navbar-colour;
   width: 100%;
-  display: table;
-  text-align: center;
 }
+
+
 
 
 #footer-button1 {
-  margin-right: 3%;
-  color: $link-colour;
-  color: white;
-  display: table-cell; vertical-align: bottom;
-}
-
-#footer-button2 {
   color: $link-colour;
   font-family: Roboto;
   color: white;
-  display: table-cell; vertical-align: bottom;
-}
-
-#copyright {
-  display: table-cell; vertical-align: bottom;
+  vertical-align: bottom;
 }
 

@@ -11,6 +11,9 @@ gem 'devise'
 # Bulma front-end styling
 gem 'bulma-rails'
 
+# toastr
+gem 'toastr-rails'
+
 # gem for icons
 gem 'font-awesome-sass'
 

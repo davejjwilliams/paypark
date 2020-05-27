@@ -6,79 +6,53 @@
       });
   </script>
 <% end %>
-
-<% flash.each do |key, value| %>
-  <%= content_tag :div, content_tag(:p, value), :class => "subtitle is-info", :style => "text-align: center;", id: "#{key}" unless value.blank? %>
-<% end %>
-
-<div id="overall-container">
-  <div id="home-top-div">
-
-
-    <h2 class="title is-marginless" id="home-title">Find Parking</h2>
-
-
-
-    <div id="home-search-bar">
-      <input id="pac-input" class="controls input" type="text" placeholder="Search for driveway"></div>
-    <div id="home-search-bar-time" style="text-align: center; margin-left: 20%;">
-      <%= form_tag "/timesearch" do %>
-        Searching for driveways between: <%= datetime_field_tag 'start_time', :style => "text-align: center"  %> and
-        <%= datetime_field_tag 'end_time', :style => "text-align: center" %>
-        <%= submit_tag "Search", :class => "button is-small", :id => "home-top-div-search-button", :style => "text-align: center"  %>
-      <% end %>
-
-    </div>
-
+<div class="columns is-gapless">
+  <div class="column is-four-fifths">
+    <input id="pac-input" class="input has-text-centered is-info" type="text" placeholder="Search address">
+    <div id="map"></div>
   </div>
+  <div class="column has-text-centered">
+    <div class="has-text-centered">
+      <h2 class="title is-marginless has-text-centered">Find Parking</h2>
 
-
-
-  <div id="center-div">
-    <div id="home-dropdown" class="box1 stack-top">
-    <div class="dropdown is-hoverable">
-      <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-          <span>Upcoming Events</span>
-          <span class="icon is-small">
+      <div class="dropdown is-hoverable">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+            <span>Upcoming Events</span>
+            <span class="icon is-small">
         <i class="fas fa-angle-down" aria-hidden="true"></i>
       </span>
-        </button>
-      </div>
-      <div class="dropdown-menu" id="dropdown-menu" role="menu">
-        <div class="dropdown-content">
-          <% if @response == "You have not given the website permissions!" %>
-            <div class="dropdown-item">
-              <ul><%= @response %></ul>
-            </div>
-          <% else %>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
             <% @response.items.each do |event| %>
               <% start = event.start.date || event.start.date_time %>
               <div class="dropdown-item">
                 <ul><%= "#{event.summary} (#{start})" %></ul>
               </div>
             <% end %>
-          <% end %>
-
+          </div>
         </div>
       </div>
+      <%= form_tag "/timesearch" do %>
+        <%= datetime_field_tag 'start_time', class: "input" %>
+        <%= datetime_field_tag 'end_time', class: "input" %>
+        <%= submit_tag "Search", :class => "button is-small" %>
+
+      <% end %>
+      <% unless session[:booking_start_time].nil? and session[:booking_end_time].nil? %>
+        <h2 class="has-text-danger">Searching For Driveways Between <%= session[:booking_start_time] %>
+          until <%= session[:booking_end_time] %></h2>
+        <%= button_to 'Clear Times', clearsearch_path, method: :post, :class => "button is-small" %>
+      <% end %>
+
     </div>
+    <h2 class="title">Available parking spots in this area <i class="fas fa-map-marker-alt" style="color: red;"></i>
+    </h2>
+    <div id="localsList">
+      <ul></ul>
     </div>
-    <div id="map" class="box1"></div>
   </div>
-
-
-
-  <div id="right-div">
-
-    <div id="right-div-title-div">
-      <h1 style="text-align: center" class="title">Available parking spots in this area <i class="fas fa-map-marker-alt" style="color: red"></i></h1>
-    </div>
-    <div id="right-div-text-div">
-      <br><br><br>
-      <div id="localsList"><ul></ul></div>
-
-
-    </div>
-  </div>
+</div>
 </div>

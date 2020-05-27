@@ -11,16 +11,13 @@
 }
 
 #center-div {
-  height: 85%;
+  height: 80%;
   width: 80%;
-  float: left;
-  position: relative;
 }
 
 #right-div {
   height: 85%;
-  width: 20%;
-  float: left;
+
 }
 #home-title{
   text-align: center;
@@ -31,9 +28,9 @@
   padding: 0;
   margin-bottom: 0;
   background-color: transparent;
-  flex-grow: 1;
   width: 20vw;
   margin-left: 39%;
+
 }
 
 #home-top-div-search-end{
@@ -66,10 +63,7 @@
 .stack-top-box{
   z-index: 9;
 }
-#home-dropdown{
-  margin-top: 7%;
-  margin-left: 0.4%;
-}
+
 
 #sign_up_top{
   color: #47525E;

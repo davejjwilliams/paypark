@@ -5,83 +5,69 @@
   </script>
 <% end %>
 
-<br><br><br>
-
-
-
-<%= form_with(model: @homeowner, local: true) do |form| %>
-  <% if @homeowner.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>
-
-      <ul>
-        <% @homeowner.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="columns has-text-centered is-gapless">
+  <div class="column">
+    <%= form_with(model: @homeowner, local: true) do |form| %>
+      <% if @homeowner.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>
+          <ul>
+            <% @homeowner.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="title">New Driveway</div>
+      <div class="field">
+        <%= form.label :paypal_email %>
+        <br>
+        <%= form.text_field(:paypal_email, :class => 'input') %>
+      </div>
+      <div class="field" style="text-align: center;">
+        <%= form.label :enter_address %>
+        <br>
+        <input id="pac-input" class=" input" type="text" placeholder="Search address and drag to driveway">
+      </div>
+      <div class="field" style="text-align: center; display: none;">
+        <%= form.label :address %>
+        <br>
+        <%= form.text_field(:address, :class => 'input', :readonly => true) %>
+      </div>
+      <div class="field" style="display: none">
+        <%= form.label :latitude %>
+        <br>
+        <%= form.text_field :latitude, :readonly => true %>
+      </div>
+      <div class="field" style="display: none">
+        <%= form.label :longitude %>
+        <br>
+        <%= form.text_field :longitude, :readonly => true %>
+      </div>
+      <div class="field" style="text-align: center">
+        <%= form.label :driveway_description %>
+        <br>
+        <%= form.text_field(:driveway_description, :class => 'input') %>
+      </div>
+      <div class="field" style="text-align: center">
+        <%= form.label "Driveway Price Per Hour (£/hr)" %>
+        <br>
+        <%= form.text_field(:driveway_price, :class => 'input') %>
+      </div>
+      <div class="actions" style="text-align: center">
+        <%= form.submit({class: "button is-info"}) %>
+      </div>
+    <% end %>
+    <br>
+    <div style="text-align: center">
+      <%= link_to 'Back', signup_path, :class => 'button is-primary' %>
     </div>
-  <% end %>
-
-
-  <div id="homeowner_new_top">New Driveway</div> </div>
-
-  <div>
-    <div id="map2" style="width: 50%; margin-left: 2%">
-    </div>
-  </div>
-
-  <div class="field" style="text-align: center">
-    <%= form.label :paypal_email %>
     <br>
-    <%= form.text_field(:paypal_email, :class => 'input', :style => 'width: 35%;') %>
   </div>
-
-
-  <div class="field" style="text-align: center;">
-    <%= form.label :enter_address %>
+  <div class="column">
+    <div id="map2"></div>
     <br>
-    <input id="pac-input" class="controls input" type="text" placeholder="Search address and drag to driveway" style="width: 35%;">
   </div>
-
-
-  <div class="field" style="text-align: center; display: none;">
-    <%= form.label :address %>
-    <br>
-    <%= form.text_field(:address, :class => 'input', :style => 'width: 35%;', :readonly => true) %>
-  </div>
-
-  <div class="field" style="display: none">
-    <%= form.label :latitude %>
-    <br>
-    <%= form.text_field :latitude, :readonly => true %>
-  </div>
-
-  <div class="field" style="display: none">
-    <%= form.label :longitude %>
-    <br>
-    <%= form.text_field :longitude, :readonly => true %>
-  </div>
-
-  <div class="field" style="text-align: center">
-    <%= form.label :driveway_description %>
-    <br>
-    <%= form.text_field(:driveway_description, :class => 'input', :style => 'width: 35%;') %>
-  </div>
-
-  <div class="field" style="text-align: center">
-    <%= form.label "Driveway Price Per Hour (£/hr)"%>
-    <br>
-    <%= form.text_field(:driveway_price, :class => 'input', :style => 'width: 35%;') %>
-  </div>
-
-  <div class="actions" style="text-align: center">
-    <%= form.submit ({class: "button is-info"}) %>
-  </div>
-
-<% end %>
 </div>
-<br>
-<div style="text-align: center">
-  <%= link_to 'Back', signup_path, :class => 'button is-primary' %>
-</div>
-<br>
+
+
