@@ -1,201 +1,84 @@
-<% provide :head_tags do %>
-  <meta name='turbolinks-visit-control' content='reload'>
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          initMap()
-      });
-  </script>
-<% end %>
-<div id="overall-container">
+<div class="imagedave"><%= image_tag("surrey_background.png", :id => "surrey-background") %></div>
 
 
 
-
-
-  <div id="top-div">
-    <div class="box1 stack-top" id="search-bar">
-
-      <div class="field">
-        <div class="control has-icons-left">
-          <p id="top-div-title"><b>Welcome To PayPark</b></p>
-
-      </span>
-        </div>
-
-
-      </div>
-    </div>
-    <div id="surrey-image-holder" class="box1"><%= image_tag("surrey_background.png", :id => "surrey-background")%></div>
-
-
+<div class="columns is-gapless is-multiline">
+  <div class="column">
+    <h1 class="title" style="text-align: center">What we do</h1>
+    <p id="column-one-text">PayPark is a parking platform for homeowners to rent out their vacant private driveways to
+      drivers.
+      Once a user signs up, they can register as both a homeowner or driver who either rents out their driveway at
+      their own price or searches for parking spaces available at their specified time.
+      We aim to make looking for parking spaces quicker and more efficient to suit the drivers' needs. Using our
+      map, drivers can find available driveways at a suitable price for parking in their desired areas.
+      The "Upcoming Events" feature available on the map, can also be used by the driver to plan their parking
+      spaces ahead of their events, which are taken from their personal Google Calendar.
+    </p>
   </div>
-  <div id="bottom-div">
-    <div id="column-one">
-      <div id="column-one-title-div">
-        <h1 class="title" id="column-one-title">What we do</h1>
-      </div>
-      <div id="column-one-text-div">
-        <p id="column-one-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.
+  <div class="column">
+    <h1 class="title" style="text-align: center">Join Us Today!</h1>
+    <figure class="image"><%= image_tag("logo_paypark.png") %></figure>
 
-          Cras efficitur dui laoreet nulla vulputate, vel venenatis diam fermentum. Vestibulum vitae eros scelerisque, finibus risus id, maximus ex. Cras imperdiet orci nulla, quis tristique ante varius sit amet. Donec nec placerat ex. Quisque sollicitudin non metus vitae ornare. Sed malesuada ante ac velit placerat pharetra. Fusce vitae purus a lorem molestie luctus.
+    <%= link_to "Click Here To Sign Up",'/auth/google_oauth2', class: "button is-fullwidth is-info" %>
+  </div>
+  <div class="column">
+    <h1 class="title" style="text-align: center">Our Happy Customers: </h1>
+    <div id="parent">
+      <div id="picture">
+        <div class='container1'>
 
-          Aliquam erat volutpat. Quisque luctus mollis consectetur. In molestie feugiat turpis, at feugiat lectus congue id. Suspendisse pretium pharetra facilisis. Maecenas at mi feugiat, maximus metus at, efficitur neque. Fusce nec velit aliquet, ultrices quam pulvinar, tempus lacus. Morbi iaculis hendrerit augue, id tincidunt mi aliquet a. Vivamus nec neque sed magna elementum pulvinar eget nec odio. Sed at euismod ipsum.
+          <%= image_tag("student-1.png", :id => "content-1") %>
 
-          Vestibulum porttitor velit ut suscipit tempus. Nunc quis tortor fringilla, hendrerit ipsum venenatis, pharetra felis.</p>
-      </div>
-    </div>
-    <div id="column-two">
-      <div id="column-two-title1-div">
-        <h1 class="title" id="column-two-title1">Got a question?</h1>
-      </div>
-      <div id="column-two-title2-div">
-        <h1 class="title" id="column-two-title2">Ask us now!</h1>
-      </div>
-      <div id="column-two-logo-div">
-        <%= image_tag("logo_paypark.png", :id => "main-logo")%>
-      </div>
-      <div id="column-two-button-div">
-        <a class="button" href="<%= contact_path %>" id="column-two-button"><span>Talk to us</span></a>
-      </div>
-    </div>
-    <div id="column-three">
-<!--      <div id="column-three-text-div"></div>-->
-      <div id="column-three-title-div">
-        <h1 class="title" id="column-three-title">Our happy customers:</h1>
-      </div>
-      <div id="column-three-message-div">
+          <%= image_tag("person-in-car.png", :id => "content-1") %>
+          <%= image_tag("stock_human.png", :id => "content-1") %>
 
-        <div id="parent">
-          <div id="picture">
-            <div class='container1'>
-
-              <%= image_tag("cat.png", :id => "content-1")%>
-
-              <%= image_tag("omaba.png", :id => "content-1")%>
-              <%= image_tag("stock_human.png", :id => "content-1")%>
-
-            </div>
-          </div>
-
-          <script>
-              var divs = $('img[id^="content-"]').hide(),
-                  i = 0;
-
-              (function cycle() {
-
-                  divs.eq(i).fadeIn(2000)
-                      .delay(8000)
-                      .fadeOut(2000, cycle);
-
-                  i = ++i % divs.length;
-
-              })();
-          </script>
-
-
-
-
-          <div id="text">
-            <p class="quotes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.</p>
-            <p class="quotes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.</p>
-            <p class="quotes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec erat at nibh finibus finibus. Morbi dapibus neque vel eros porta fringilla. Quisque tempor et nunc quis cursus. Phasellus finibus egestas scelerisque. Fusce pellentesque tincidunt odio sit amet luctus. Quisque pulvinar elit sed diam convallis dapibus. Aenean dictum volutpat velit, et porttitor enim cursus ac.</p>
-            <br><br><br><br>
-          </div>
         </div>
-
-
-        <script>
-            (function() {
-
-                var quotes = $(".quotes");
-                var quoteIndex = -1;
-
-                function showNextQuote() {
-                    ++quoteIndex;
-                    quotes.eq(quoteIndex % quotes.length)
-                        .fadeIn(2000)
-                        .delay(8000)
-                        .fadeOut(2000, showNextQuote);
-                }
-
-                showNextQuote();
-
-            })();
-        </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </div>
 
+      <script>
+          var divs = $('img[id^="content-"]').hide(),
+              i = 0;
+
+          (function cycle() {
+
+              divs.eq(i).fadeIn(2000)
+                  .delay(8000)
+                  .fadeOut(2000, cycle);
+
+              i = ++i % divs.length;
+
+          })();
+      </script>
+
+
+      <div id="text">
+        <p class="quotes">PayPark helped to find a parking space for me when I went to a football game and there was
+          no parking else where. Its so quick and easy to use and it can help you find parking in seconds!</p>
+        <p class="quotes">I have used this website a countless number of times for when parking was really busy
+          during the day. Its nice to navigate through and shows the parking near you quickly. Would recommend. </p>
+        <p class="quotes">PayPark is super useful for finding parking in an emergency. Its really reliable and
+          allows you not to worry about parking while driving. You can navigate through the website really easily
+          and you can even talk to the parking spot owner if you need to sort something out. Great website!</p>
+        <br><br><br><br>
+      </div>
     </div>
+    <script>
+        (function () {
+
+            var quotes = $(".quotes");
+            var quoteIndex = -1;
+
+            function showNextQuote() {
+                ++quoteIndex;
+                quotes.eq(quoteIndex % quotes.length)
+                    .fadeIn(2000)
+                    .delay(8000)
+                    .fadeOut(2000, showNextQuote);
+            }
+
+            showNextQuote();
+
+        })();
+    </script>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-<!--  <div class="field">-->
-<!--    <%#= f.label :email %><br />-->
-<%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
-<!--  </div>-->
-
-<!--  <div class="field">-->
-<!--    <%#= f.label :password %><br />-->
-<%#= f.password_field :password, autocomplete: "current-password" %>
-<!--  </div>-->
-
-<%# if devise_mapping.rememberable? %>
-<!--    <div class="field">-->
-<%#= f.check_box :remember_me %>
-<%#= f.label :remember_me %>
-<!--    </div>-->
-<%# end %>
-
-<!--  <div class="actions">-->
-<%#= f.submit "Log in" %>
-<!--  </div>-->
-<%# end %>
-
-<%#= render "devise/shared/links" %>

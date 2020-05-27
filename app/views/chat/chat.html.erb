@@ -1,24 +1,42 @@
-<div id="overall-container">
-<h3 class="subtitle" style="text-align: center">Homeowners you have booked with</h3>
+<div class="has-text-centered">
 
-<ul id="conv-users-list">
-  <% if !Driver.find_by_user_id(current_user.id).nil? %>
-    <% @driver_conversations_with.each do |user| %>
-      <li style="text-align: center"><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post, :class => "button is-link" %></li>
-      <br>
+  <div class="columns is-gapless">
+    <% if !Driver.find_by_user_id(current_user.id).nil? %>
+      <div class="column">
+        <h1 class="title">Homeowners you have booked with</h1>
+        <ul id="conv-users-list">
+          <% if @driver_conversations_with.size == 0 %>
+            <li>You have not booked at any driveways.</li>
+          <% else %>
+            <% @driver_conversations_with.each do |user| %>
+
+              <li><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post, :class => "button is-link" %></li>
+              <br>
+            <% end %>
+          <% end %>
+        </ul>
     <% end %>
-  <% end %>
-</ul>
-  <br>
-<% if !Homeowner.find_by_user_id(current_user.id).nil? %>
+    </div>
 
-  <%= render 'homeowner_conversations' %>
-<% end %>
-
-<ul id="conversations-list">
-  <% @conversations.each do |conversation| %>
-    <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
-  <% end %>
-</ul>
-
+    <% if !Homeowner.find_by_user_id(current_user.id).nil? %>
+      <div class="column">
+        <h1 class="title">Drivers who have booked with you</h1>
+        <ul id="conv-users-list">
+          <% if @homeowner_conversations_with.size == 0 %>
+            <li>You do not have any drivers scheduled to park at your driveway!</li>
+          <% else %>
+            <% @homeowner_conversations_with.each do |user| %>
+              <li><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post, :class => "button is-link" %></li>
+            <% end %>
+          <% end %>
+        </ul>
+    <% end %>
+    </div>
+  </div>
 </div>
+
+  <ul id="conversations-list">
+    <% @conversations.each do |conversation| %>
+      <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
+    <% end %>
+  </ul>

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :homeowners
   devise_for :users
   get 'contact', to:'home#contact'
+  get 'privacy', to: 'home#privacy'
   post 'request_contact', to: 'home#request_contact'
 
   # Sign Up View
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
 
   # App Root
   root 'map#map'
+
 
   # Verification Form
   get 'verification', to:'verification#new'

@@ -4,9 +4,9 @@
       <h2><%= pluralize(driver.errors.count, "error") %> prohibited this driver from being saved:</h2>
 
       <ul>
-      <% driver.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% driver.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -14,10 +14,10 @@
   <div class="field" id="driver_new_mid">
     <%= form.label :please_enter_your_registration_number %>
     <br>
-    <%= form.text_field(:registration_number, :class => 'input', :id => "driver_field") %>
+    <%= form.text_field(:registration_number, :class => 'input has-text-centered') %>
   </div>
 
   <div class="actions" id="driver_new_bot">
-    <%= form.submit({class: "button is-info"}) %>
+    <%= form.submit "Confirm",({class: "button is-info"}) %>
   </div>
 <% end %>

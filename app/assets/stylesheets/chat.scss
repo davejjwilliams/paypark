@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .panel {
-  width: 60%;
   float: none;
 }
 
@@ -29,13 +28,8 @@
   font-size: 15px;
 }
 
-#conversations-list {
-  list-style: none;
-  padding-top: 2%;
-  padding-left: 2%;
-}
-
 #messages-list {
   list-style: none;
   padding-left: 2%;
 }
+

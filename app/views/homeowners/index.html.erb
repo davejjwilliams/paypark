@@ -1,16 +1,16 @@
 <div id="overall-container">
-<p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
   <h1 class="title" style="text-align: center"><strong>Homeowners</strong></h1>
-<br>
-
+  <br>
+  <div style="overflow-x: auto;">
     <table class="table is-striped is-hoverable is-fullwidth is-bordered" border="1" width="100%">
       <thead>
       <tr>
         <th>User</th>
         <th>Address</th>
         <th>Description</th>
-        <th>Price</th>
+        <th>Price £/hr</th>
         <th>Last modified</th>
         <th>Code</th>
         <th>Verified</th>
@@ -35,18 +35,19 @@
             <% if homeowner.total_ratings == 0 %>
               No Ratings Yet
             <% else %>
-              <%= (homeowner.total_ratings.to_f/homeowner.number_ratings) %>
+              <%= (homeowner.total_ratings.to_f / homeowner.number_ratings) %>
             <% end %>
           <td><%= homeowner.active_start %></td>
           <td><%= homeowner.active_end %></td>
           </td>
-          <td><%= link_to 'Show', homeowner, :class => 'button'%></td>
+          <td><%= link_to 'Show', homeowner, :class => 'button' %></td>
           <td><%= link_to 'Edit', edit_homeowner_path(homeowner), :class => 'button is-info' %></td>
-          <td><%= link_to 'Destroy', homeowner, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button is-danger'%></td>
+          <td><%= link_to 'Destroy', homeowner, method: :delete, data: {confirm: 'Are you sure?'}, :class => 'button is-danger' %></td>
         </tr>
       <% end %>
       </tbody>
     </table>
+  </div>
 
 
 </div>
