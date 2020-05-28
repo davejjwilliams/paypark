@@ -5,8 +5,6 @@ ruby '2.6.5'
 
 gem 'redis'
 
-gem 'jquery-rails'
-
 # User Models
 gem 'devise'
 

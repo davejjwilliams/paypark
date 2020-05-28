@@ -1,6 +1,7 @@
 class DriversController < ApplicationController
   before_action :set_driver, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :correct_driver_check, only: [:show, :edit, :update]
 
   # GET /drivers
   # GET /drivers.json
@@ -103,6 +104,15 @@ class DriversController < ApplicationController
     def admin_check
       unless current_user.admin?
         redirect_to root_path, alert: "You do not have admin privileges!"
+      end
+    end
+
+    def correct_driver_check
+      unless current_user.admin?
+        if params[:id].to_i != Driver.find_by_user_id(current_user.id).id
+          flash[:alert] = "You cannot access another driver's Information!"
+          redirect_to root_path
+        end
       end
     end
 

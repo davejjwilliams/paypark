@@ -1,6 +1,7 @@
 class HomeownersController < ApplicationController
   before_action :set_homeowner, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :correct_homeowner_check, only: [:show, :edit, :update, :destroy]
 
   # GET /homeowners
   # GET /homeowners.json
@@ -82,6 +83,16 @@ class HomeownersController < ApplicationController
         redirect_to root_path, alert: "You do not have admin privileges!"
       end
     end
+
+    def correct_homeowner_check
+      unless current_user.admin?
+        if params[:id].to_i != Homeowner.find_by_user_id(current_user.id).id
+          flash[:alert] = "You cannot access another homeowner's Information!"
+          redirect_to root_path
+        end
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_homeowner
       @homeowner = Homeowner.find(params[:id])
