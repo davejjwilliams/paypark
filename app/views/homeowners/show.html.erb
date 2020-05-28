@@ -4,9 +4,12 @@
     <div id="square">
       <div id="homeowner_show_mid">
 
-        <p>
-          <strong>PayPal Email:</strong>
-          <%= @homeowner.paypal_email %>
+        <p><strong>
+          <% if @homeowner.driveway_verified == false %>
+            Not Verified (verification code is sent to your email)
+          <% else %>
+            Driveway is Verified
+          <% end %></strong>
         </p>
 
         <p>
@@ -25,14 +28,6 @@
         </p>
 
         <p>
-          <% if @homeowner.driveway_verified == false %>
-            Not Verified (verification code is sent to your email)
-          <% else %>
-            Driveway is Verified
-          <% end %>
-        </p>
-
-        <p>
           <strong>Average Rating:</strong>
           <% if @homeowner.number_ratings == 0 %>
             No Ratings Yet
@@ -40,6 +35,12 @@
             <%= (@homeowner.total_ratings.to_f / @homeowner.number_ratings) %>
           <% end %>
         </p>
+
+        <p>
+          <strong>PayPal Email:</strong>
+          <%= @homeowner.paypal_email %>
+        </p>
+
         <div>
           <% unless @homeowner.driveway_verified %>
             <%= link_to 'Verify Driveway', verification_path, :class => 'button is-success' %>

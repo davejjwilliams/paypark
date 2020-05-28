@@ -9,6 +9,6 @@ class HomeownerMailer < ApplicationMailer
 
     @homeowner = homeowner
 
-    mail to: homeowner.user.email, subject: "Verfication code"
+    mail to: homeowner.user.email, subject: "Verification code"
   end
 end

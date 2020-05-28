@@ -73,14 +73,14 @@ class DriversController < ApplicationController
         if @hash.key?("make")
           @driver.car_info = @hash["colour"] + " " + @hash["make"] + " " + @hash["model"]
         else
-          @driver.car_info = "Registration number not linked to vehicle!!!"
+          @driver.car_info = "Registration number not linked to vehicle."
         end
 
         @driver.registration_number.upcase!
 
         @driver.save!
 
-        format.html { redirect_to @driver, notice: 'Driver was successfully updated.' }
+        format.html { redirect_to @driver, notice: 'Details updated successfully.' }
         format.json { render :show, status: :ok, location: @driver }
       else
         format.html { render :edit }

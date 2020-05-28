@@ -1,3 +1,17 @@
+<%
+  current_homeowner = nil
+  current_driver = nil
+
+  if user_signed_in?
+    if Homeowner.exists?(user_id: current_user.id)
+      current_homeowner = Homeowner.find_by_user_id(current_user.id)
+    end
+    if Driver.exists?(user_id: current_user.id)
+      current_driver = Driver.find_by_user_id(current_user.id)
+    end
+  end
+%>
+
 <nav class="navbar" role="navigation" aria-label="main navigation" id="nb">
   <div class="navbar-brand">
     <a href="/">
@@ -27,37 +41,37 @@
       <% if user_signed_in? %>
 
         <%= link_to " <i class='fas fa-search-location fa-lg'></i> &nbsp Find Parking".html_safe, root_path, :class => "navbar-item" %>
+        <% unless current_homeowner.nil? and current_driver.nil? %>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"><i class="fas fa-calendar-check fa-lg"></i>&nbspAll Bookings</a>
 
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link"><i class="fas fa-calendar-check fa-lg"></i>&nbspAll Bookings</a>
+            <div class="navbar-dropdown">
+              <% unless current_homeowner.nil? %>
+                <%= link_to " <i class='fas fa-clipboard-list'></i> &nbsp On My Driveway".html_safe, homeowner_bookings_path, :class => "navbar-item" %>
+              <% end %>
 
-          <div class="navbar-dropdown">
-            <% if Homeowner.exists?(user_id: current_user.id) %>
+              <% unless current_driver.nil? %>
+                <%= link_to " <i class='fas fa-book'></i> &nbspMy Bookings".html_safe, driver_bookings_path, :class => "navbar-item" %>
+              <% end %>
 
-              <%= link_to " <i class='fas fa-clipboard-list'></i> &nbsp On My Driveway".html_safe, homeowner_bookings_path, :class => "navbar-item" %>
-            <% end %>
-            <% if Driver.exists?(session[:driver_id]) %>
-
-              <%= link_to " <i class='fas fa-book'></i> &nbspMy Bookings".html_safe, driver_bookings_path, :class => "navbar-item" %>
-
-            <% end %>
-            <%= link_to " <i class='fas fa-comments'></i> &nbspChat".html_safe, chat_path, :class => "navbar-item" %>
-
+              <% unless current_driver.nil? and current_homeowner.nil? %>
+                <%= link_to " <i class='fas fa-comments'></i> &nbspChat".html_safe, chat_path, :class => "navbar-item" %>
+              <% end %>
+            </div>
           </div>
-        </div>
-        <% if Homeowner.exists?(user_id: current_user.id) %>
-          <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
+        <% end %>
+
+        <% unless current_homeowner.nil? %>
           <%= link_to " <i class='fas fa-home fa-lg'></i> &nbspMy Driveway".html_safe, current_homeowner, :class => "navbar-item" %>
         <% end %>
 
-        <% if Driver.exists?(user_id: current_user.id) %>
-          <% current_driver = Driver.find_by_user_id(current_user.id) %>
+        <% unless current_driver.nil? %>
           <%= link_to " <i class='fas fa-car fa-lg'></i> &nbspMy Vehicle".html_safe, current_driver, :class => "navbar-item" %>
         <% end %>
       <% end %>
-
-
     </div>
+
+
     <div class="navbar-end">
       <% if user_signed_in? %>
 
@@ -65,17 +79,11 @@
           <a class="navbar-link"><%= current_user.admin ? "Admin | " + current_user.name : current_user.name %></a>
           <div class="navbar-dropdown is-right">
 
-            <% if Homeowner.exists?(user_id: current_user.id) %>
-              <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
-              <%= link_to " <i class='fas fa-home'></i> &nbsp Driveway".html_safe, current_homeowner, :class => "navbar-item" %>
-            <% else %>
+            <% if current_homeowner.nil? %>
               <%= link_to " <i class='fas fa-home '></i> &nbsp Become a Homeowner".html_safe, new_homeowner_path, :class => "navbar-item" %>
             <% end %>
 
-            <% if Driver.exists?(user_id: current_user.id) %>
-              <% current_driver = Driver.find_by_user_id(current_user.id) %>
-              <%= link_to " <i class='fas fa-car'></i> &nbsp Vehicle".html_safe, current_driver, :class => "navbar-item" %>
-            <% else %>
+            <% if current_driver.nil? %>
               <%= link_to " <i class='fas fa-car'></i> &nbsp Become a Driver".html_safe, new_driver_path, :class => "navbar-item" %>
             <% end %>
 
