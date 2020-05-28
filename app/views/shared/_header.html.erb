@@ -26,33 +26,33 @@
 
       <% if user_signed_in? %>
 
-        <%= link_to "Find Parking", root_path, :class => "navbar-item" %>
+        <%= link_to " <i class='fas fa-search-location fa-lg'></i> &nbsp Find Parking".html_safe, root_path, :class => "navbar-item" %>
 
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">All Bookings</a>
+          <a class="navbar-link"><i class="fas fa-calendar-check fa-lg"></i>&nbspAll Bookings</a>
 
           <div class="navbar-dropdown">
             <% if Homeowner.exists?(user_id: current_user.id) %>
 
-              <%= link_to "On My Driveway", homeowner_bookings_path, :class => "navbar-item" %>
+              <%= link_to " <i class='fas fa-clipboard-list'></i> &nbsp On My Driveway".html_safe, homeowner_bookings_path, :class => "navbar-item" %>
             <% end %>
             <% if Driver.exists?(session[:driver_id]) %>
 
-              <%= link_to "My Bookings", driver_bookings_path, :class => "navbar-item" %>
+              <%= link_to " <i class='fas fa-book'></i> &nbspMy Bookings".html_safe, driver_bookings_path, :class => "navbar-item" %>
 
             <% end %>
-            <%= link_to "Chat", chat_path, :class => "navbar-item" %>
+            <%= link_to " <i class='fas fa-comments'></i> &nbspChat".html_safe, chat_path, :class => "navbar-item" %>
 
           </div>
         </div>
         <% if Homeowner.exists?(user_id: current_user.id) %>
           <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
-          <%= link_to "My Driveway", current_homeowner, :class => "navbar-item" %>
+          <%= link_to " <i class='fas fa-home fa-lg'></i> &nbspMy Driveway".html_safe, current_homeowner, :class => "navbar-item" %>
         <% end %>
 
         <% if Driver.exists?(user_id: current_user.id) %>
           <% current_driver = Driver.find_by_user_id(current_user.id) %>
-          <%= link_to "My Vehicle", current_driver, :class => "navbar-item" %>
+          <%= link_to " <i class='fas fa-car fa-lg'></i> &nbspMy Vehicle".html_safe, current_driver, :class => "navbar-item" %>
         <% end %>
       <% end %>
 
@@ -67,19 +67,19 @@
 
             <% if Homeowner.exists?(user_id: current_user.id) %>
               <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
-              <%= link_to "Driveway", current_homeowner, :class => "navbar-item" %>
+              <%= link_to " <i class='fas fa-home'></i> &nbsp Driveway".html_safe, current_homeowner, :class => "navbar-item" %>
             <% else %>
-              <%= link_to "Become a homeowner", new_homeowner_path, :class => "navbar-item" %>
+              <%= link_to " <i class='fas fa-home '></i> &nbsp Become a Homeowner".html_safe, new_homeowner_path, :class => "navbar-item" %>
             <% end %>
 
             <% if Driver.exists?(user_id: current_user.id) %>
               <% current_driver = Driver.find_by_user_id(current_user.id) %>
-              <%= link_to "Vehicle", current_driver, :class => "navbar-item" %>
+              <%= link_to " <i class='fas fa-car'></i> &nbsp Vehicle".html_safe, current_driver, :class => "navbar-item" %>
             <% else %>
-              <%= link_to "Become a driver", new_driver_path, :class => "navbar-item" %>
+              <%= link_to " <i class='fas fa-car'></i> &nbsp Become a Driver".html_safe, new_driver_path, :class => "navbar-item" %>
             <% end %>
 
-            <%= link_to "Cancel Account", edit_user_registration_path, :class => "navbar-item" %>
+            <%= link_to " <i class='fas fa-ban'></i> &nbsp Cancel Account".html_safe, edit_user_registration_path, :class => "navbar-item" %>
 
             <% if current_user.admin? %>
               <hr class="navbar-divider">
@@ -89,13 +89,13 @@
               <%= link_to "Withdrawal Requests", withdrawal_requests_path, :class => "navbar-item" %>
             <% end %>
 
-            <%= link_to "Logout", destroy_user_session_path, method: 'delete', :class => "navbar-item" %>
+            <%= link_to " <i class='fas fa-sign-out-alt'></i> &nbsp Logout".html_safe, destroy_user_session_path, method: 'delete', :class => "navbar-item" %>
           </div>
         </div>
 
       <% else %>
         <div class="buttons">
-          <%= link_to "Login/Signup", '/auth/google_oauth2', :class => "button active", :id => "login-button" %>
+          <%= link_to " <i class='fas fa-sign-in-alt'></i> &nbsp Login/Signup".html_safe, '/auth/google_oauth2', :class => "button is-primary", :id => "login-button" %>
         </div>
       <% end %>
     </div>
