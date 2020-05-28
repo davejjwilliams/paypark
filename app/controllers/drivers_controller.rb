@@ -50,7 +50,7 @@ class DriversController < ApplicationController
     respond_to do |format|
       if @driver.save
         session[:driver_id] = @driver.id
-        format.html { redirect_to @driver, notice: 'Driver was successfully created.' }
+        format.html { redirect_to @driver, notice: 'Car information registered successfully!' }
         format.json { render :show, status: :created, location: @driver }
       else
         format.html { render :new }

@@ -80,24 +80,27 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
-    driver_check
-    current_homeowner = nil
+    # Redirect home if one of these 3 conditions are met.
+    if params[:dvwid].nil?
+      redirect_to root_path, alert: "Driveway not chosen correctly."
+      return
+    end
+
+    unless Driver.exists?(user_id: current_user.id)
+      redirect_to new_driver_path, alert: "Please register as a driver before booking."
+      return
+    end
+
     if Homeowner.exists?(user_id: current_user.id)
-      current_homeowner = Homeowner.find_by_user_id(current_user.id)
-    end
-
-    if (!params[:dvwid].nil?)
-      if (!current_homeowner.nil?) and (current_homeowner.id == params[:dvwid].to_i)
+      if Homeowner.find_by_user_id(current_user.id).id == params[:dvwid].to_i
         redirect_to root_path, alert: "You cannot book at your own driveway!"
-      else
-        @booking = Booking.new
-        session[:current_driveway] = params[:dvwid]
-        @homeowner = Homeowner.find(session[:current_driveway])
+        return
       end
-    else
-      redirect_to root_path
     end
 
+    @booking = Booking.new
+    session[:current_driveway] = params[:dvwid]
+    @homeowner = Homeowner.find(session[:current_driveway])
   end
 
   # POST /bookings
@@ -190,14 +193,6 @@ class BookingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])
-    end
-
-    # Helper method to redirect non-registered driver to the driver registration page when they try to book.
-    def driver_check
-      if (!Driver.exists?(user_id: current_user.id))
-        flash[:alert] = "You are not registered as a driver!"
-        redirect_to new_driver_path
-      end
     end
 
     # Only allow a list of trusted parameters through.
