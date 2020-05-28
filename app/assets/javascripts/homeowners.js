@@ -73,7 +73,7 @@ function initMapHO() {
                 return;
             }
 
-            // Clear last marker
+            // Clear last marker and rectangle area
             marker.setMap(null);
             rectangle.setMap(null);
 
@@ -119,7 +119,7 @@ function initMapHO() {
                 }
             });
 
-            //git stauszoom level fitting to the bounds
+            //zoom level fitting to the bounds
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
                 bounds.union(place.geometry.viewport);
