@@ -8,9 +8,9 @@ class VerificationController < ApplicationController
     if code_from_form == @homeowner.activation_code
       @homeowner.driveway_verified = true
       @homeowner.save
-      redirect_to "/homeowners/#{@homeowner.id}"
+      redirect_to "/homeowners/#{@homeowner.id}", notice: "Driveway verified successfully!"
     else
-      redirect_to root_path
+      redirect_to verification_path, alert: "Wrong verification code. Please try again."
     end
   end
 

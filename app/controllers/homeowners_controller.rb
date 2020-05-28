@@ -27,7 +27,7 @@ class HomeownersController < ApplicationController
   # GET /homeowners/1/edit
   def edit
     unless @homeowner.driveway_verified
-      redirect_to @homeowner, notice: "Your driveway isn't verified yet!"
+      redirect_to @homeowner, alert: "Your driveway isn't verified yet!"
     end
   end
 
@@ -43,7 +43,7 @@ class HomeownersController < ApplicationController
       if @homeowner.save
         HomeownerMailer.homeowner_confirmation(@homeowner).deliver_now
         session[:homeowner_id] = @homeowner.id
-        format.html { redirect_to @homeowner, notice: 'Homeowner was successfully created.' }
+        format.html { redirect_to @homeowner, notice: 'Driveway registered successfully.' }
         format.json { render :show, status: :created, location: @homeowner }
       else
         format.html { render :new }
