@@ -43,7 +43,7 @@ class HomeownersController < ApplicationController
       if @homeowner.save
         HomeownerMailer.homeowner_confirmation(@homeowner).deliver_now
         session[:homeowner_id] = @homeowner.id
-        format.html { redirect_to @homeowner, notice: 'Driveway registered successfully.' }
+        format.html { redirect_to @homeowner, notice: 'Driveway registered successfully. Please check your email for the verification code!' }
         format.json { render :show, status: :created, location: @homeowner }
       else
         format.html { render :new }

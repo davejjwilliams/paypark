@@ -55,9 +55,14 @@ function initMap() {
             return function () {
                 var str = "Book";
                 var result = str.link(link);
+                var rating = 0;
+                if (parseInt(gon.driveways[index].number_ratings) > 0) {
+                    rating = parseFloat(gon.driveways[index].total_ratings) / parseInt(gon.driveways[index].number_ratings);
+                }
                 infowindowDriver.setContent(
                     gon.driveways[index].address + '<br>' + '<br>' +
-                    '£' + parseFloat(gon.driveways[index].driveway_price) + ' per hour' + '<br><br>' +
+                    '£' + parseFloat(gon.driveways[index].driveway_price) + ' per hour' + '<br>' +
+                    'Rating: ' + rating.toFixed(2) + '<br>' +
                     gon.driveways[index].driveway_description + '<br>' + result);
                 infowindowDriver.open(map, marker);
             }

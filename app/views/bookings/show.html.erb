@@ -47,24 +47,29 @@
     </p>
   <% end %>
 
-  <% if @booking.complete and @booking.rating == 0 %>
-    <%= form_tag "/rate" do %>
-      <%#= hidden_field :form_booking_id, :value => @booking.id %>
-      <%= hidden_field_tag 'form_booking_id', @booking.id %>
+  <% if Driver.exists?(user_id: current_user.id) %>
+    <% if Driver.find_by_user_id(current_user.id) == @booking.driver  %>
+      <% if @booking.complete and @booking.rating == 0 %>
+        <%= form_tag "/rate" do %>
+          <%#= hidden_field :form_booking_id, :value => @booking.id %>
+          <%= hidden_field_tag 'form_booking_id', @booking.id %>
 
-      <div class="select">
-        <%= select_tag :rating, raw("<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>"), class: "select" %>
-      </div>
-      <%= submit_tag "Rate", :class => "button is-info" %>
+          <div class="select">
+            <%= select_tag :rating, raw("<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>"), class: "select" %>
+          </div>
+          <%= submit_tag "Rate", :class => "button is-info" %>
 
+        <% end %>
+      <% end %>
+
+      <% if @booking.paid %>
+        <% if ((@booking.start_time - Time.now) / 3600) > 24 %>
+
+          <%= button_to 'Refund', charges_refund_path, class: "button is-primary", method: :post, params: {booking_id: @booking.id}, remote: true %>
+
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 
-  <% if @booking.paid %>
-    <% if ((@booking.start_time - Time.now) / 3600) > 24 %>
-
-      <%= button_to 'Refund', charges_refund_path, class: "button is-primary", method: :post, params: {booking_id: @booking.id}, remote: true %>
-
-    <% end %>
-  <% end %>
 </div>

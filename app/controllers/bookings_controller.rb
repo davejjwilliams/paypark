@@ -41,6 +41,21 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   # GET /bookings/1.json
   def show
+    current_homeowner = nil
+    current_driver = nil
+
+    if Homeowner.exists?(user_id: current_user.id)
+      current_homeowner = Homeowner.find_by_user_id(current_user.id)
+    end
+
+    if Driver.exists?(user_id: current_user.id)
+      current_driver = Driver.find_by_user_id(current_user.id)
+    end
+
+    unless current_homeowner == @booking.homeowner or current_driver == @booking.driver
+      redirect_to root_path, alert: "You cannot view another user's booking!"
+    end
+
     session[:booking_id] = @booking.id
 
     @session = Stripe::Checkout::Session.create(
