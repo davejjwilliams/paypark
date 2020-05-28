@@ -79,6 +79,8 @@
               <%= link_to "Become a driver", new_driver_path, :class => "navbar-item" %>
             <% end %>
 
+            <%= link_to "Cancel Account", edit_user_registration_path, :class => "navbar-item" %>
+
             <% if current_user.admin? %>
               <hr class="navbar-divider">
               <%= link_to "All Homeowners", homeowners_path, :class => "navbar-item" %>

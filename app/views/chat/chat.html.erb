@@ -1,5 +1,8 @@
 <div class="has-text-centered">
 
+  <% unless Homeowner.exists?(user_id: current_user.id) and Driver.exists?(user_id: current_user.id) %>
+    <h1 class="title">You are not signed up as a homeowner or a driver!</h1>
+  <% end %>
   <div class="columns is-gapless">
     <% if !Driver.find_by_user_id(current_user.id).nil? %>
       <div class="column">

@@ -1,4 +1,6 @@
 class ChatController < ApplicationController
+  before_action :authenticate_user!
+
   def chat
 
     session[:conversations] ||= []
