@@ -86,9 +86,16 @@ class HomeownersController < ApplicationController
 
     def correct_homeowner_check
       unless current_user.admin?
-        if params[:id].to_i != Homeowner.find_by_user_id(current_user.id).id
-          flash[:alert] = "You cannot access another homeowner's Information!"
+        if Homeowner.exists?(user_id: current_user.id)
+          if params[:id].to_i != Homeowner.find_by_user_id(current_user.id).id
+            flash[:alert] = "You cannot access another homeowner's Information!"
+            redirect_to root_path
+            return
+          end
+        else
+          flash[:alert] = "You are not signed up as a homeowner!"
           redirect_to root_path
+          return
         end
       end
     end

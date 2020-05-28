@@ -109,9 +109,16 @@ class DriversController < ApplicationController
 
     def correct_driver_check
       unless current_user.admin?
-        if params[:id].to_i != Driver.find_by_user_id(current_user.id).id
-          flash[:alert] = "You cannot access another driver's Information!"
+        if Driver.exists?(user_id: current_user.id)
+          if params[:id].to_i != Driver.find_by_user_id(current_user.id).id
+            flash[:alert] = "You cannot access another driver's Information!"
+            redirect_to root_path
+            return
+          end
+        else
+          flash[:alert] = "You are not signed up as a driver!"
           redirect_to root_path
+          return
         end
       end
     end
