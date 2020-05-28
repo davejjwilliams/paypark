@@ -3,6 +3,12 @@
     <a href="/">
       <%= image_tag("logo_paypark.png", size: "55x450", :class => "nav-image") %>
     </a>
+    <% unless user_signed_in? %>
+      <div class="navbar-item is-size-4">
+        PayPark
+      </div>
+    <% end %>
+
 
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
       <span aria-hidden="true" style="color: white"></span>
@@ -20,94 +26,78 @@
 
       <% if user_signed_in? %>
 
-        <%= link_to "Find Parking", root_path, :class => "navbar-item nav-button" %>
+        <%= link_to "Find Parking", root_path, :class => "navbar-item" %>
 
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link nav-button">Bookings</a>
+          <a class="navbar-link">All Bookings</a>
 
           <div class="navbar-dropdown">
             <% if Homeowner.exists?(user_id: current_user.id) %>
-              <hr class="navbar-divider">
 
-              <%= link_to "Homeowner Bookings", homeowner_bookings_path, :class => "navbar-item nav-button" %>
+              <%= link_to "On My Driveway", homeowner_bookings_path, :class => "navbar-item" %>
             <% end %>
             <% if Driver.exists?(session[:driver_id]) %>
-              <% driver = Driver.find(session[:driver_id]) %>
-              <hr class="navbar-divider">
 
-              <%= link_to "Driver Bookings", driver_bookings_path, :class => "navbar-item nav-button" %>
+              <%= link_to "My Bookings", driver_bookings_path, :class => "navbar-item" %>
 
             <% end %>
-            <hr class="navbar-divider">
-            <%= link_to "Chat", chat_path, :class => "navbar-item nav-button" %>
+            <%= link_to "Chat", chat_path, :class => "navbar-item" %>
 
           </div>
         </div>
         <% if Homeowner.exists?(user_id: current_user.id) %>
           <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
-          <%= link_to "Driveway", current_homeowner, :class => "navbar-item nav-button", :id => "homeowner-page-button" %>
+          <%= link_to "My Driveway", current_homeowner, :class => "navbar-item" %>
         <% end %>
 
         <% if Driver.exists?(user_id: current_user.id) %>
           <% current_driver = Driver.find_by_user_id(current_user.id) %>
-          <%= link_to "Vehicle", current_driver, :class => "navbar-item nav-button", :id => "driver-page-button" %>
+          <%= link_to "My Vehicle", current_driver, :class => "navbar-item" %>
         <% end %>
       <% end %>
 
 
-
     </div>
-    <div class="navbar-item" >
-
-    </div>
-
     <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <% if user_signed_in? %>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link nav-button">
-                &nbsp &nbsp My Account &nbsp
-              </a>
+      <% if user_signed_in? %>
 
-              <div class="navbar-dropdown">
-                <hr class="navbar-divider" >
-                <span class="subtitle is-6"><%= current_user.name  %></span>
-                <hr class="navbar-divider">
-                <span class="subtitle is-6"><%= current_user.email %></span>
-                <hr class="navbar-divider">
-                <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => "navbar-item nav-button"%>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link"><%= current_user.admin ? "Admin | " + current_user.name : current_user.name %></a>
+          <div class="navbar-dropdown is-right">
 
-                <% if Homeowner.exists?(user_id: current_user.id) %>
-                  <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
-                  <%= link_to "Driveway", current_homeowner, :class => "navbar-item nav-button" %>
-                <% else %>
-                  <%= link_to "Become a homeowner", new_homeowner_path, :class => "navbar-item nav-button" %>
-                <% end %>
+            <% if Homeowner.exists?(user_id: current_user.id) %>
+              <% current_homeowner = Homeowner.find_by_user_id(current_user.id) %>
+              <%= link_to "Driveway", current_homeowner, :class => "navbar-item" %>
+            <% else %>
+              <%= link_to "Become a homeowner", new_homeowner_path, :class => "navbar-item" %>
+            <% end %>
 
-                <% if Driver.exists?(user_id: current_user.id) %>
-                  <% current_driver = Driver.find_by_user_id(current_user.id) %>
-                  <%= link_to "Vehicle", current_driver, :class => "navbar-item nav-button"%>
-                  <% else %>
-                    <%= link_to "Become a driver", new_driver_path, :class => "navbar-item nav-button" %>
-                  <% end %>
+            <% if Driver.exists?(user_id: current_user.id) %>
+              <% current_driver = Driver.find_by_user_id(current_user.id) %>
+              <%= link_to "Vehicle", current_driver, :class => "navbar-item" %>
+            <% else %>
+              <%= link_to "Become a driver", new_driver_path, :class => "navbar-item" %>
+            <% end %>
 
-                <% if current_user.admin? %>
-                  <hr class="navbar-divider">
-                  <%= link_to "All Homeowners", homeowners_path, :class => "navbar-item nav-button" %>
-                  <%= link_to "All Drivers", drivers_path, :class => "navbar-item nav-button" %>
-                  <%= link_to "All Bookings", bookings_path, :class => "navbar-item nav-button" %>
-                  <%= link_to "Withdrawal Requests", withdrawal_requests_path, :class => "navbar-item nav-button" %>
-                <% end %>
+            <% if current_user.admin? %>
+              <hr class="navbar-divider">
+              <%= link_to "All Homeowners", homeowners_path, :class => "navbar-item" %>
+              <%= link_to "All Drivers", drivers_path, :class => "navbar-item" %>
+              <%= link_to "All Bookings", bookings_path, :class => "navbar-item" %>
+              <%= link_to "Withdrawal Requests", withdrawal_requests_path, :class => "navbar-item" %>
+            <% end %>
 
-              </div>
-          <% else %>
-            <%= link_to "Login/Signup", '/auth/google_oauth2', :class => "button active", :id => "login-button" %>
-          <% end %>
+            <%= link_to t('logout'), destroy_user_session_path, method: 'delete', :class => "navbar-item" %>
           </div>
         </div>
-      </div>
+
+      <% else %>
+        <div class="buttons">
+          <%= link_to "Login/Signup", '/auth/google_oauth2', :class => "button active", :id => "login-button" %>
+        </div>
+      <% end %>
     </div>
+  </div>
   </div>
 </nav>
 <script>

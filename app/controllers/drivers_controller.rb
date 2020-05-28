@@ -44,6 +44,8 @@ class DriversController < ApplicationController
       @driver.car_info = "Registration number not linked to vehicle!!!"
     end
 
+    @driver.registration_number.upcase!
+
     respond_to do |format|
       if @driver.save
         session[:driver_id] = @driver.id
@@ -72,6 +74,8 @@ class DriversController < ApplicationController
         else
           @driver.car_info = "Registration number not linked to vehicle!!!"
         end
+
+        @driver.registration_number.upcase!
 
         @driver.save!
 

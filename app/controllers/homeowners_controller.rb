@@ -56,7 +56,7 @@ class HomeownersController < ApplicationController
   def update
     respond_to do |format|
       if @homeowner.update(homeowner_params)
-        format.html { redirect_to @homeowner, notice: 'Homeowner was successfully updated.' }
+        format.html { redirect_to @homeowner, notice: 'Details updated successfully.' }
         format.json { render :show, status: :ok, location: @homeowner }
       else
         format.html { render :edit }

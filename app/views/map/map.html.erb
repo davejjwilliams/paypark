@@ -8,7 +8,12 @@
 <% end %>
 <div class="columns is-gapless">
   <div class="column is-four-fifths">
-    <input id="pac-input" class="input has-text-centered is-info" type="text" placeholder="Search address">
+    <% unless session[:booking_start_time].nil? or session[:booking_end_time].nil? %>
+      <div class="subtitle is-marginless has-text-centered"><div>
+        Showing driveways available between <%= session[:booking_start_time].to_datetime.strftime("%F at %T") %>
+        until <%= session[:booking_end_time].to_datetime.strftime("%F at %T") %> <%= link_to 'Clear Times', clearsearch_path, method: :post, :class => "button is-small" %></div></div>
+    <% end %>
+    <input id="pac-input" class="input has-text-centered" type="text" placeholder="Search address">
     <div id="map"></div>
   </div>
   <div class="column has-text-centered">
@@ -18,7 +23,7 @@
       <div class="dropdown is-hoverable">
         <div class="dropdown-trigger">
           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-            <span>Upcoming Events</span>
+            <span>My Upcoming Events</span>
             <span class="icon is-small">
         <i class="fas fa-angle-down" aria-hidden="true"></i>
       </span>
@@ -36,19 +41,15 @@
         </div>
       </div>
       <%= form_tag "/timesearch" do %>
-        <%= datetime_field_tag 'start_time', class: "input" %>
-        <%= datetime_field_tag 'end_time', class: "input" %>
+        <p>Start:</p>
+        <%= datetime_field_tag 'start_time', class: "input", value: Time.now %>
+        <p>End:</p>
+        <%= datetime_field_tag 'end_time', class: "input", value: Time.now %>
         <%= submit_tag "Search", :class => "button is-small" %>
 
       <% end %>
-      <% unless session[:booking_start_time].nil? and session[:booking_end_time].nil? %>
-        <h2 class="has-text-danger">Searching For Driveways Between <%= session[:booking_start_time] %>
-          until <%= session[:booking_end_time] %></h2>
-        <%= button_to 'Clear Times', clearsearch_path, method: :post, :class => "button is-small" %>
-      <% end %>
-
     </div>
-    <h2 class="title">Available parking spots in this area <i class="fas fa-map-marker-alt" style="color: red;"></i>
+    <h2 class="title">Available parking spots in this area <%= image_tag "google-pin.png", size: "18" %>
     </h2>
     <div id="localsList">
       <ul></ul>

@@ -22,6 +22,20 @@ $link: #5B2A9D;
 $footer-padding: 0.1rem 0.1rem 0.1rem !important;;
 $footer-background-color: #5B2A9D;
 
+
+$dropdown-content-arrow: white;
+$navbar-background-color: #5b2a9d;
+$navbar-item-color: white;
+$navbar-item-hover-color: white;
+$navbar-item-hover-background-color: #3f1a70;
+
+$navbar-dropdown-border-top: 0px;
+$navbar-dropdown-arrow: white;
+$navbar-dropdown-background-color: #3f1a70;
+$navbar-dropdown-item-hover-background-color: #8449bf;
+$navbar-dropdown-item-hover-color: white;
+
+
 @import "bulma";
 @import "font-awesome-sprockets";
 @import "font-awesome";

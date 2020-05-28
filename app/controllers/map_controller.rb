@@ -38,6 +38,11 @@ class MapController < ApplicationController
   end
 
   def timesearch
+    if params[:start_time].blank? or params[:end_time].blank?
+      flash[:alert] = "Please fill in a start and end time."
+      redirect_to root_path
+      return
+    end
     session[:booking_start_time] = params[:start_time]
     session[:booking_end_time] = params[:end_time]
     redirect_to root_path
