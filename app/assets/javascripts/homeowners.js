@@ -13,7 +13,6 @@ function initMapHO() {
     var map = new google.maps.Map(document.getElementById('map2'), {
         center: {lat: 51.241920, lng: -0.585900},
         zoom: 14,
-        mapTypeId: 'roadmap'
     });
 
     infoWindow = new google.maps.InfoWindow;
@@ -44,6 +43,7 @@ function initMapHO() {
             'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
     }
+    setTimeout(function(){infoWindow.close(map);}, '4000');
 
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
@@ -73,7 +73,7 @@ function initMapHO() {
                 return;
             }
 
-            // Clear last marker
+            // Clear last marker and rectangle area
             marker.setMap(null);
             rectangle.setMap(null);
 
@@ -119,7 +119,7 @@ function initMapHO() {
                 }
             });
 
-            // Not too sure, something to do with the zoom level fitting to the bounds
+            //zoom level fitting to the bounds
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
                 bounds.union(place.geometry.viewport);

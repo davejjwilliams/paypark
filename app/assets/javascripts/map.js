@@ -1,11 +1,11 @@
 var markers = []; //used to store markers found to be in bounds
 
 function initMap() {
+
     //SPAWN MAP
-    var cen = {lat: 51.5, lng: -0.13};
     var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 51.241920, lng: -0.585900},
         zoom: 14,
-        center: cen
     });
 
     //GEOLOCATION
@@ -28,7 +28,6 @@ function initMap() {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
     }
-
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
@@ -36,10 +35,11 @@ function initMap() {
             'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
     }
+    setTimeout(function(){infoWindow.close(map);}, '4000');
 
     //PLACE MARKERS
     var marker, contentString;
-    var infowindow = new google.maps.InfoWindow({
+    var infowindowDriver = new google.maps.InfoWindow({
         //content: contentString
     });
     gon.driveways.forEach(myFunction);
@@ -55,11 +55,11 @@ function initMap() {
             return function () {
                 var str = "Book";
                 var result = str.link(link);
-                infowindow.setContent(
+                infowindowDriver.setContent(
                     gon.driveways[index].address + '<br>' + '<br>' +
                     '£' + parseFloat(gon.driveways[index].driveway_price) + ' per hour' + '<br><br>' +
                     gon.driveways[index].driveway_description + '<br>' + result);
-                infowindow.open(map, marker);
+                infowindowDriver.open(map, marker);
             }
                 ;
         })(marker));
@@ -83,7 +83,7 @@ function initMap() {
     });
 
     // Everytime there is a new search
-    var marker = new google.maps.Marker({});
+    var markerSearch = new google.maps.Marker({});
     searchBox.addListener('places_changed', function() {
         var places = searchBox.getPlaces();
 
@@ -100,17 +100,17 @@ function initMap() {
             }
 
             // Clear last marker
-            marker.setMap(null);
+            markerSearch.setMap(null);
 
             // Drop marker
-            marker = new google.maps.Marker({
+            markerSearch = new google.maps.Marker({
                 position: place.geometry.location,
                 animation: google.maps.Animation.DROP,
                 map: map,
                 icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png'
             });
 
-            // Not too sure, something to do with the zoom level fitting to the bounds
+            // zoom level fitting to the bounds
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
                 bounds.union(place.geometry.viewport);
