@@ -40,15 +40,19 @@
           </div>
         </div>
       </div>
-      <%= form_tag "/timesearch" do %>
-        <p>Start:</p>
-        <%= datetime_field_tag 'start_time', class: "input", value: Time.now %>
-        <p>End:</p>
-        <%= datetime_field_tag 'end_time', class: "input", value: Time.now %>
-        <%= submit_tag "Search", :class => "button is-small" %>
+      <div>
+        <br>
+        <%= form_tag "/timesearch" do %>
+          <p>Start:</p>
+          <%= datetime_field_tag 'start_time', class: "input", value: Time.now %>
+          <p>End:</p>
+          <%= datetime_field_tag 'end_time', class: "input", value: Time.now %> <br><br>
+          <%= submit_tag "Search", :class => "button is-small is-info" %>
 
-      <% end %>
+        <% end %>
+      </div>
     </div>
+    <br>
     <h2 class="title">Available parking spots in this area <%= image_tag "google-pin.png", size: "18" %>
     </h2>
     <div id="localsList">
