@@ -13,10 +13,10 @@
     <br>
     <%= @driver.car_info %>
     <div>
-      <%= link_to 'Edit', edit_driver_path(@driver), :class => 'button is-info' %>
+      <%= link_to 'Change Car', edit_driver_path(@driver), :class => 'button is-info' %>
       <br>
       <br>
-      <%= link_to " <i class='fas fa-search-location fa-lg'></i> &nbsp Find Parking".html_safe, root_path, :class => 'button is-primary' %>
+      <%= link_to " <i class='fas fa-search-location fa-lg'></i> &nbsp Find Parking".html_safe, root_path, :class => 'button is-primary is-large' %>
     </div>
   </div>
 </div>

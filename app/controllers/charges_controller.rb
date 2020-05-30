@@ -18,6 +18,7 @@ class ChargesController < ApplicationController
       # booking is paid for
 
       begin
+        Google::Apis.logger = Logger.new(nil)
         token = current_user.google_token
         puts "Current Token Is: #{token.access_token}"
         # Initialize Google Calendar API
@@ -77,6 +78,7 @@ class ChargesController < ApplicationController
   end
 
   def refund
+    Google::Apis.logger = Logger.new(nil)
     # find booking through button POST params
     booking = Booking.find(params[:booking_id])
 

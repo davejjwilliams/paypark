@@ -1,19 +1,12 @@
 <div id="footer-bottom">
   <% unless user_signed_in? %>
-    <%= link_to "Click Here To Sign Up", '/auth/google_oauth2', class: "button is-link is-fullwidth is-large" %>
+    <%= link_to "Click Here To Sign Up", '/auth/google_oauth2', class: "button is-primary is-fullwidth is-large" %>
   <% end %>
 
-  <div class="columns is-multiline is-mobile is-marginless has-text-centered">
-
-
-    <div class="column is-paddingless"><%= link_to 'Contact Us', contact_path, :id => "footer-button1" %></div>
-
-
-    <div class="column is-paddingless"><%= link_to 'Privacy Policy', privacy_path, :id => "footer-button1" %></div>
-
-
+  <div class="level">
+    <div class="level-item is-marginless"><%= link_to 'Contact Us', contact_path %></div>
+    <div class="level-item"><%= link_to 'Privacy Policy', privacy_path %></div>
   </div>
-
 </div>
 
 

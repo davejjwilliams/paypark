@@ -1,80 +1,78 @@
-<p id="notice"><%= notice %></p>
+<div class="has-text-centered">
+  <h1 class="title">Bookings On My Driveway</h1>
+  <% if @upcoming_homeowner_bookings.length == 0 %>
 
+    <h2 class="subtitle is-6">You don't have any bookings yet.</h2>
 
-<h1 style="text-align: center" class="title">Bookings For Your Driveway</h1>
-<br>
-<% if @upcoming_homeowner_bookings.length == 0 %>
-
-  <h2 style="text-align: center" class="subtitle is-6">You don't have any bookings yet</h2>
-
-<% else %>
-  <div style="overflow-x: auto;">
-    <table class="table is-hoverable is-fullwidth is-bordered">
-      <thead>
-      <tr>
-        <th>Driver</th>
-        <th>Car Info</th>
-        <th>Price £/hr</th>
-        <th>Start time</th>
-        <th>End time</th>
-        <th colspan="1"></th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @upcoming_homeowner_bookings.each do |booking| %>
+  <% else %>
+    <div style="overflow-x: auto;">
+      <table class="table is-hoverable is-fullwidth is-bordered">
+        <thead>
         <tr>
-          <td><%= booking.driver.user.name %></td>
-          <td><%= booking.driver.car_info %></td>
-          <td><%= number_to_currency(booking.price, unit: "£") %></td>
-          <td><%= booking.start_time %></td>
-          <td><%= booking.end_time %></td>
-          <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
+          <th>Driver</th>
+          <th>Car Info</th>
+          <th>Price</th>
+          <th>Start time</th>
+          <th>End time</th>
+          <th colspan="1"></th>
         </tr>
+        </thead>
 
-        <h1></h1>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-<% end %>
+        <tbody>
+        <% @upcoming_homeowner_bookings.each do |booking| %>
+          <tr>
+            <td><%= booking.driver.user.name %></td>
+            <td><%= booking.driver.car_info %></td>
+            <td><%= number_to_currency(booking.price, unit: "£") %></td>
+            <td><%= booking.start_time %></td>
+            <td><%= booking.end_time %></td>
+            <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
+          </tr>
 
-<h1 style="text-align: center" class="subtitle">Completed Bookings</h1>
+          <h1></h1>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 
-<% if @complete_homeowner_bookings.length == 0 %>
-  <h2 style="text-align: center" class="subtitle is-6">You do not have any completed bookings</h2>
-<% else %>
-  <h2 class="subtitle is-6">Pending Earnings <%= @pending_sum %></h2>
-  <%= button_to 'Withdraw Earnings', withdraw_path, method: :post, params: {homeowner_id: @homeowner.id}, remote: true, :class => "button is-info" %>
-  <div style="overflow-x: auto;">
-    <table class="table is-hoverable is-fullwidth is-bordered">
-      <thead>
-      <tr>
-        <th>Driver</th>
-        <th>Car Info</th>
-        <th>Price £/hr</th>
-        <th>Start time</th>
-        <th>End time</th>
-        <th>Withdrawn</th>
-        <th colspan="1"></th>
-      </tr>
-      </thead>
+  <h1 class="title">Completed Bookings</h1>
 
-      <tbody>
-      <% @complete_homeowner_bookings.each do |booking| %>
+  <% if @complete_homeowner_bookings.length == 0 %>
+    <h2 class="subtitle is-6">You do not have any completed bookings.</h2>
+  <% else %>
+    <h2 class="subtitle is-6">Pending Earnings <%= number_to_currency(@pending_sum, unit: "£") %></h2>
+    <%= button_to 'Withdraw Earnings', withdraw_path, method: :post, params: {homeowner_id: @homeowner.id}, remote: true, :class => "button is-info" %>
+    <div style="overflow-x: auto;">
+      <table class="table is-hoverable is-fullwidth is-bordered">
+        <thead>
         <tr>
-          <td><%= booking.driver.user.name %></td>
-          <td><%= booking.driver.car_info %></td>
-          <td><%= number_to_currency(booking.price, unit: "£") %></td>
-          <td><%= booking.start_time %></td>
-          <td><%= booking.end_time %></td>
-          <td><%= booking.withdrawn %></td>
-          <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
+          <th>Driver</th>
+          <th>Car Info</th>
+          <th>Price</th>
+          <th>Start time</th>
+          <th>End time</th>
+          <th>Withdrawn</th>
+          <th colspan="1"></th>
         </tr>
+        </thead>
+
+        <tbody>
+        <% @complete_homeowner_bookings.each do |booking| %>
+          <tr>
+            <td><%= booking.driver.user.name %></td>
+            <td><%= booking.driver.car_info %></td>
+            <td><%= number_to_currency(booking.price, unit: "£") %></td>
+            <td><%= booking.start_time %></td>
+            <td><%= booking.end_time %></td>
+            <td><%= booking.withdrawn %></td>
+            <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
+          </tr>
 
 
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-<% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

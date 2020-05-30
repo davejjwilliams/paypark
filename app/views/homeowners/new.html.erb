@@ -19,21 +19,18 @@
         </div>
       <% end %>
       <div class="title">New Driveway</div>
+      <h1 class="subtitle is-marginless is-size-4">Locate Driveway</h1>
       <div class="field">
-        <%= form.label :paypal_email %>
-        <br>
-        <%= form.text_field(:paypal_email, :class => 'input') %>
-      </div>
-      <div class="field" style="text-align: center;">
-        <%= form.label :enter_address %>
+        <%= form.label :enter_address, "1. Enter address" %>
         <br>
         <input id="pac-input" class=" input" type="text" placeholder="Search address and drag to driveway">
       </div>
-      <div class="field" style="text-align: center; display: none;">
+      <div class="field" style="display: none;">
         <%= form.label :address %>
         <br>
         <%= form.text_field(:address, :class => 'input', :readonly => true) %>
       </div>
+      <p style="font-size: 18px">2. Drag the pin within the red square to the centre of your driveway.</p><br>
       <div class="field" style="display: none">
         <%= form.label :latitude %>
         <br>
@@ -44,18 +41,26 @@
         <br>
         <%= form.text_field :longitude, :readonly => true %>
       </div>
-      <div class="field" style="text-align: center">
+      <h1 class="subtitle is-marginless is-size-4">Driveway Details</h1>
+      <div class="field">
         <%= form.label :driveway_description %>
         <br>
         <%= form.text_field(:driveway_description, :class => 'input') %>
       </div>
-      <div class="field" style="text-align: center">
-        <%= form.label "Driveway Price Per Hour (£/hr)" %>
+      <div class="field">
+        <%= form.label "Driveway Price Per Hour (£)" %>
         <br>
         <%= form.text_field(:driveway_price, :class => 'input') %>
       </div>
-      <div class="actions" style="text-align: center">
-        <%= form.submit({class: "button is-info"}) %>
+
+      <div class="field">
+        <%= form.label :paypal_email %>
+        <br>
+        <%= form.text_field(:paypal_email, :class => 'input') %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit({class: "button is-primary is-large", value: "Register Driveway"}) %>
       </div>
     <% end %>
   </div>

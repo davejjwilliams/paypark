@@ -11,13 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field" id="driver_new_mid">
+  <div class="field">
     <%= form.label :please_enter_your_registration_number %>
     <br>
     <%= form.text_field(:registration_number, :class => 'input has-text-centered') %>
   </div>
 
-  <div class="actions" id="driver_new_bot">
-    <%= form.submit "Confirm",({class: "button is-info"}) %>
+  <div class="actions" >
+    <%= form.submit "Confirm",({class: "button is-primary"}) %>
   </div>
 <% end %>

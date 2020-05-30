@@ -18,7 +18,9 @@
 
 
 // Bulma footer padding is huge; this is how you change it (MUST be before import)
-$link: #5B2A9D;
+$link: white;
+$primary: #5b2a9d;
+$text: #000000;
 $footer-padding: 0.1rem 0.1rem 0.1rem !important;;
 $footer-background-color: #5B2A9D;
 
@@ -59,18 +61,17 @@ h4 {
 }
 
 p {
-  color: $subtle-colour;
   font-family: Roboto;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus, .textarea:focus {
   background-color: #fff;
   border-bottom: 2px solid $navbar-colour;
   transition: 200ms;
 }
 
 .push {
-  height: 83px;
+  height: 108px;
 }
 
 #overall-container {
@@ -78,5 +79,5 @@ input[type=text]:focus {
 
   /* Equal to height of footer */
   /* But also accounting for potential margin-bottom of last child */
-  margin-bottom: -50px;
+  margin-bottom: -108px;
 }

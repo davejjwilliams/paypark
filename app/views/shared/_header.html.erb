@@ -12,7 +12,7 @@
   end
 %>
 
-<nav class="navbar" role="navigation" aria-label="main navigation" id="nb">
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a href="/">
       <%= image_tag("logo_paypark.png", size: "55x450", :class => "nav-image") %>
@@ -35,7 +35,7 @@
 
   </div>
 
-  <div id="navMenuDocumentation" class="navbar-menu">
+  <div class="navbar-menu">
     <div class="navbar-start">
 
       <% if user_signed_in? %>

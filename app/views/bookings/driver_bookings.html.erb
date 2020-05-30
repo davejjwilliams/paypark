@@ -1,10 +1,8 @@
-<p id="notice"><%= notice %></p>
-
 <div class="has-text-centered">
-  <h1 class="title">Bookings</h1>
+  <h1 class="title">My Bookings</h1>
 
   <% if @upcoming_driver_bookings.length == 0 %>
-    <h2 class="subtitle is-6">You don't have any bookings yet</h2>
+    <h2 class="subtitle is-6">You don't have any bookings yet.</h2>
   <% else %>
     <div style="overflow-x: auto;">
       <table class="table is-hoverable is-fullwidth is-bordered">
@@ -12,7 +10,7 @@
         <tr>
           <th>Address</th>
           <th>Homeowner</th>
-          <th>Price £/hr</th>
+          <th>Price</th>
           <th>Start time</th>
           <th>End time</th>
           <th colspan="1"></th>
@@ -38,7 +36,7 @@
   <h1 class="title">Completed Bookings</h1>
 
   <% if @complete_driver_bookings.length == 0 %>
-    <h2 class="subtitle is-6">You do not have any completed bookings</h2>
+    <h2 class="subtitle is-6">You do not have any completed bookings.</h2>
   <% else %>
     <div style="overflow-x: auto;">
     <table class="table is-hoverable is-fullwidth is-bordered">
@@ -46,7 +44,7 @@
       <tr>
         <th>Address</th>
         <th>Homeowner</th>
-        <th>Price £/hr</th>
+        <th>Price</th>
         <th>Start time</th>
         <th>End time</th>
         <th>Rating</th>

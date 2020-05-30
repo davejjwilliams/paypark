@@ -1,7 +1,11 @@
-<br><br><br>
+<div class="has-text-centered">
+  <h1 class="title">New Driver</h1>
 
-<div id="driver_new_top" style="margin-bottom: 9%"><strong>New Driver</strong></div>
+  <%= render 'form', driver: @driver %>
 
-<div>
-<%= render 'form', driver: @driver %>
+  <br>
+
+  <div>
+    <%= link_to 'Back', @driver, :class => 'button is-info' %>
+  </div>
 </div>

@@ -15,6 +15,7 @@ class MapController < ApplicationController
     puts "Current User Name is: #{current_user.email}"
 
     begin
+      Google::Apis.logger = Logger.new(nil)
       token = current_user.google_token
       puts "Current Token Is: #{token.access_token}"
       # Initialize Google Calendar API
@@ -43,8 +44,13 @@ class MapController < ApplicationController
       redirect_to root_path
       return
     end
-    session[:booking_start_time] = params[:start_time]
-    session[:booking_end_time] = params[:end_time]
+
+
+    start_time = DateTime.new(params[:start_time]["start_time(1i)"].to_i, params[:start_time]["start_time(2i)"].to_i, params[:start_time]["start_time(3i)"].to_i, params[:start_time]["start_time(4i)"].to_i)
+    end_time = DateTime.new(params[:end_time]["end_time(1i)"].to_i, params[:end_time]["end_time(2i)"].to_i, params[:end_time]["end_time(3i)"].to_i, params[:end_time]["end_time(4i)"].to_i)
+
+    session[:booking_start_time] = start_time
+    session[:booking_end_time] = end_time
     redirect_to root_path
   end
 

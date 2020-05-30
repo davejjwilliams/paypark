@@ -17,7 +17,7 @@ function initMap() {
                 lng: position.coords.longitude
             };
             infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found ~ 1 mile');
+            infoWindow.setContent('Your location');
             infoWindow.open(map);
             map.setCenter(pos);
         }, function() {
@@ -53,8 +53,6 @@ function initMap() {
         var link = "/bookings/new?dvwid=".concat(gon.driveways[index].id);
         google.maps.event.addListener(marker, 'click', (function (marker) {
             return function () {
-                var str = "Book";
-                var result = str.link(link);
                 var rating = 0;
                 if (parseInt(gon.driveways[index].number_ratings) > 0) {
                     rating = parseFloat(gon.driveways[index].total_ratings) / parseInt(gon.driveways[index].number_ratings);
@@ -62,8 +60,8 @@ function initMap() {
                 infowindowDriver.setContent(
                     gon.driveways[index].address + '<br>' + '<br>' +
                     '£' + parseFloat(gon.driveways[index].driveway_price) + ' per hour' + '<br>' +
-                    'Rating: ' + rating.toFixed(2) + '<br>' +
-                    gon.driveways[index].driveway_description + '<br>' + result);
+                    'Rating: ' + rating.toFixed(2) + '/5<br>' +
+                    gon.driveways[index].driveway_description + '<br><a style="text-decoration: underline" class="has-text-primary has-text-weight-bold is-size-5" href="' + link + '">Book now</a>');
                 infowindowDriver.open(map, marker);
             }
                 ;

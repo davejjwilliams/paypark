@@ -2,42 +2,28 @@
   <h1 class="title">
     <%= t('.title') %>
   </h1>
+
   <p class="subtitle">
     <%= t('.contact_us') %>
-
-
   </p>
+
   <%= form_tag request_contact_path, method: 'post' do %>
 
     <%= label_tag :name, t('.name'), :class => "subtitle" %>
 
     <br>
-    <% if user_signed_in? %>
 
-      <%= text_field_tag :name, '', title: t('.enter_name'), size: 50, value: current_user.name, :class => "input" %>
+    <%= text_field_tag :name, '', title: t('.enter_name'), size: 50, value: user_signed_in? ? current_user.name : "", class: "input" %>
 
-      <br>
-    <% else %>
-
-      <%= text_field_tag :name, '', title: t('.enter_name'), size: 50, :class => "input" %>
-
-      <br>
-    <% end %>
+    <br>
 
     <%= label_tag :email, t('.email'), :class => "subtitle" %>
 
     <br>
-    <% if user_signed_in? %>
 
-      <%= email_field_tag :email, '', title: t('.enter_email'), value: current_user.email, :class => "input" %>
+    <%= email_field_tag :email, '', title: t('.enter_email'), value: user_signed_in? ? current_user.email : "", :class => "input" %>
 
-      <br>
-    <% else %>
-
-      <%= email_field_tag :email, '', title: t('.enter_email'), :class => "input" %>
-
-      <br>
-    <% end %>
+    <br>
 
     <%= label_tag :telephone, t('.telephone'), :class => "subtitle" %>
 
@@ -51,7 +37,7 @@
 
     <br>
 
-    <%= text_field_tag :message, '', title: t('.enter_message'), size: 100, :class => "textarea" %>
+    <%= text_area_tag :message, '', title: t('.enter_message'), :class => "textarea", :rows => 5 %>
 
     <br>
     <% flash.each do |key, value| %>
@@ -59,7 +45,11 @@
     <% end %>
     <br>
 
-    <%= submit_tag t('.submit'), :class => "button is-info" %>
+    <%= submit_tag t('.submit'), :class => "button is-primary is-large" %>
 
   <% end %>
 </div>
+
+<% 3.times do %>
+  <br>
+<% end %>
