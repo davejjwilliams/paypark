@@ -9,54 +9,56 @@
 
 <div class="columns is-gapless">
   <div class="column is-four-fifths">
-    <% unless session[:booking_start_time].nil? and session[:booking_end_time].nil? %>
-      <div class="subtitle is-marginless has-text-centered">
-        <div>
-          Showing driveways available between <%= session[:booking_start_time].to_datetime.strftime("%F at %T") %>
-          until <%= session[:booking_end_time].to_datetime.strftime("%F at %T") %> <%= link_to 'Clear Times', clearsearch_path, method: :post, :class => "button is-small" %>
+    <div class="box">
+      <% unless session[:booking_start_time].nil? and session[:booking_end_time].nil? %>
+        <div class="subtitle is-marginless has-text-centered">
+          <div>
+            Showing driveways available between <%= session[:booking_start_time].to_datetime.strftime("%F at %T") %>
+            until <%= session[:booking_end_time].to_datetime.strftime("%F at %T") %> <%= link_to 'Clear Times', clearsearch_path, method: :post, :class => "button is-small" %>
+          </div>
         </div>
-      </div>
-    <% end %>
-    <input id="pac-input" class="input has-text-centered" type="text" placeholder="Search address">
-    <div id="map"></div>
+      <% end %>
+
+      <input id="pac-input" class="input has-text-centered" type="text" placeholder="Search address">
+      <div id="map"></div>
+    </div>
+
   </div>
 
   <div class="column has-text-centered">
-    <div class="has-text-centered">
-      <h2 class="title is-marginless has-text-centered">Find Parking</h2>
+    <h2 class="title is-marginless has-text-centered">Find Parking</h2>
 
-      <div class="dropdown is-hoverable">
-        <div class="dropdown-trigger">
-          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-            <span>My Upcoming Events</span>
-            <span class="icon is-small">
+    <div class="dropdown is-hoverable">
+      <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+          <span>My Upcoming Events</span>
+          <span class="icon is-small">
         <i class="fas fa-angle-down" aria-hidden="true"></i>
       </span>
-          </button>
-        </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <% @response.items.each do |event| %>
-              <% start = event.start.date || event.start.date_time %>
-              <div class="dropdown-item">
-                <ul><%= "#{event.summary} (#{start})" %></ul>
-              </div>
-            <% end %>
-          </div>
+        </button>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div class="dropdown-content">
+          <% @response.items.each do |event| %>
+            <% start = event.start.date || event.start.date_time %>
+            <div class="dropdown-item">
+              <ul><%= "#{event.summary} (#{start})" %></ul>
+            </div>
+          <% end %>
         </div>
       </div>
-      <div>
-        <br>
-        <%= form_tag "/timesearch" do %>
-          <p>Start:</p>
-          <%= datetime_select :start_time, :start_time, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class:"datetime" %>
-          <p>End:</p>
-          <%= datetime_select :end_time, :end_time, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class:"datetime" %>
-          <br><br>
-          <%= submit_tag "Search", :class => "button is-medium is-primary" %>
+    </div>
+    <div>
+      <br>
+      <%= form_tag "/timesearch" do %>
+        <p>Start:</p>
+        <%= datetime_select :start_time, :start_time, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class: "datetime" %>
+        <p>End:</p>
+        <%= datetime_select :end_time, :end_time, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class: "datetime" %>
+        <br><br>
+        <%= submit_tag "Search", :class => "button is-medium is-primary" %>
 
-        <% end %>
-      </div>
+      <% end %>
     </div>
     <br>
     <h2 class="title is-marginless">Available parking spots in this area <%= image_tag "google-pin.png", size: "18" %>

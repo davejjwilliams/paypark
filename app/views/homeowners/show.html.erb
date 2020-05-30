@@ -53,6 +53,8 @@
     </div>
   </div>
   <div class="column">
-    <figure class="image"><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=600x600&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %></figure>
+    <div class="box is-rounded">
+      <figure class="image"><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=600x600&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %></figure>
+    </div>
   </div>
 </div>
