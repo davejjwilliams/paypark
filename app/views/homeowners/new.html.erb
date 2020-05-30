@@ -7,10 +7,11 @@
 
 <div class="columns has-text-centered is-gapless">
   <div class="column">
+    <h1 class="title">New Driveway</h1>
     <%= form_with(model: @homeowner, local: true) do |form| %>
       <% if @homeowner.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@homeowner.errors.count, "error") %> prohibited this homeowner from being saved:</h2>
+          <h2>Please check these <%= pluralize(@homeowner.errors.count, "field") %>:</h2>
           <ul>
             <% @homeowner.errors.full_messages.each do |message| %>
               <li><%= message %></li>
@@ -18,7 +19,6 @@
           </ul>
         </div>
       <% end %>
-      <div class="title">New Driveway</div>
       <h1 class="subtitle is-marginless is-size-4">Locate Driveway</h1>
       <div class="field">
         <%= form.label :enter_address, "1. Enter address" %>
@@ -65,8 +65,10 @@
     <% end %>
   </div>
   <div class="column">
-    <div id="map2"></div>
-    <br>
+    <div class="box">
+      <div id="map2"></div>
+      <h1 class="subtitle">Use this map for step 2.</h1>
+    </div>
   </div>
 </div>
 

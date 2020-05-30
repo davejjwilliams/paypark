@@ -14,10 +14,15 @@
 
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a href="/">
-      <%= image_tag("logo_paypark.png", size: "55x450", :class => "nav-image") %>
-    </a>
-    <% unless user_signed_in? %>
+
+    <% if user_signed_in? %>
+      <a href="/">
+        <%= image_tag("logo_paypark.png", size: "55x450", :class => "nav-image") %>
+      </a>
+    <% else %>
+      <a href="/users/sign_in">
+        <%= image_tag("logo_paypark.png", size: "55x450", :class => "nav-image") %>
+      </a>
       <div class="navbar-item is-size-4">
         PayPark
       </div>

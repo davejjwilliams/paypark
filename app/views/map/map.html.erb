@@ -10,15 +10,16 @@
 <div class="columns is-gapless">
   <div class="column is-four-fifths">
     <div class="box">
-      <% unless session[:booking_start_time].nil? and session[:booking_end_time].nil? %>
-        <div class="subtitle is-marginless has-text-centered">
-          <div>
-            Showing driveways available between <%= session[:booking_start_time].to_datetime.strftime("%F at %T") %>
-            until <%= session[:booking_end_time].to_datetime.strftime("%F at %T") %> <%= link_to 'Clear Times', clearsearch_path, method: :post, :class => "button is-small" %>
-          </div>
-        </div>
-      <% end %>
-
+      <div class="box subtitle is-marginless has-text-centered">
+        Showing driveways
+        <% if session[:booking_start_time].nil? and session[:booking_end_time].nil? %>
+          currently available.
+        <% else %>
+          available between <%= session[:booking_start_time].to_datetime.strftime("%F at %T") %>
+          until <%= session[:booking_end_time].to_datetime.strftime("%F at %T") %>
+          <%= link_to 'Clear Times', clearsearch_path, method: :post, :class => "button is-small is-danger" %>
+        <% end %>
+      </div>
       <input id="pac-input" class="input has-text-centered" type="text" placeholder="Search address">
       <div id="map"></div>
     </div>
@@ -53,8 +54,10 @@
       <%= form_tag "/timesearch" do %>
         <p>Start:</p>
         <%= datetime_select :start_time, :start_time, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class: "datetime" %>
+        :00
         <p>End:</p>
         <%= datetime_select :end_time, :end_time, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class: "datetime" %>
+        :00
         <br><br>
         <%= submit_tag "Search", :class => "button is-medium is-primary" %>
 

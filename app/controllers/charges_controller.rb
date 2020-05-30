@@ -48,10 +48,6 @@ class ChargesController < ApplicationController
         )
 
         result = service.insert_event('primary', event)
-        puts "Event summary is: #{event.summary}"
-        puts "Event created: #{result.html_link}"
-        puts "The Calendar Event ID is #{(Base64.decode64(result.html_link[42..-1])).split.first}"
-
         booking.calendar_event_id = (Base64.decode64(result.html_link[42..-1])).split.first
       rescue StandardError => e
         booking.calendar_event_id = "No Event ID"

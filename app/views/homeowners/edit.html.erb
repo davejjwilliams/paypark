@@ -1,5 +1,5 @@
 <div class="columns has-text-centered is-gapless is-multiline">
-  <div class="column">
+  <div class="column is-two-thirds">
     <%= form_with(model: @homeowner, local: true) do |form| %>
       <% if @homeowner.errors.any? %>
         <div id="error_explanation">
@@ -40,21 +40,23 @@
 
         <div class="field">
           <%= form.label :active_start %>
-          <%= form.datetime_select :active_start, :discard_minute => true %> hr
+          <%= form.datetime_select :active_start, datetime_separator: " at ", discard_minute: true %>:00
         </div>
 
         <div class="field">
           <%= form.label :active_end %>
-          <%= form.datetime_select :active_end, :discard_minute => true %> hr
+          <%= form.datetime_select :active_end, datetime_separator: " at ", discard_minute: true %>:00
         </div>
 
         <div class="actions">
-          <%= form.submit "Confirm Availability", ({class: "button is-primary is-large"}) %>
+          <%= form.submit "Confirm Changes", ({class: "button is-primary is-large"}) %>
         </div>
     <% end %>
     </div>
   </div>
   <div class="column">
-    <figure class="image"><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=400x300&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %></figure>
+    <div class="box is-rounded">
+      <figure class="image"><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=18&size=400x300&markers=size:small%7Ccolor:red%7C#{@homeowner.latitude},#{@homeowner.longitude}&key=#{Rails.application.credentials.google[:google_maps_api_key]}", alt: "Map" %></figure>
+    </div>
   </div>
 </div>

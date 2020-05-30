@@ -41,7 +41,7 @@
       <% if @booking.rating == 0 %>
         Not Yet Rated
       <% else %>
-        <%= @booking.rating %>
+        <%= @booking.rating %>/5
       <% end %>
 
     </p>
@@ -65,7 +65,7 @@
       <% if @booking.paid %>
         <% if ((@booking.start_time - Time.now) / 3600) > 24 %>
 
-          <%= button_to 'Refund', charges_refund_path, class: "button is-primary", method: :post, params: {booking_id: @booking.id}, remote: true %>
+          <%= button_to 'Cancel & Refund Booking', charges_refund_path, class: "button is-danger", method: :post, params: {booking_id: @booking.id}, remote: true %>
 
         <% end %>
       <% end %>

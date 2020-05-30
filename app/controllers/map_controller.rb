@@ -4,20 +4,15 @@ class MapController < ApplicationController
   before_action :authenticate_user!
 
   def map
-    puts "THE BOOKING SEARCH START TIME IS: #{session[:booking_start_time]}"
-    puts "THE BOOKING SEARCH END TIME IS: #{session[:booking_end_time]}"
     unless  session[:booking_start_time].nil? and session[:booking_end_time].nil?
       gon.driveways = Homeowner.where("active_start < ? and active_end > ? and driveway_verified = ?", session[:booking_start_time].to_datetime, session[:booking_end_time].to_datetime, true)
     else
       gon.driveways = Homeowner.where("active_start < ? and active_end > ? and driveway_verified = ?", DateTime.now, DateTime.now, true)
     end
 
-    puts "Current User Name is: #{current_user.email}"
-
     begin
       Google::Apis.logger = Logger.new(nil)
       token = current_user.google_token
-      puts "Current Token Is: #{token.access_token}"
       # Initialize Google Calendar API
       service = Google::Apis::CalendarV3::CalendarService.new
       # Use google keys to authorize

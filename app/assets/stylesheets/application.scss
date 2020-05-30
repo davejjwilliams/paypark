@@ -43,7 +43,12 @@ $navbar-dropdown-item-hover-color: white;
 @import "font-awesome";
 @import "colours";
 
-
+#surrey-background {
+  margin-top: -0.25rem;
+  margin-left: -0.25rem;
+  margin-right: -0.25rem;
+  max-width: 100vw;
+}
 
 #overall-container {
   margin: 0.25rem;

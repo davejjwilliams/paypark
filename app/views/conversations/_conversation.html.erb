@@ -1,10 +1,9 @@
 <li>
-
   <div class="panel" data-conversation-id="<%= conversation.id %>">
 
     <div class="panel-heading">
-      <%= link_to conversation.opposed_user(user).name, '', class: 'toggle-window' %>
-      <%= link_to "x", close_conversation_path(conversation), class: "btn btn-default btn-xs pull-right", remote: true, method: :post %>
+      <%= link_to conversation.opposed_user(user).name, '', class: 'has-text-primary toggle-window' %>
+      <%= link_to "X", close_conversation_path(conversation), class: "has-text-primary btn btn-default btn-xs is-pulled-right", remote: true, method: :post %>
     </div>
 
     <div class="panel-body">
@@ -17,11 +16,17 @@
       <form class="new_message">
         <input name="conversation_id" type="hidden" value="<%= conversation.id %>">
         <input name="user_id" type="hidden" value="<%= user.id %>">
-        <textarea name="body" class="input is-rounded"></textarea><br>
-        <input type="submit" id="msg-button" class="button is-success" value="Send">
+
+        <div class="field has-addons">
+          <div class="control is-expanded">
+            <input type="text" name="body" class="input is-rounded">
+          </div>
+          <div class="control">
+            <input type="submit" id="msg-button" class="button is-success" value="Send">
+          </div>
+        </div>
       </form>
 
     </div>
   </div>
-
 </li>

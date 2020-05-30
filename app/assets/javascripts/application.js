@@ -7,5 +7,5 @@
 //= require toastr
 
 toastr.options = {
-    "positionClass": "toast-top-left"
+    "positionClass": "toast-bottom-right"
 }

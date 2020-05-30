@@ -9,7 +9,7 @@
           <% else %>
             <% @driver_conversations_with.each do |user| %>
 
-              <li><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post, :class => "button is-link" %></li>
+              <li><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post, :class => "button is-primary" %></li>
               <br>
             <% end %>
           <% end %>
@@ -25,7 +25,7 @@
             <li>You do not have any drivers scheduled to park at your driveway!</li>
           <% else %>
             <% @homeowner_conversations_with.each do |user| %>
-              <li><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post, :class => "button is-link" %></li>
+              <li><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post, :class => "button is-primary" %></li>
             <% end %>
           <% end %>
         </ul>
