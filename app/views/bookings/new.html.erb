@@ -7,7 +7,7 @@
 <div class="columns is-gapless">
   <div class="column">
     <div onload="init()">
-    <div id="scheduler_here" style='width:100%; height:500px;' class="dhx_cal_container is-paddingless">
+    <div id="scheduler_here" style='width:100%; height:800px;' class="dhx_cal_container is-paddingless">
       <div class="dhx_cal_navline">
         <div class="dhx_cal_prev_button">&nbsp;</div>
         <div class="dhx_cal_next_button">&nbsp;</div>
@@ -25,8 +25,8 @@
     </div>
   </div>
   <div class="column has-text-centered">
-    <h2 class="subtitle">Available between <%= @homeowner.active_start %>
-      and <%= @homeowner.active_end %></h2>
+    <h2 class="subtitle">Available between <%= @homeowner.active_start.strftime("%F at %T") %>
+      and <%= @homeowner.active_end.strftime("%F at %T") %></h2>
     <h2 class="subtitle">Price Per Hour: <%= number_to_currency(@homeowner.driveway_price, unit: "£") %></h2>
     <% if @homeowner.number_ratings > 0 %>
       <h2 class="subtitle">Average Rating: <%= (@homeowner.total_ratings.to_f / @homeowner.number_ratings).round(2) %>
@@ -48,96 +48,59 @@
     dp.init(scheduler);
     dp.setTransactionMode("REST");
 
-    function init() {
-        var compactView = {
-            xy: {
-                nav_height: 80
-            },
-            config: {
-                header: {
-                    rows: [
-                        {
-                            cols: [
-                                "prev",
-                                "date",
-                                "next",
-                            ]
-                        },
-                        {
-                            cols: [
-                                "day",
-                                "week",
-                                "spacer",
-                                "today"
-                            ]
-                        }
-                    ]
-                }
-            },
-            templates: {
-                month_scale_date: scheduler.date.date_to_str("%D"),
-                week_scale_date: scheduler.date.date_to_str("%D, %j"),
-                event_bar_date: function (start, end, ev) {
-                    return "";
-                }
-
-            }
-        };
-        var fullView = {
-            xy: {
-                nav_height: 80
-            },
-            config: {
-                header: [
-                    "day",
-                    "week",
-                    "date",
+    // define configs
+    const compactHeader = {
+        rows: [
+            {
+                cols: [
                     "prev",
-                    "today",
-                    "next"
+                    "date",
+                    "next",
                 ]
             },
-            templates: {
-                month_scale_date: scheduler.date.date_to_str("%l"),
-                week_scale_date: scheduler.date.date_to_str("%l, %F %j"),
-                event_bar_date: function (start, end, ev) {
-                    return "• <b>" + scheduler.templates.event_date(start) + "</b> ";
-                }
+            {
+                cols: [
+                    "day",
+                    "week",
+                    "spacer",
+                    "today"
+                ]
             }
-        };
+        ]
+    };
 
-        function resetConfig() {
-            var settings;
-            if (window.innerWidth < 1000) {
-                settings = compactView;
-            } else {
-                settings = fullView;
+    const fullHeader = [
+        "day",
+        "week",
+        "date",
+        "prev",
+        "today",
+        "next"
+    ];
 
-            }
-            scheduler.utils.mixin(scheduler.config, settings.config, true);
-            scheduler.utils.mixin(scheduler.templates, settings.templates, true);
-            scheduler.utils.mixin(scheduler.xy, settings.xy, true);
-            return true;
+    // add a switch to select an appropriate config for a current screen size
+
+    function resetConfig(){
+        let header;
+        if (window.innerWidth < 1000) {
+            header = compactHeader;
+        } else {
+            header = fullHeader;
+
         }
-
-        scheduler.config.responsive_lightbox = true;
-        resetConfig();
-        scheduler.attachEvent("onBeforeViewChange", resetConfig);
-        scheduler.attachEvent("onSchedulerResize", resetConfig);
-
-        scheduler.config.multi_day = true;
-
-        scheduler.config.xml_date = "%Y-%m-%d %H:%i";
-        scheduler.init("scheduler_here", new Date(), "week");
-        scheduler.load("<%= data_path %>/", "json");
-
-        var dp = new dataProcessor("<%= data_path %>/");
-        dp.init(scheduler);
-        dp.setTransactionMode("REST");
-        document.querySelector(".add_event_button").addEventListener("click", function () {
-            scheduler.addEventNow();
-        });
+        scheduler.config.header = header;
+        return true;
     }
+
+    // apply the config initially and each time scheduler repaints or resizes:
+
+    resetConfig();
+    scheduler.attachEvent("onBeforeViewChange", resetConfig);
+    scheduler.attachEvent("onSchedulerResize", resetConfig);
+
+    scheduler.config.responsive_lightbox = true; // responsive lightbox
+
+    scheduler.init("scheduler_here");
 
     $(function(){
         $('div[onload]').trigger('onload');

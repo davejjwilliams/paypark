@@ -27,12 +27,12 @@
 
   <p class="subtitle">
     <strong>Start time:</strong>
-    <%= @booking.start_time %>
+    <%= @booking.start_time.strftime("%F at %T") %>
   </p>
 
   <p class="subtitle">
     <strong>End time:</strong>
-    <%= @booking.end_time %>
+    <%= @booking.end_time.strftime("%F at %T") %>
   </p>
 
   <% if @booking.complete %>

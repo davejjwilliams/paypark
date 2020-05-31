@@ -25,13 +25,13 @@
 
   <div class="field">
     <%= form.label :start_time %>
-    <span class="dt-span"><%= form.datetime_select :start_time, :minute_step => 60, :discard_minute => true, :class => 'datetime' %></span>
+    <%= form.datetime_select :start_time, :datetime_separator=> " at ", :minute_step => 60, :discard_minute => true, :class => 'select' %>
     <p class="time_select_00"> :00 </p>
   </div>
 
   <div class="field">
     <%= form.label :end_time %>
-    <span class="dt-span"><%= form.datetime_select :end_time, :discard_minute => true, :class => 'datetime' %></span>
+    <%= form.datetime_select :end_time, :datetime_separator=> " at ", :discard_minute => true, :class => 'select' %>
     <p class="time_select_00"> :00 </p>
   </div>
 

@@ -21,8 +21,8 @@
           <td><%= booking.driver_id %></td>
           <td><%= booking.homeowner_id %></td>
           <td><%= booking.price %></td>
-          <td><%= booking.start_time %></td>
-          <td><%= booking.end_time %></td>
+          <td><%= booking.start_time.strftime("%F at %T") %></td>
+          <td><%= booking.end_time.strftime("%F at %T") %></td>
           <td><%= booking.complete %></td>
           <td><%= booking.withdrawn %></td>
           <td><%= link_to 'Show', booking, :class => 'button' %></td>

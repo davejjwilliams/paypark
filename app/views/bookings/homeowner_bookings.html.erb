@@ -24,8 +24,8 @@
             <td><%= booking.driver.user.name %></td>
             <td><%= booking.driver.car_info %></td>
             <td><%= number_to_currency(booking.price, unit: "£") %></td>
-            <td><%= booking.start_time %></td>
-            <td><%= booking.end_time %></td>
+            <td><%= booking.start_time.strftime("%F at %T") %></td>
+            <td><%= booking.end_time.strftime("%F at %T") %></td>
             <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
           </tr>
 
@@ -63,8 +63,8 @@
             <td><%= booking.driver.user.name %></td>
             <td><%= booking.driver.car_info %></td>
             <td><%= number_to_currency(booking.price, unit: "£") %></td>
-            <td><%= booking.start_time %></td>
-            <td><%= booking.end_time %></td>
+            <td><%= booking.start_time.strftime("%F at %T") %></td>
+            <td><%= booking.end_time.strftime("%F at %T") %></td>
             <td><%= booking.withdrawn %></td>
             <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
           </tr>
