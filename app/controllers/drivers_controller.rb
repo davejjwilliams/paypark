@@ -49,7 +49,6 @@ class DriversController < ApplicationController
 
     respond_to do |format|
       if @driver.save
-        session[:driver_id] = @driver.id
         format.html { redirect_to @driver, notice: 'Car information registered successfully!' }
         format.json { render :show, status: :created, location: @driver }
       else
@@ -93,7 +92,6 @@ class DriversController < ApplicationController
   # DELETE /drivers/1.json
   def destroy
     @driver.destroy
-    session[:driver_id] = 0
     respond_to do |format|
       format.html { redirect_to drivers_url, notice: 'Driver was successfully destroyed.' }
       format.json { head :no_content }

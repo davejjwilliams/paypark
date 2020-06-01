@@ -3,8 +3,8 @@ require 'test_helper'
 class ConversationTest < ActiveSupport::TestCase
 
   setup do
-    @user1 = users(:three)
-    @user2 = users(:four)
+    @user1 = users(:two)
+    @user2 = users(:three)
   end
 
   test "Should save conversation" do

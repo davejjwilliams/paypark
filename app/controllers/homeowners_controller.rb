@@ -42,7 +42,6 @@ class HomeownersController < ApplicationController
     respond_to do |format|
       if @homeowner.save
         HomeownerMailer.homeowner_confirmation(@homeowner).deliver_now
-        session[:homeowner_id] = @homeowner.id
         format.html { redirect_to @homeowner, notice: 'Driveway registered successfully. Please check your email for the verification code!' }
         format.json { render :show, status: :created, location: @homeowner }
       else
@@ -70,7 +69,6 @@ class HomeownersController < ApplicationController
   # DELETE /homeowners/1.json
   def destroy
     @homeowner.destroy
-    session[:homeowner_id] = 0
     respond_to do |format|
       format.html { redirect_to homeowners_url, notice: 'Homeowner was successfully destroyed.' }
       format.json { head :no_content }

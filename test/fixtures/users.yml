@@ -5,21 +5,21 @@
 # below each fixture, per the syntax in the comments below
 #
 
-one:
-  email: "one@test.com"
+admin:
+  email: "admin@test.com"
   name: "Alice"
   admin: true
 
+one:
+  email: "one@test.com"
+  name: "Ben"
+
 two:
   email: "two@test.com"
-  name: "Ben"
+  name: "Charlie"
 
 three:
   email: "three@test.com"
-  name: "Charlie"
-
-four:
-  email: "four@test.com"
   name: "Dave"
 
 

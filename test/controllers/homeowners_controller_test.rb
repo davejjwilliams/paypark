@@ -2,8 +2,8 @@ require 'test_helper'
 
 class HomeownersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
-    @homeowner = homeowners(:one)
+    @user = users(:admin)
+    @homeowner = homeowners(:adminhomeowner)
     sign_in @user
   end
 
@@ -29,7 +29,7 @@ class HomeownersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create homeowner" do
     assert_difference('Homeowner.count') do
-      post homeowners_url, params: { homeowner: { activation_code: @homeowner.activation_code, address: @homeowner.address, active_start: @homeowner.active_start, active_end: @homeowner.active_end, driveway_description: @homeowner.driveway_description, driveway_price: @homeowner.driveway_price, driveway_verified: @homeowner.driveway_verified, last_modified: @homeowner.last_modified, latitude: @homeowner.latitude, longitude: @homeowner.longitude, number_ratings: @homeowner.number_ratings, total_ratings: @homeowner.total_ratings, user_id: @homeowner.user_id } }
+      post homeowners_url, params: {homeowner: {activation_code: @homeowner.activation_code, address: "Address", active_start: @homeowner.active_start, active_end: @homeowner.active_end, driveway_description: @homeowner.driveway_description, driveway_price: @homeowner.driveway_price, driveway_verified: @homeowner.driveway_verified, last_modified: @homeowner.last_modified, latitude: @homeowner.latitude, longitude: @homeowner.longitude, number_ratings: @homeowner.number_ratings, paypal_email: @homeowner.paypal_email, total_ratings: @homeowner.total_ratings, user_id: @homeowner.user_id}}
     end
 
     assert_redirected_to homeowner_url(Homeowner.last)
@@ -46,7 +46,7 @@ class HomeownersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update homeowner" do
-    patch homeowner_url(@homeowner), params: { homeowner: { activation_code: @homeowner.activation_code, address: @homeowner.address, active_start: @homeowner.active_start, active_end: @homeowner.active_end, driveway_description: @homeowner.driveway_description, driveway_price: @homeowner.driveway_price, driveway_verified: @homeowner.driveway_verified, last_modified: @homeowner.last_modified, latitude: @homeowner.latitude, longitude: @homeowner.longitude, number_ratings: @homeowner.number_ratings, total_ratings: @homeowner.total_ratings, user_id: @homeowner.user_id } }
+    patch homeowner_url(@homeowner), params: {homeowner: {activation_code: @homeowner.activation_code, address: @homeowner.address, active_start: @homeowner.active_start, active_end: @homeowner.active_end, driveway_description: @homeowner.driveway_description, driveway_price: @homeowner.driveway_price, driveway_verified: @homeowner.driveway_verified, last_modified: @homeowner.last_modified, latitude: @homeowner.latitude, longitude: @homeowner.longitude, number_ratings: @homeowner.number_ratings, total_ratings: @homeowner.total_ratings, user_id: @homeowner.user_id}}
     assert_redirected_to homeowner_url(@homeowner)
   end
 

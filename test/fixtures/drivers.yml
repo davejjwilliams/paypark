@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  registration_number: MyString
+admindriver:
+  user: admin
+  registration_number: MT09NKS
+  car_info: "This is a car."
 
-two:
-  user: two
-  registration_number: MyString
+driverone:
+  user: one
+  registration_number: MT09TKC
+  car_info: "This is a car too."

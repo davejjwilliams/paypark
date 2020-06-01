@@ -2,18 +2,14 @@ require 'test_helper'
 
 class WithdrawalRequestsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
-    @homeowner = homeowners(:one)
+    @user = users(:admin)
+    @homeowner = homeowners(:adminhomeowner)
     @withdrawal_request = withdrawal_requests(:one)
+    sign_in @user
   end
 
   test "should get index" do
     get withdrawal_requests_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_withdrawal_request_url
     assert_response :success
   end
 
@@ -27,11 +23,6 @@ class WithdrawalRequestsControllerTest < ActionDispatch::IntegrationTest
 
   test "should show withdrawal_request" do
     get withdrawal_request_url(@withdrawal_request)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_withdrawal_request_url(@withdrawal_request)
     assert_response :success
   end
 

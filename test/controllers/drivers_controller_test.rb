@@ -2,8 +2,8 @@ require 'test_helper'
 
 class DriversControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
-    @driver = drivers(:one)
+    @user = users(:admin)
+    @driver = drivers(:admindriver)
     sign_in @user
   end
 
@@ -12,9 +12,10 @@ class DriversControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
+  test "should not get new for registered driver" do
     get new_driver_url
-    assert_response :success
+
+    assert_redirected_to @driver
   end
 
   test "should create driver" do
