@@ -42,11 +42,27 @@
         <%= @homeowner.paypal_email %>
       </p>
 
-      <div>
-        <% unless @homeowner.driveway_verified %>
-          <%= link_to 'Verify Driveway', verification_path, :class => 'button is-success' %>
+      <% if @homeowner.active_start.nil? %>
+        <p class="has-text-danger">
+          Your driveway isn't available to drivers yet.
+        </p>
+      <% else %>
+        <% if Time.now > @homeowner.active_start and Time.now < @homeowner.active_end %>
+          <p class="has-text-success">
+            Your driveway is available to drivers and active until <%= @homeowner.active_end.strftime("%F at %T") %>
+          </p>
         <% else %>
+          <p class="has-text-danger">
+            Your driveway is currently inactive!
+          </p>
+        <% end %>
+      <% end %>
+
+      <div>
+        <% if @homeowner.driveway_verified %>
           <%= link_to 'Enter Availability / Edit Details', edit_homeowner_path(@homeowner), :class => 'button is-primary is-medium' %>
+        <% else %>
+          <%= link_to 'Verify Driveway', verification_path, :class => 'button is-success' %>
         <% end %>
 
       </div>

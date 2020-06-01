@@ -40,12 +40,12 @@
 
         <div class="field">
           <%= form.label :active_start %>
-          <%= form.datetime_select :active_start, datetime_separator: " at ", discard_minute: true %>:00
+          <%= form.datetime_select :active_start, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class: "select" %>:00
         </div>
 
         <div class="field">
           <%= form.label :active_end %>
-          <%= form.datetime_select :active_end, datetime_separator: " at ", discard_minute: true %>:00
+          <%= form.datetime_select :active_end, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class: "select" %>:00
         </div>
 
         <div class="actions">

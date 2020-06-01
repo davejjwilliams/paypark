@@ -53,10 +53,10 @@
       <br>
       <%= form_tag "/timesearch" do %>
         <p>Start:</p>
-        <%= datetime_select :start_time, :start_time, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class: "datetime" %>
+        <%= datetime_select :start_time, :start_time, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class: "select" %>
         :00
         <p>End:</p>
-        <%= datetime_select :end_time, :end_time, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class: "datetime" %>
+        <%= datetime_select :end_time, :end_time, {datetime_separator: " at ", :minute_step => 60, :discard_minute => true}, class: "select" %>
         :00
         <br><br>
         <%= submit_tag "Search", :class => "button is-medium is-primary" %>
