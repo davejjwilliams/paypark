@@ -1,19 +1,16 @@
 <p>
-  <%= "Dear  #{@homeowner.user.name}, "   %>
-
+  ***THIS MESSAGE WOULD BE DELIVERED BY PHYSICAL POST IN A REAL-LIFE DEPLOYMENT*** <br>
+  Dear <%= @homeowner.user.name %>,
 </p>
 <p>
-  <%= "To verify your driveway, please enter the code below on the verification page accessible through the 'My Driveway' page." %>
+  To verify your driveway, please enter the code below on the verification page accessible through the 'My Driveway'
+  page. You can also view this page by clicking <%= link_to 'this link', verification_url %>.
+</p>
+<p>
+  Your verification code is: <%= @homeowner.activation_code %>
+</p>
+<p>
+  Thank you,
   <br>
-  <%= "This message would be delivered by physical post in a real-life deployment." %>
+  PayPark
 </p>
-<dl>
-
-<p>
-  <%= @homeowner.activation_code %>
-</p>
-<p>Thank you,</p>
-<p>
-  <%= "PayPark" %>
-</p>
-</dl>

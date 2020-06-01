@@ -68,12 +68,12 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { :host => 'https://fierce-tor-28482.herokuapp.com/'}
+  config.action_mailer.default_url_options = { :host => 'https://paypark-group24.herokuapp.com/'}
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
       address:                "smtp.gmail.com",
       port:                   465,
-      domain:                 'fierce-tor-28482.herokuapp.com',
+      domain:                 'paypark-group24.herokuapp.com',
       user_name: Rails.application.credentials.mailer[:mailer_email],
       password: Rails.application.credentials.mailer[:mailer_password],
       authentication:         :login,

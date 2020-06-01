@@ -17,7 +17,6 @@ class User < ApplicationRecord
   after_create :signup_confirmation
   def signup_confirmation
     UserMailer.signup_confirmation(self).deliver
-
   end
 
   def google_token
@@ -25,8 +24,8 @@ class User < ApplicationRecord
   end
 
   # Chat associations
-  has_many :conversations, foreign_key: :sender_id
-  has_many :messages
+  has_many :conversations, foreign_key: :sender_id, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   has_one :homeowner, dependent: :destroy
   has_one :driver, dependent: :destroy
