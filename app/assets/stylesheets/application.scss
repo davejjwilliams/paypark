@@ -54,17 +54,8 @@ $navbar-dropdown-item-hover-color: white;
   margin: 0.25rem;
 }
 
-h1, h2, h3 {
-  color: $text-colour;
-  font-family: Roboto;
-}
-
-h4 {
-  color: white;
-}
-
-p {
-  font-family: Roboto;
+body {
+  font-family: Roboto, sans-serif;
 }
 
 input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus, .textarea:focus {

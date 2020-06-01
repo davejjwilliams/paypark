@@ -6,7 +6,7 @@
 
   <% else %>
     <div style="overflow-x: auto;">
-      <table class="table is-hoverable is-fullwidth is-bordered">
+      <table class="table is-striped is-hoverable is-fullwidth">
         <thead>
         <tr>
           <th>Driver</th>
@@ -44,7 +44,7 @@
     <h2 class="subtitle is-6">Pending Earnings <%= number_to_currency(@pending_sum, unit: "£") %></h2>
     <%= button_to 'Withdraw Earnings', withdraw_path, method: :post, params: {homeowner_id: @homeowner.id}, remote: true, :class => "button is-info" %>
     <div style="overflow-x: auto;">
-      <table class="table is-hoverable is-fullwidth is-bordered">
+      <table class="table is-striped is-hoverable is-fullwidth">
         <thead>
         <tr>
           <th>Driver</th>

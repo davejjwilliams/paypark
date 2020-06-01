@@ -1,10 +1,6 @@
-<div id="overall-container">
-  <div id="sign_up_top"><strong>Sign Up</strong></div>
-
-  <div id="sign_up_mid"><strong>Would you like to be a homeowner or a driver?</strong></div>
-
-<div id="sign_up_bot">
-<%= link_to " <i class='fas fa-car-side fa-lg'></i> &nbsp Driver".html_safe, new_driver_path, :class => "button is-danger is-outlined is-large"  %>
-<%= link_to " <i class='fas fa-home fa-lg'></i> &nbsp Homeowner".html_safe, new_homeowner_path, :class => "button is-info is-outlined is-large" %>
-</div>
+<div class="has-text-centered">
+  <h1 class="title">Sign Up</h1>
+  <h2 class="subtitle">Would you like to be a homeowner or a driver?</h2>
+  <%= link_to " <i class='fas fa-car-side fa-lg'></i> &nbsp Driver".html_safe, new_driver_path, :class => "button is-danger is-outlined is-large" %>
+  <%= link_to " <i class='fas fa-home fa-lg'></i> &nbsp Homeowner".html_safe, new_homeowner_path, :class => "button is-info is-outlined is-large" %>
 </div>

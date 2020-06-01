@@ -1,13 +1,11 @@
 <div class="has-text-centered">
-  <h1 class="title">Please enter your verification</h1>
-  <div class="field">
-    <%= form_tag :action => 'new' do %>
+  <h1 class="title">Please enter your verification code (from email)</h1>
+  <%= form_tag :action => 'new' do %>
+    <div class="field">
       <%= text_field :myform, :code, :class => 'input has-text-centered' %>
-      <%#= text_field :myform, :code, :class => 'input', :id => "driver_field" %>
-      <%= submit_tag "Enter Verification Code", :class => 'button is-success' %>
-    <% end %>
-    <div style="text-align: center; margin-top: 2%">
-      <%= link_to 'Back', :back, :class => 'button is-primary' %>
     </div>
-  </div>
+    <%= submit_tag "Enter Verification Code", :class => 'button is-primary is-medium' %>
+  <% end %>
+  <br>
+  <%= link_to 'Back', :back, :class => 'button is-info' %>
 </div>
