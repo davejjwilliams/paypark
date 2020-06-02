@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   # Omniauth Redirect
   get '/auth/:provider/callback' => 'home#omniauth'
 
+  # Omniauth Cancel Redirect
+  get '/auth/failure', to: 'map#map'
+
   # Temporary error route
   get 'booking_error', to: 'home#booking_error'
 
