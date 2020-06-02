@@ -11,8 +11,6 @@ class ConversationTest < ActiveSupport::TestCase
 
     conversation = Conversation.new
 
-    conversation.sender_id = @user1
-    conversation.recipient_id = @user2
     conversation.sender = @user1
     conversation.recipient = @user2
 
@@ -26,8 +24,6 @@ class ConversationTest < ActiveSupport::TestCase
 
     conversation = Conversation.new
 
-    conversation.sender_id = @user1
-    conversation.recipient_id = @user2
     conversation.sender = @user1
     conversation.recipient = @user2
 
@@ -37,14 +33,12 @@ class ConversationTest < ActiveSupport::TestCase
 
     conversation2 = Conversation.new
 
-    conversation2.sender_id = @user1
-    conversation2.recipient_id = @user2
     conversation2.sender = @user1
     conversation2.recipient = @user2
 
     conversation2.save
 
-    refute conversation2.valid?
+    assert conversation2.invalid?
 
   end
 

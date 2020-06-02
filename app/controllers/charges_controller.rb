@@ -1,12 +1,18 @@
 require 'google/api_client/client_secrets.rb'
 require 'google/apis/calendar_v3'
 class ChargesController < ApplicationController
+  before_action :authenticate_user!
 
   def success
+    if params[:session_id].nil?
+      redirect_to root_path, alert: "You cannot access this page."
+      return
+    end
+
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
 
-    if (session[:booking_id] == 0)
+    if session[:booking_id] == 0
       flash[:notice] = "Something went wrong!"
       redirect_to root_path
       return
@@ -65,6 +71,11 @@ class ChargesController < ApplicationController
   end
 
   def cancel
+    if session[:booking_id].nil?
+      redirect_to root_path, alert: "You cannot access this page."
+      return
+    end
+
     if session[:booking_id] != 0
       booking = Booking.find(session[:booking_id])
       booking.destroy!
@@ -74,6 +85,7 @@ class ChargesController < ApplicationController
   end
 
   def refund
+
     Google::Apis.logger = Logger.new(nil)
     # find booking through button POST params
     booking = Booking.find(params[:booking_id])

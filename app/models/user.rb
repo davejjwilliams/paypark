@@ -29,4 +29,6 @@ class User < ApplicationRecord
 
   has_one :homeowner, dependent: :destroy
   has_one :driver, dependent: :destroy
+
+  validates :name, :email, presence: true
 end

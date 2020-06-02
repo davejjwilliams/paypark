@@ -5,5 +5,4 @@ class ChatControllerTest < ActionDispatch::IntegrationTest
   #  get chat_chat_url
   #  assert_response :success
   #end
-
 end
