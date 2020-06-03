@@ -41,7 +41,7 @@
   <% if @complete_homeowner_bookings.length == 0 %>
     <h2 class="subtitle is-6">You do not have any completed bookings.</h2>
   <% else %>
-    <h2 class="subtitle is-6">Pending Earnings <%= number_to_currency(@pending_sum, unit: "£") %></h2>
+    <h2 class="subtitle is-6">Withdrawable Earnings <%= number_to_currency(@pending_sum, unit: "£") %></h2>
     <%= button_to 'Withdraw Earnings', withdraw_path, method: :post, params: {homeowner_id: @homeowner.id}, remote: true, :class => "button is-info" %>
     <div style="overflow-x: auto;">
       <table class="table is-striped is-hoverable is-fullwidth">

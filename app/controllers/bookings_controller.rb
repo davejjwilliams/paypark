@@ -21,6 +21,7 @@ class BookingsController < ApplicationController
       complete_not_withdrawn.each do |booking|
         @pending_sum += booking.price
       end
+      @pending_sum = @pending_sum * 0.9
     else
       redirect_to root_path
     end
