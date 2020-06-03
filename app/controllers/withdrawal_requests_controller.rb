@@ -28,8 +28,11 @@ class WithdrawalRequestsController < ApplicationController
         booking.save!
       end
 
-      withdrawal.amount = amount
+      withdrawal.amount = amount*0.9
       withdrawal.save!
+      flash[:notice] = "Transfer will be processed. Please allow up to 3 working days for completion."
+    else
+      flash[:alert] = "No withdrawable earnings!"
     end
     redirect_to homeowner_bookings_path
   end

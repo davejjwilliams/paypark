@@ -43,6 +43,7 @@
   <% else %>
     <h2 class="subtitle is-6">Withdrawable Earnings <%= number_to_currency(@pending_sum, unit: "£") %></h2>
     <%= button_to 'Withdraw Earnings', withdraw_path, method: :post, params: {homeowner_id: @homeowner.id}, remote: true, :class => "button is-info" %>
+    <br>
     <div style="overflow-x: auto;">
       <table class="table is-striped is-hoverable is-fullwidth">
         <thead>
@@ -52,7 +53,7 @@
           <th>Price</th>
           <th>Start time</th>
           <th>End time</th>
-          <th>Withdrawn</th>
+          <th>Withdrawal status</th>
           <th colspan="1"></th>
         </tr>
         </thead>
@@ -65,7 +66,7 @@
             <td><%= number_to_currency(booking.price, unit: "£") %></td>
             <td><%= booking.start_time.strftime("%F at %T") %></td>
             <td><%= booking.end_time.strftime("%F at %T") %></td>
-            <td><%= booking.withdrawn %></td>
+            <td><%= booking.withdrawn ? "Withdrawn" : "Not withdrawn" %></td>
             <td><%= link_to 'Show', booking, :class => "button is-primary" %></td>
           </tr>
 
