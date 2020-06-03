@@ -33,7 +33,7 @@ class DriversControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to driver_url(Driver.last)
-    puts "Car-Info: #{Driver.last.car_info}"
+
     assert Driver.last.car_info, "RED HONDA CIVIC"
 
     assert_difference('Driver.count') do

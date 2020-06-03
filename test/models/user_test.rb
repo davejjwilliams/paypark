@@ -17,7 +17,7 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid?
   end
 
-  test "Should not create valid user" do
+  test "Should not create invalid user" do
     # Missing name
     user = User.new
 

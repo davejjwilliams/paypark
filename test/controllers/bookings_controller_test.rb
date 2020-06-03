@@ -115,8 +115,8 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
           driver_id: @driver.id,
           homeowner_id: @homeowner.id,
           price: 9.99,
-          start_time: DateTime.new(2021, 05, 01, 12, 00, 00),
-          end_time: DateTime.new(2021, 05, 01, 10, 00, 00),
+          start_time: DateTime.now + 4.hours,
+          end_time: DateTime.now + 3.hours,
           complete: false,
           withdrawn: false
       }}
@@ -128,8 +128,21 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
           driver_id: @driver.id,
           homeowner_id: @homeowner.id,
           price: 9.99,
-          start_time: DateTime.new(2000, 05, 01, 12, 00, 00),
-          end_time: DateTime.new(2000, 05, 01, 16, 00, 00),
+          start_time: DateTime.now - 3.hours,
+          end_time: DateTime.now - 1.hour,
+          complete: false,
+          withdrawn: false
+      }}
+    end
+
+    # Date outside of active range
+    assert_no_difference('Booking.count') do
+      post bookings_url, params: {booking: {
+          driver_id: @driver.id,
+          homeowner_id: @homeowner.id,
+          price: 9.99,
+          start_time: DateTime.now - 5.days,
+          end_time: DateTime.now - 5.days + 2.hours,
           complete: false,
           withdrawn: false
       }}

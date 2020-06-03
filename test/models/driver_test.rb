@@ -21,7 +21,7 @@ class DriverTest < ActiveSupport::TestCase
     assert driver.valid?
   end
 
-  test "Should not create valid driver" do
+  test "Should not create invalid driver" do
     # Missing registration number
     driver = Driver.new
 

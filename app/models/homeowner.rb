@@ -6,6 +6,6 @@ class Homeowner < ApplicationRecord
 
   validates :address, uniqueness: true
 
-  validates :address, :paypal_email, :driveway_description, :driveway_price, presence: true
-  validates :driveway_price, numericality: { greater_than: 0, less_than_or_equal_to: 100 }
+  validates :address, :latitude, :longitude, :paypal_email, :driveway_description, :driveway_price, presence: true
+  validates :driveway_price, numericality: {greater_than: 0, less_than_or_equal_to: 100}
 end
